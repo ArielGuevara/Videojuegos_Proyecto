@@ -1,0 +1,13 @@
+# Godot 4
+.godot/
+
+# Exported builds
+export/
+build/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
