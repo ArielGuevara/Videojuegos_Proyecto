@@ -244,7 +244,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"appearing",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -419,7 +419,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cr3mk"]
 radius = 11.0
-height = 34.0
+height = 25.0
 
 [node name="ninja_frog" type="CharacterBody2D"]
 scale = Vector2(2, 2)
@@ -429,11 +429,10 @@ script = ExtResource("1_5jcvq")
 position = Vector2(0, 0.49999952)
 scale = Vector2(1, 1.03125)
 sprite_frames = SubResource("SpriteFrames_epfvt")
-animation = &"appearing"
-frame = 6
-frame_progress = 1.0
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.5)
 shape = SubResource("CapsuleShape2D_cr3mk")
 
 [node name="Camera2D" type="Camera2D" parent="."]
