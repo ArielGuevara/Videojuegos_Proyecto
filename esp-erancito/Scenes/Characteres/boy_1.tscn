@@ -386,6 +386,11 @@ animations = [{
 "name": &"jump",
 "speed": 7.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lvq1u")
@@ -457,7 +462,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmhcq"]
-size = Vector2(44, 81)
+size = Vector2(44, 79)
 
 [node name="boy_1" type="CharacterBody2D"]
 script = ExtResource("1_ng8he")
@@ -465,14 +470,14 @@ script = ExtResource("1_ng8he")
 [node name="animaciones" type="AnimatedSprite2D" parent="."]
 position = Vector2(10, -46)
 sprite_frames = SubResource("SpriteFrames_o78fh")
-animation = &"atack_3"
+animation = &"walk"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, -20.5)
+position = Vector2(3, -21.5)
 shape = SubResource("RectangleShape2D_jmhcq")
 
 [connection signal="animation_finished" from="animaciones" to="." method="_on_animaciones_animation_finished"]
