@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 300.0
+const RUN_SPEED = 500.0
 const JUMP_VELOCITY = -400.0
 var appeared:bool = false
 var attacking:bool = false
@@ -29,10 +30,17 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("ui_left", "ui_right")
+	var actual_speed := SPEED
+
+	# Si Ctrl está presionado → correr
+	if Input.is_action_pressed("run_modifier") and direction != 0:
+		actual_speed = RUN_SPEED
+
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = direction * actual_speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+
 	
 	move_and_slide()
 	decide_animation()
@@ -46,10 +54,16 @@ func decide_animation():
 		$animaciones.play("idle")
 	elif velocity.x < 0:
 		$animaciones.flip_h = true
-		$animaciones.play("walk")
+		if abs(velocity.x) > SPEED:
+			$animaciones.play("run")
+		else:
+			$animaciones.play("walk")
 	elif velocity.x > 0:
 		$animaciones.flip_h = false
-		$animaciones.play("walk")
+		if abs(velocity.x) > SPEED:
+			$animaciones.play("run")
+		else:
+			$animaciones.play("walk")
 		
 	#Eje de las Y
 	if velocity.y > 0:

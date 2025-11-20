@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://rds3wpbxe8uh"]
+
+[ext_resource type="Texture2D" uid="uid://c4jljjsfnsui0" path="res://Caracters_player/Profesor miro/Profesor miro.png" id="1_6u8dw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqn0y"]
+atlas = ExtResource("1_6u8dw")
+region = Rect2(0, 0, 256, 266)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idamh"]
+atlas = ExtResource("1_6u8dw")
+region = Rect2(256, 0, 256, 266)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs67b"]
+atlas = ExtResource("1_6u8dw")
+region = Rect2(512, 0, 256, 266)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdj2r"]
+atlas = ExtResource("1_6u8dw")
+region = Rect2(768, 0, 256, 266)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ecoqx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqn0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idamh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs67b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdj2r")
+}],
+"loop": true,
+"name": &"appearing",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="miro_1" type="CharacterBody2D"]
+position = Vector2(0, 1)
+
+[node name="animaciones" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ecoqx")
+animation = &"appearing"
+frame = 2
+frame_progress = 0.18066363
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
