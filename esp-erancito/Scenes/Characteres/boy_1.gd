@@ -59,7 +59,6 @@ func decide_animation():
 		
 
 func _on_animaciones_animation_finished() -> void:
-	print($animaciones.animation)
 	if $animaciones.animation == "appearing":
 		appeared = true
 	if $animaciones.animation == "attack_1":

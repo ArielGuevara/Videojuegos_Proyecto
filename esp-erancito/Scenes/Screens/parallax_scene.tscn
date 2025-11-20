@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjnqmhljoj1jw"]
+
+[ext_resource type="Texture2D" uid="uid://dhs3nyc2hgpuy" path="res://Assets_Secenes/sky-with-clouds-background-set/Clouds/Clouds 5/1.png" id="1_2svq3"]
+
+[node name="Parallax2D" type="Parallax2D"]
+
+[node name="2" type="Sprite2D" parent="."]
+position = Vector2(577, 323)
+scale = Vector2(1.9930557, 1.9814814)
+texture = ExtResource("1_2svq3")
