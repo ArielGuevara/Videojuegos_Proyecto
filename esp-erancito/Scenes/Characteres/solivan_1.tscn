@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://bf4mc0ojx6jp7"]
+
+[ext_resource type="Texture2D" uid="uid://b8j48v47jiyd3" path="res://Caracters_player/Profesor Solivan/aparecer.png" id="1_nbx1c"]
+[ext_resource type="Texture2D" uid="uid://x5iu82841d26" path="res://Caracters_player/Profesor Solivan/espera.png" id="2_25gq6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25gq6"]
+atlas = ExtResource("1_nbx1c")
+region = Rect2(0, 0, 329, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_00atl"]
+atlas = ExtResource("1_nbx1c")
+region = Rect2(329, 0, 329, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mu2w4"]
+atlas = ExtResource("1_nbx1c")
+region = Rect2(658, 0, 329, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5odd7"]
+atlas = ExtResource("1_nbx1c")
+region = Rect2(987, 0, 329, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6pav"]
+atlas = ExtResource("1_nbx1c")
+region = Rect2(1316, 0, 329, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqpyi"]
+atlas = ExtResource("2_25gq6")
+region = Rect2(0, 0, 282, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ho3rj"]
+atlas = ExtResource("2_25gq6")
+region = Rect2(282, 0, 282, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byph5"]
+atlas = ExtResource("2_25gq6")
+region = Rect2(564, 0, 282, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr52t"]
+atlas = ExtResource("2_25gq6")
+region = Rect2(846, 0, 282, 521)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iqpyi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25gq6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_00atl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mu2w4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5odd7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6pav")
+}],
+"loop": true,
+"name": &"appearing",
+"speed": 7.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqpyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ho3rj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byph5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sr52t")
+}],
+"loop": true,
+"name": &"wait",
+"speed": 5.0
+}]
+
+[node name="solivan_1" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_iqpyi")
+animation = &"new_animation"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]

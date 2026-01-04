@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cnfyaaciuy527"
+path="res://.godot/imported/industrial.mp3-2b4a7ee74e1ae0cf13bf7dc1b0dee58e.mp3str"
+
+[deps]
+
+source_file="res://Assets_Secenes/background_industrial/Industrial Theme Music/industrial.mp3"
+dest_files=["res://.godot/imported/industrial.mp3-2b4a7ee74e1ae0cf13bf7dc1b0dee58e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

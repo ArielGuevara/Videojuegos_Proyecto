@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3tjcy6fwdnkg"]
+[gd_scene load_steps=15 format=3 uid="uid://d3tjcy6fwdnkg"]
 
 [ext_resource type="PackedScene" uid="uid://cjnqmhljoj1jw" path="res://Scenes/Screens/parallax_scene.tscn" id="1_ogk55"]
 [ext_resource type="PackedScene" uid="uid://4tg4fghnxefi" path="res://Scenes/Escenarios/escenario_1.tscn" id="2_ogk55"]
 [ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="2_w3ucr"]
 [ext_resource type="Texture2D" uid="uid://hrtahlfvsmay" path="res://Assets_Secenes/Assets_ESPE/fachadas_ESPE.jpg" id="4_5sfx4"]
 [ext_resource type="Texture2D" uid="uid://b58575b0tsttj" path="res://Assets_Secenes/Assets_ESPE/objetos_ESPE.jpg" id="5_kvtqo"]
+[ext_resource type="PackedScene" uid="uid://c5pkplavpvw5c" path="res://Scenes/movingPlatform1.tscn" id="6_kvtqo"]
+[ext_resource type="PackedScene" uid="uid://b6ro82poj52e2" path="res://Scenes/Escenarios/portal.tscn" id="7_n4r7i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n4r7i"]
 texture = ExtResource("4_5sfx4")
@@ -14816,16 +14818,85 @@ texture = ExtResource("5_kvtqo")
 sources/0 = SubResource("TileSetAtlasSource_n4r7i")
 sources/1 = SubResource("TileSetAtlasSource_mpr4t")
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_kvtqo"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 3376, 632, 0, 0, 0, 0, 4019, 624)
+}
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_n4r7i"]
+resource_name = "regular_move"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_mpr4t"]
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pkr2b"]
+_data = {
+&"RESET": SubResource("Animation_mpr4t"),
+&"regular_move": SubResource("Animation_n4r7i")
+}
+
+[node name="Screen_1" type="Node2D"]
+
+[node name="portal" parent="." instance=ExtResource("7_n4r7i")]
+position = Vector2(3093, 494)
+
+[node name="portal2" parent="." instance=ExtResource("7_n4r7i")]
+position = Vector2(3110, -124)
 
 [node name="Parallax2D" parent="." instance=ExtResource("1_ogk55")]
 
 [node name="TileMap" parent="." instance=ExtResource("2_ogk55")]
 
 [node name="boy1" parent="." instance=ExtResource("2_w3ucr")]
-position = Vector2(50, 457)
+position = Vector2(2957, 483)
 
 [node name="TileMap2" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_pkr2b")
 format = 2
 layer_0/tile_data = PackedInt32Array(1376288, 2228225, 7, 1441824, 2228225, 3, 1507360, 2228225, 4, 1572896, 2228225, 5, 1638432, 2228225, 6, 1703968, 2228225, 7, 1769504, 2228225, 8, 1835040, 2228225, 9, 1900576, 2228225, 10, 1966112, 2228225, 11, 2031648, 2228225, 12, 2097184, 2228225, 13, 2162720, 2228225, 14, 2228256, 2228225, 15, 2293792, 2228225, 16, 1376289, 2293761, 7, 1441825, 2293761, 3, 1507361, 2293761, 4, 1572897, 2293761, 5, 1638433, 2293761, 6, 1703969, 2293761, 7, 1769505, 2293761, 8, 1835041, 2293761, 9, 1900577, 2293761, 10, 1966113, 2293761, 11, 2031649, 2293761, 12, 2097185, 2293761, 13, 2162721, 2293761, 14, 2228257, 2293761, 15, 2293793, 2293761, 16, 1376290, 2359297, 7, 1441826, 2359297, 3, 1507362, 2359297, 4, 1572898, 2359297, 5, 1638434, 2359297, 6, 1703970, 2359297, 7, 1769506, 2359297, 8, 1835042, 2359297, 9, 1900578, 2359297, 10, 1966114, 2359297, 11, 2031650, 2359297, 12, 2097186, 2359297, 13, 2162722, 2359297, 14, 2228258, 2359297, 15, 2293794, 2359297, 16, 1376291, 2424833, 7, 1441827, 2424833, 3, 1507363, 2424833, 4, 1572899, 2424833, 5, 1638435, 2424833, 6, 1703971, 2424833, 7, 1769507, 2424833, 8, 1835043, 2424833, 9, 1900579, 2424833, 10, 1966115, 2424833, 11, 2031651, 2424833, 12, 2097187, 2424833, 13, 2162723, 2424833, 14, 2228259, 2424833, 15, 2293795, 2424833, 16, 2359328, 2228225, 12, 2424864, 2228225, 13, 2490400, 2228225, 14, 2555936, 2228225, 15, 2359329, 2293761, 12, 2424865, 2293761, 13, 2490401, 2293761, 14, 2555937, 2293761, 15, 2359330, 2359297, 12, 2424866, 2359297, 13, 2490402, 2359297, 14, 2555938, 2359297, 15, 2359331, 2424833, 12, 2424867, 2424833, 13, 2490403, 2424833, 14, 2555939, 2424833, 15, 2621472, 2228225, 12, 2687008, 2228225, 13, 2752544, 2228225, 14, 2818080, 2228225, 15, 2621473, 2293761, 12, 2687009, 2293761, 13, 2752545, 2293761, 14, 2818081, 2293761, 15, 2621474, 2359297, 12, 2687010, 2359297, 13, 2752546, 2359297, 14, 2818082, 2359297, 15, 2621475, 2424833, 12, 2687011, 2424833, 13, 2752547, 2424833, 14, 2818083, 2424833, 15, 1179680, 2228225, 4, 1245216, 2228225, 5, 1310752, 2228225, 6, 1179681, 2293761, 4, 1245217, 2293761, 5, 1310753, 2293761, 6, 1179682, 2359297, 4, 1245218, 2359297, 5, 1310754, 2359297, 6, 1179683, 2424833, 4, 1245219, 2424833, 5, 1310755, 2424833, 6, 917536, 2228225, 4, 983072, 2228225, 5, 1048608, 2228225, 6, 1114144, 2228225, 7, 917537, 2293761, 4, 983073, 2293761, 5, 1048609, 2293761, 6, 1114145, 2293761, 7, 917538, 2359297, 4, 983074, 2359297, 5, 1048610, 2359297, 6, 1114146, 2359297, 7, 917539, 2424833, 4, 983075, 2424833, 5, 1048611, 2424833, 6, 1114147, 2424833, 7, 655392, 2228225, 4, 720928, 2228225, 5, 786464, 2228225, 6, 852000, 2228225, 7, 655393, 2293761, 4, 720929, 2293761, 5, 786465, 2293761, 6, 852001, 2293761, 7, 655394, 2359297, 4, 720930, 2359297, 5, 786466, 2359297, 6, 852002, 2359297, 7, 655395, 2424833, 4, 720931, 2424833, 5, 786467, 2424833, 6, 852003, 2424833, 7, 393248, 2228225, 4, 458784, 2228225, 5, 524320, 2228225, 6, 589856, 2228225, 7, 393249, 2293761, 4, 458785, 2293761, 5, 524321, 2293761, 6, 589857, 2293761, 7, 393250, 2359297, 4, 458786, 2359297, 5, 524322, 2359297, 6, 589858, 2359297, 7, 393251, 2424833, 4, 458787, 2424833, 5, 524323, 2424833, 6, 589859, 2424833, 7)
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-209.27771, 0)
+scale = Vector2(1.1073098, 1)
+curve = SubResource("Curve2D_kvtqo")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(3376, 632)
+rotation = -0.012441037
+loop = false
+
+[node name="moving_platform_2" parent="Path2D/PathFollow2D" instance=ExtResource("6_kvtqo")]
+position = Vector2(0.062164307, -4.999591)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D/PathFollow2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_pkr2b")
+}
+autoplay = "regular_move"

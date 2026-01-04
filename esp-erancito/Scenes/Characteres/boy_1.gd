@@ -6,6 +6,8 @@ const RUN_SPEED = 500.0
 const JUMP_VELOCITY = -400.0
 var appeared:bool = false
 var attacking:bool = false
+var leaved_floor: bool = false
+var had_jump: bool = false
 
 
 func _ready():
@@ -13,12 +15,19 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	
+	if is_on_floor():
+		leaved_floor = false
+		had_jump = false
 	# Add the gravity.
 	if not is_on_floor():
+		if not leaved_floor:
+			$coyote_timer.start()
+			leaved_floor = true
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and right_to_jump():
 		velocity.y = JUMP_VELOCITY
 		
 		# Detectar ataque
@@ -51,30 +60,43 @@ func decide_animation():
 	if attacking: return  
 	# Eje de las x
 	if velocity.x == 0:
-		$animaciones.play("idle")
+		$animaciones.play("idle_first")
 	elif velocity.x < 0:
 		$animaciones.flip_h = true
 		if abs(velocity.x) > SPEED:
-			$animaciones.play("run")
+			$animaciones.play("run_first")
 		else:
-			$animaciones.play("walk")
+			$animaciones.play("walk_first")
 	elif velocity.x > 0:
 		$animaciones.flip_h = false
 		if abs(velocity.x) > SPEED:
-			$animaciones.play("run")
+			$animaciones.play("run_first")
 		else:
-			$animaciones.play("walk")
+			$animaciones.play("walk_first")
 		
 	#Eje de las Y
 	if velocity.y > 0:
-		$animaciones.play("idle")
+		$animaciones.play("idle_first")
 	elif velocity.y < 0:
-		$animaciones.play("jump")
+		$animaciones.play("jump_first")
 		
+
+func right_to_jump():
+	if had_jump: return false
+	if is_on_floor(): 
+		had_jump = true
+		return true
+	elif not $coyote_timer.is_stopped(): 
+		had_jump = true
+		return true
 
 func _on_animaciones_animation_finished() -> void:
 	if $animaciones.animation == "appearing":
 		appeared = true
 	if $animaciones.animation == "attack_1":
-		$animaciones.play("idle")
+		$animaciones.play("idle_first")
 		attacking = false
+
+
+func _on_coyote_timer_timeout() -> void:
+	pass;

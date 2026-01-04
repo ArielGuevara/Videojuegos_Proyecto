@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5pkplavpvw5c"]
+
+[ext_resource type="Texture2D" uid="uid://cbmie0vp6ecta" path="res://Assets_Secenes/Assets_ESPE/assets_ESPE.jpg" id="1_0i2nm"]
+[ext_resource type="Script" uid="uid://d4chwcppijbqj" path="res://Scenes/moving_platform_1.gd" id="1_s7q82"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7q82"]
+size = Vector2(132, 37)
+
+[node name="moving_platform_1" type="AnimatableBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_s7q82")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s7q82")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("1_0i2nm")
+region_enabled = true
+region_rect = Rect2(726, 204, 132, 36)

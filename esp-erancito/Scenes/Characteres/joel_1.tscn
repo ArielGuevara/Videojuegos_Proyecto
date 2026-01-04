@@ -9,6 +9,22 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rwb58"]
 size = Vector2(137, 224)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_osycp"]
+atlas = ExtResource("5_xttt3")
+region = Rect2(0, 0, 256, 251)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bnfe"]
+atlas = ExtResource("5_xttt3")
+region = Rect2(256, 0, 256, 251)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o84ij"]
+atlas = ExtResource("5_xttt3")
+region = Rect2(512, 0, 256, 251)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3i0c"]
+atlas = ExtResource("5_xttt3")
+region = Rect2(768, 0, 256, 251)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_aqdno"]
 atlas = ExtResource("1_5r3hm")
 region = Rect2(0, 0, 270, 262)
@@ -57,24 +73,25 @@ region = Rect2(512, 0, 256, 247)
 atlas = ExtResource("4_ecn00")
 region = Rect2(768, 0, 256, 247)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_osycp"]
-atlas = ExtResource("5_xttt3")
-region = Rect2(0, 0, 256, 251)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6bnfe"]
-atlas = ExtResource("5_xttt3")
-region = Rect2(256, 0, 256, 251)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_o84ij"]
-atlas = ExtResource("5_xttt3")
-region = Rect2(512, 0, 256, 251)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b3i0c"]
-atlas = ExtResource("5_xttt3")
-region = Rect2(768, 0, 256, 251)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_r5igs"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_osycp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bnfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o84ij")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3i0c")
+}],
+"loop": true,
+"name": &"appearing",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aqdno")
@@ -130,23 +147,6 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_osycp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6bnfe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_o84ij")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b3i0c")
-}],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
 }]
 
 [node name="Joel_1" type="CharacterBody2D"]
@@ -157,7 +157,6 @@ shape = SubResource("RectangleShape2D_rwb58")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_r5igs")
-animation = &"idle"
-frame_progress = 0.7890333
+animation = &"appearing"
 
 [node name="Camera2D" type="Camera2D" parent="."]
