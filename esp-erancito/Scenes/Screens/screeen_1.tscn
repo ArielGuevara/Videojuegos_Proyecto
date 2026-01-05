@@ -14820,14 +14820,12 @@ sources/1 = SubResource("TileSetAtlasSource_mpr4t")
 
 [sub_resource type="Curve2D" id="Curve2D_kvtqo"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 3376, 632, 0, 0, 0, 0, 4019, 624)
+"points": PackedVector2Array(0, 0, 0, 0, 3376, 632, 0, 0, 0, 0, 4021.709, 632)
 }
 point_count = 2
 
-[sub_resource type="Animation" id="Animation_n4r7i"]
-resource_name = "regular_move"
+[sub_resource type="Animation" id="Animation_mpr4t"]
 length = 5.0
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -14841,8 +14839,10 @@ tracks/0/keys = {
 "values": [0.0, 1.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_mpr4t"]
+[sub_resource type="Animation" id="Animation_n4r7i"]
+resource_name = "regular_move"
 length = 5.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -14868,7 +14868,15 @@ _data = {
 position = Vector2(3093, 494)
 
 [node name="portal2" parent="." instance=ExtResource("7_n4r7i")]
-position = Vector2(3110, -124)
+position = Vector2(3086, -72)
+
+[node name="portal3" parent="." instance=ExtResource("7_n4r7i")]
+position = Vector2(417, -73)
+group = 2
+
+[node name="portal4" parent="." instance=ExtResource("7_n4r7i")]
+position = Vector2(412, -641)
+group = 2
 
 [node name="Parallax2D" parent="." instance=ExtResource("1_ogk55")]
 
@@ -14889,7 +14897,6 @@ curve = SubResource("Curve2D_kvtqo")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 position = Vector2(3376, 632)
-rotation = -0.012441037
 loop = false
 
 [node name="moving_platform_2" parent="Path2D/PathFollow2D" instance=ExtResource("6_kvtqo")]
