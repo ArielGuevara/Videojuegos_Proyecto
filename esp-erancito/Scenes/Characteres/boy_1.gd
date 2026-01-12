@@ -8,13 +8,29 @@ var appeared:bool = false
 var attacking:bool = false
 var leaved_floor: bool = false
 var had_jump: bool = false
+# ---  VARIABLES DE VIDA ---
+var max_health = 100
+var current_health = 100
+var is_invulnerable = false # Para no recibir daño infinito
 
+# Referencia al Timer
+@onready var invul_timer = $InvulnerabilityTimer
+@onready var health_bar = $CanvasLayer/BarraVida
 
 func _ready():
+	current_health = max_health
 	$animaciones.play("appearing")
+	
+	# CONFIGURACIÓN INICIAL DE LA BARRA
+	if health_bar:
+		health_bar.max_value = max_health
+		health_bar.value = current_health
 
 
 func _physics_process(delta: float) -> void:
+	
+	if current_health <= 0:
+		return
 	
 	if is_on_floor():
 		leaved_floor = false
@@ -54,6 +70,51 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	decide_animation()
 	#_on_animaciones_animation_finished()
+	
+# --- NUEVA FUNCIÓN: RECIBIR DAÑO ---
+func take_damage(amount: int, source_position: Vector2):
+	if is_invulnerable or current_health <= 0:
+		print("El jugador es invulnerable, daño ignorado.")
+		return
+	current_health -= amount
+	print("Vida bajó a: ", current_health)
+	
+	# ACTUALIZAR LA BARRA VISUALMENTE
+	if health_bar:
+		health_bar.value = current_health
+		
+	print("Vida restante: ", current_health)
+	
+	if current_health <= 0:
+		die()
+	else:
+		get_hurt_feedback()
+		apply_knockback(source_position)
+
+
+func get_hurt_feedback():
+	# Activar invulnerabilidad
+	is_invulnerable = true
+	invul_timer.start() 
+	
+	# Feedback visual: Parpadear en rojo
+	modulate = Color(1, 0, 0) # Rojo puro
+	
+	# O reproducir animación de "hurt" si la tienes
+	# $animaciones.play("hurt")
+
+func apply_knockback(source_pos):
+	# Calcular dirección contraria al golpe
+	var knockback_dir = (global_position - source_pos).normalized()
+	# Un pequeño empujón hacia arriba y atrás
+	velocity = knockback_dir * 300
+	velocity.y = -200 
+
+func die():
+	print("Jugador muerto")
+	$animaciones.play("dead") # O tu animación de muerte
+	# Aquí podrías reiniciar el nivel o mostrar pantalla de Game Over
+	set_physics_process(false) # Desactivar controles
 	
 func decide_animation():
 	if not appeared: return
@@ -100,3 +161,8 @@ func _on_animaciones_animation_finished() -> void:
 
 func _on_coyote_timer_timeout() -> void:
 	pass;
+
+
+func _on_invulnerability_timer_timeout() -> void:
+	is_invulnerable = false
+	modulate = Color(1, 1, 1)

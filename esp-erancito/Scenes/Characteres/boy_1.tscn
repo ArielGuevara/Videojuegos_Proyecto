@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://bhd61nlu4lfy7"]
+[gd_scene load_steps=102 format=3 uid="uid://bhd61nlu4lfy7"]
 
 [ext_resource type="Texture2D" uid="uid://ddg8ygjlaf2wm" path="res://Caracters_player/Converted_Vampire/Attack_1.png" id="1_kf24q"]
 [ext_resource type="Script" uid="uid://b06onw1qokc8s" path="res://Scenes/Characteres/boy_1.gd" id="1_ng8he"]
@@ -668,13 +668,19 @@ size = Vector2(27, 79)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjwng"]
 size = Vector2(12, 43)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjwng"]
+bg_color = Color(0.17254902, 0.2, 0.17254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f02do"]
+bg_color = Color(0.18808609, 0.6547139, 0.39334014, 1)
+
 [node name="boy_1" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ng8he")
 
 [node name="animaciones" type="AnimatedSprite2D" parent="." groups=["player"]]
 position = Vector2(10, -46)
 sprite_frames = SubResource("SpriteFrames_o78fh")
-animation = &"idle"
+animation = &"dead"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_bottom = 648
@@ -698,5 +704,22 @@ modulate = Color(0.7135751, 0.077161305, 9.62615e-08, 1)
 position = Vector2(10, -3.5)
 shape = SubResource("RectangleShape2D_pjwng")
 
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BarraVida" type="ProgressBar" parent="CanvasLayer" groups=["player"]]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 220.0
+offset_bottom = 50.0
+theme_override_styles/background = SubResource("StyleBoxFlat_pjwng")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f02do")
+step = 1.0
+value = 50.0
+
 [connection signal="animation_finished" from="animaciones" to="." method="_on_animaciones_animation_finished"]
 [connection signal="timeout" from="coyote_timer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

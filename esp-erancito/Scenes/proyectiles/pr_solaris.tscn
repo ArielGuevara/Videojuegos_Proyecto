@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3l6h4o8iaw81"]
+
+[ext_resource type="Script" uid="uid://6mtj8e5r6u6l" path="res://Scenes/proyectiles/pr_solaris.gd" id="1_5oerl"]
+[ext_resource type="Texture2D" uid="uid://8ga38h51lxtg" path="res://Caracters_player/Profesor solaris/objeto.png" id="1_xrlpk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5oerl"]
+radius = 88.02273
+
+[node name="Proyectil" type="Area2D"]
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_5oerl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xrlpk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5oerl")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

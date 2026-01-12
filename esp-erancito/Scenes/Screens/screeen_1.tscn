@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d3tjcy6fwdnkg"]
+[gd_scene load_steps=16 format=3 uid="uid://d3tjcy6fwdnkg"]
 
 [ext_resource type="PackedScene" uid="uid://cjnqmhljoj1jw" path="res://Scenes/Screens/parallax_scene.tscn" id="1_ogk55"]
 [ext_resource type="PackedScene" uid="uid://4tg4fghnxefi" path="res://Scenes/Escenarios/escenario_1.tscn" id="2_ogk55"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b58575b0tsttj" path="res://Assets_Secenes/Assets_ESPE/objetos_ESPE.jpg" id="5_kvtqo"]
 [ext_resource type="PackedScene" uid="uid://c5pkplavpvw5c" path="res://Scenes/movingPlatform1.tscn" id="6_kvtqo"]
 [ext_resource type="PackedScene" uid="uid://b6ro82poj52e2" path="res://Scenes/Escenarios/portal.tscn" id="7_n4r7i"]
+[ext_resource type="PackedScene" uid="uid://e5gslaiy8s0w" path="res://Scenes/Characteres/solaris_1.tscn" id="8_mpr4t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n4r7i"]
 texture = ExtResource("4_5sfx4")
@@ -14883,7 +14884,7 @@ group = 2
 [node name="TileMap" parent="." instance=ExtResource("2_ogk55")]
 
 [node name="boy1" parent="." instance=ExtResource("2_w3ucr")]
-position = Vector2(2957, 483)
+position = Vector2(2353, 333)
 
 [node name="TileMap2" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_pkr2b")
@@ -14907,3 +14908,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_pkr2b")
 }
 autoplay = "regular_move"
+
+[node name="solaris_1" parent="." instance=ExtResource("8_mpr4t")]
+position = Vector2(2975, 410)
