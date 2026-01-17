@@ -14864,6 +14864,7 @@ _data = {
 }
 
 [node name="Screen_1" type="Node2D"]
+position = Vector2(-4, 3)
 
 [node name="portal" parent="." instance=ExtResource("7_n4r7i")]
 position = Vector2(3093, 494)
@@ -14884,7 +14885,7 @@ group = 2
 [node name="TileMap" parent="." instance=ExtResource("2_ogk55")]
 
 [node name="boy1" parent="." instance=ExtResource("2_w3ucr")]
-position = Vector2(2353, 333)
+position = Vector2(277, 185)
 
 [node name="TileMap2" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_pkr2b")
@@ -14910,4 +14911,4 @@ libraries = {
 autoplay = "regular_move"
 
 [node name="solaris_1" parent="." instance=ExtResource("8_mpr4t")]
-position = Vector2(2975, 410)
+position = Vector2(1156, 379)

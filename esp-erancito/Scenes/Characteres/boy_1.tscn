@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://bhd61nlu4lfy7"]
+[gd_scene load_steps=105 format=3 uid="uid://bhd61nlu4lfy7"]
 
 [ext_resource type="Texture2D" uid="uid://ddg8ygjlaf2wm" path="res://Caracters_player/Converted_Vampire/Attack_1.png" id="1_kf24q"]
 [ext_resource type="Script" uid="uid://b06onw1qokc8s" path="res://Scenes/Characteres/boy_1.gd" id="1_ng8he"]
@@ -94,6 +94,14 @@ region = Rect2(384, 0, 128, 128)
 [sub_resource type="AtlasTexture" id="AtlasTexture_elj3g"]
 atlas = ExtResource("1_kf24q")
 region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h21wm"]
+atlas = ExtResource("6_x8p06")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjahp"]
+atlas = ExtResource("6_x8p06")
+region = Rect2(128, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a5y6w"]
 atlas = ExtResource("4_p4nju")
@@ -401,7 +409,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x10m5")
 }],
-"loop": true,
+"loop": false,
 "name": &"atack_3",
 "speed": 5.0
 }, {
@@ -424,6 +432,17 @@ animations = [{
 "loop": false,
 "name": &"attack_1",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h21wm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjahp")
+}],
+"loop": false,
+"name": &"crouch",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -450,9 +469,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bt005")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -541,9 +560,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l1eq0")
 }],
-"loop": true,
+"loop": false,
 "name": &"protected",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -674,13 +693,16 @@ bg_color = Color(0.17254902, 0.2, 0.17254902, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f02do"]
 bg_color = Color(0.18808609, 0.6547139, 0.39334014, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f02do"]
+size = Vector2(25, 12)
+
 [node name="boy_1" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ng8he")
 
 [node name="animaciones" type="AnimatedSprite2D" parent="." groups=["player"]]
 position = Vector2(10, -46)
 sprite_frames = SubResource("SpriteFrames_o78fh")
-animation = &"dead"
+animation = &"protected"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_bottom = 648
@@ -705,7 +727,7 @@ position = Vector2(10, -3.5)
 shape = SubResource("RectangleShape2D_pjwng")
 
 [node name="InvulnerabilityTimer" type="Timer" parent="."]
-wait_time = 0.8
+wait_time = 2.223
 one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -720,6 +742,18 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_f02do")
 step = 1.0
 value = 50.0
 
+[node name="RayTecho" type="RayCast2D" parent="."]
+position = Vector2(6, 13)
+target_position = Vector2(0, -50)
+
+[node name="AreaAtaque" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAtaque"]
+position = Vector2(57.5, -21)
+shape = SubResource("RectangleShape2D_f02do")
+disabled = true
+
 [connection signal="animation_finished" from="animaciones" to="." method="_on_animaciones_animation_finished"]
 [connection signal="timeout" from="coyote_timer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
+[connection signal="body_entered" from="AreaAtaque" to="." method="_on_area_ataque_body_entered"]

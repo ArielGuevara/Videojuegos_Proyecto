@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # --- CONFIGURACIÓN ---
-@export var max_health = 60
+@export var max_health = 200
 @export var speed = 100
 @export var damage_touch = 10 # Daño si tocas al enemigo con el cuerpo
 @export var projectile_scene: PackedScene 
@@ -87,6 +87,9 @@ func cambiar_direccion():
 # --- COMBATE ---
 
 func _on_timer_ataque_timeout():
+	# Si estoy muerto, no hago nada.
+	if current_health <= 0:
+		return
 	# Solo dispara si ve al jugador
 	if target_player and projectile_scene:
 		anim.play("attack")
@@ -131,9 +134,22 @@ func activar_fase_2():
 	# scale = Vector2(1.5, 1.5) 
 
 func die():
-	anim.play("desappering")
+	# 1. Detener ataques inmediatamente
+	timer_ataque.stop() 
+	target_player = null # Dejar de apuntar/perseguir
+	
+	# 2. Reproducir muerte
+	anim.play("desappearing")
+	
+	# 3. Desactivar movimiento y colisiones
 	set_physics_process(false)
-	$CollisionShape2D.call_deferred("set_disabled", true) # Desactiva colisión
+	
+	# Desactiva la colisión principal (para que no choque con paredes)
+	$CollisionShape2D.call_deferred("set_disabled", true) 
+	
+	# IMPORTANTE: Si tienes un nodo Hitbox aparte, desactívalo también aquí
+	# o añade una comprobación de vida en la función de daño por contacto.
+	# 4. Esperar y desaparecer
 	await anim.animation_finished
 	queue_free()
 
@@ -156,6 +172,9 @@ func _on_area_deteccion_body_exited(body):
 # Si quieres que haga daño si el jugador lo toca con el cuerpo
 # Necesitas un Area2D extra llamada "Hitbox" o usar la misma deteccion pero muy cerca
 func _on_hitbox_body_entered(body):
+	if current_health <= 0:
+		return
+		
 	if body.is_in_group("player") and body.has_method("take_damage"):
 		print(current_health)
 		body.take_damage(damage_touch, global_position)

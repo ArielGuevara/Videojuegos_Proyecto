@@ -7,7 +7,7 @@
 radius = 88.02273
 
 [node name="Proyectil" type="Area2D"]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.2, 0.2)
 script = ExtResource("1_5oerl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
