@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0tie75ccwpc1"]
+
+[ext_resource type="Texture2D" uid="uid://dgoijdayt3h8h" path="res://Scenes/Menus/MenuPrincipal_reduce.png" id="1_5yyhg"]
+[ext_resource type="Script" uid="uid://b2nav58dnt6px" path="res://Scenes/Menus/menu_principal.gd" id="1_ee117"]
+[ext_resource type="AudioStream" uid="uid://bl1xvcck5ytap" path="res://Music/MenuPrincipal/musica_menu.ogg" id="3_rkpcb"]
+
+[sub_resource type="FontFile" id="FontFile_5yyhg"]
+cache/0/200/0/ascent = 0.0
+cache/0/200/0/descent = 0.0
+cache/0/200/0/underline_position = 0.0
+cache/0/200/0/underline_thickness = 0.0
+cache/0/200/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ee117"]
+font = SubResource("FontFile_5yyhg")
+font_size = 200
+
+[node name="MenuPrincipal" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 438.0
+offset_top = 298.0
+offset_right = 438.0
+offset_bottom = 298.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ee117")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.224
+anchor_top = -0.312
+anchor_right = 0.77300006
+anchor_bottom = 0.684
+offset_left = -66.608
+offset_top = 0.27999878
+offset_right = 127.88611
+offset_bottom = 97.03998
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5yyhg")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -363.0
+offset_top = -234.0
+offset_right = 316.0
+offset_bottom = -109.0
+text = "ESPErancito"
+label_settings = SubResource("LabelSettings_ee117")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -382.0
+offset_top = 408.0
+offset_right = -139.0
+offset_bottom = 479.0
+
+[node name="BotonJugar" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "JUGAR
+"
+
+[node name="BotonSalir" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "SALIR"
+
+[node name="MusicMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rkpcb")

@@ -13,8 +13,8 @@ var had_jump: bool = false
 var is_blocking: bool = false 
 
 # --- VARIABLES DE VIDA ---
-var max_health = 1000
-var current_health = 1000
+var max_health = 500
+var current_health = 500
 var is_invulnerable = false 
 
 var distancia_ataque: float = 57.5
