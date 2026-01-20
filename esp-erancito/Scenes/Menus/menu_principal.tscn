@@ -2,23 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://dgoijdayt3h8h" path="res://Scenes/Menus/MenuPrincipal_reduce.png" id="1_5yyhg"]
 [ext_resource type="Script" uid="uid://b2nav58dnt6px" path="res://Scenes/Menus/menu_principal.gd" id="1_ee117"]
+[ext_resource type="FontFile" uid="uid://enqqfjpwfd6j" path="res://Scenes/Fonts/mini_pixel-7.ttf" id="3_bly56"]
 [ext_resource type="AudioStream" uid="uid://bl1xvcck5ytap" path="res://Music/MenuPrincipal/musica_menu.ogg" id="3_rkpcb"]
 
-[sub_resource type="FontFile" id="FontFile_5yyhg"]
-cache/0/200/0/ascent = 0.0
-cache/0/200/0/descent = 0.0
-cache/0/200/0/underline_position = 0.0
-cache/0/200/0/underline_thickness = 0.0
-cache/0/200/0/scale = 1.0
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-
 [sub_resource type="LabelSettings" id="LabelSettings_ee117"]
-font = SubResource("FontFile_5yyhg")
-font_size = 200
+font = ExtResource("3_bly56")
+font_size = 300
+font_color = Color(0, 0.8235294, 0.15686275, 1)
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 0.9843137)
 
 [node name="MenuPrincipal" type="Control"]
 layout_mode = 3
@@ -61,16 +53,20 @@ label_settings = SubResource("LabelSettings_ee117")
 layout_mode = 0
 offset_left = -382.0
 offset_top = 408.0
-offset_right = -139.0
-offset_bottom = 479.0
+offset_right = -116.0
+offset_bottom = 571.0
 
 [node name="BotonJugar" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bly56")
+theme_override_font_sizes/font_size = 60
 text = "JUGAR
 "
 
 [node name="BotonSalir" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bly56")
+theme_override_font_sizes/font_size = 60
 text = "SALIR"
 
 [node name="MusicMenu" type="AudioStreamPlayer" parent="."]
