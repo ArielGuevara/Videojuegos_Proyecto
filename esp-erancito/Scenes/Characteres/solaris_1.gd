@@ -6,6 +6,11 @@ extends CharacterBody2D
 @export var damage_touch = 10 # Daño si tocas al enemigo con el cuerpo
 @export var projectile_scene: PackedScene 
 
+#--------VARIABLES DE ATAUQE-----------
+var is_dashing = false # ¿Está embistiendo?
+var dash_speed = 400   # Velocidad de la embestida
+var dash_duration = 0.5 # Cuánto dura el dash
+
 # --- ESTADOS ---
 var current_health = 0
 var direction = 1 # 1 = Derecha, -1 = Izquierda
@@ -31,6 +36,13 @@ func _physics_process(delta):
 	# 1. Gravedad
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		
+	# --- MODIFICACION DASH ---
+	if is_dashing:
+		# Si estamos embistiendo, nos movemos MUY RÁPIDO hacia donde miramos
+		velocity.x = direction * dash_speed
+		move_and_slide()
+		return # ¡Importante! No hacemos nada más mientras embestimos
 
 	# 2. Si está en animación de crecer o atacar, no se mueve
 	if anim.animation == "grow_up" and anim.is_playing():
@@ -54,8 +66,101 @@ func _physics_process(delta):
 	# Gestionar animación de caminar si no está atacando
 	if velocity.x != 0 and (anim.animation != "attack" or not anim.is_playing()):
 		anim.play("run" if is_enraged else "walk")
+		
+	
+#----- ATAQUES ------
+func iniciar_ataque_normal():
+	anim.play("attack")
+	# Nota: Asumo que tu animación "attack" llama a 'lanzar_proyectil'
+	# o que usas un call_deferred como tenías antes.
+	# Si tu animación NO tiene eventos, usa esto:
+	call_deferred("lanzar_proyectil")
+	
+func iniciar_rafaga():
+	anim.play("attack") # Animación visual
+	
+	# Disparo 1
+	lanzar_proyectil()
+	await get_tree().create_timer(0.3).timeout # Espera 0.3 segundos
+	
+	# Disparo 2 (Si seguimos vivos)
+	if current_health > 0:
+		anim.frame = 0 # Reiniciar frame de animación (opcional)
+		lanzar_proyectil()
+		await get_tree().create_timer(0.3).timeout
+	
+	# Disparo 3
+	if current_health > 0:
+		anim.frame = 0
+		lanzar_proyectil()
+		
+		
+func iniciar_embestida():
+	# 1. Avisar visualmente (opcional: ponerlo rojo o animacion especial)
+	modulate = Color(1, 0, 0) # Se pone rojo
+	
+	# 2. Pausa dramática antes de lanzarse (0.3 seg)
+	velocity.x = 0
+	await get_tree().create_timer(0.3).timeout
+	
+	# 3. ¡LANZAMIENTO!
+	if current_health > 0 and target_player:
+		is_dashing = true
+		anim.play("run" if is_enraged else "walk") # O animación de correr
+		
+		# Asegurar dirección correcta antes de salir disparado
+		perseguir_jugador() 
+		
+		# Esperar duración del dash
+		await get_tree().create_timer(dash_duration).timeout
+		
+		# 4. Frenar
+		is_dashing = false
+		modulate = Color(1, 1, 1) # Color normal
+		velocity.x = 0 # Frenado finalfunc iniciar_embestida():
+	# 1. Avisar visualmente (opcional: ponerlo rojo o animacion especial)
+	modulate = Color(1, 0, 0) # Se pone rojo
+	
+	# 2. Pausa dramática antes de lanzarse (0.3 seg)
+	velocity.x = 0
+	await get_tree().create_timer(0.3).timeout
+	
+	# 3. ¡LANZAMIENTO!
+	if current_health > 0 and target_player:
+		is_dashing = true
+		anim.play("run" if is_enraged else "walk") # O animación de correr
+		
+		# Asegurar dirección correcta antes de salir disparado
+		perseguir_jugador() 
+		
+		# Esperar duración del dash
+		await get_tree().create_timer(dash_duration).timeout
+		
+		# 4. Frenar
+		is_dashing = false
+		modulate = Color(1, 1, 1) # Color normal
+		velocity.x = 0 # Frenado final
 
 # --- COMPORTAMIENTOS ---
+
+func elegir_ataque():
+	# Generamos un número aleatorio entre 0 y 100
+	var dado = randf_range(0, 100)
+	
+	if dado < 50:
+		# 0 a 49 (50%): Disparo Normal
+		print("Eligió: Disparo Normal")
+		iniciar_ataque_normal()
+		
+	elif dado < 80:
+		# 50 a 79 (30%): Ráfaga Rápida
+		print("Eligió: Ráfaga")
+		iniciar_rafaga()
+		
+	else:
+		# 80 a 100 (20%): Embestida
+		print("Eligió: Embestida")
+		iniciar_embestida()
 
 func patrullar():
 	# Si detectamos pared O se acaba el suelo -> Girar
@@ -91,10 +196,8 @@ func _on_timer_ataque_timeout():
 	if current_health <= 0:
 		return
 	# Solo dispara si ve al jugador
-	if target_player and projectile_scene:
-		anim.play("attack")
-		# Esperamos un momento (frame) para que la animacion coincida, o lanzamos directo:
-		call_deferred("lanzar_proyectil") 
+	if target_player:
+		elegir_ataque()
 
 func lanzar_proyectil():
 	var proyectil = projectile_scene.instantiate()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0tie75ccwpc1"]
+[gd_scene load_steps=16 format=3 uid="uid://b0tie75ccwpc1"]
 
 [ext_resource type="Texture2D" uid="uid://dgoijdayt3h8h" path="res://Scenes/Menus/MenuPrincipal_reduce.png" id="1_5yyhg"]
 [ext_resource type="Script" uid="uid://b2nav58dnt6px" path="res://Scenes/Menus/menu_principal.gd" id="1_ee117"]
 [ext_resource type="FontFile" uid="uid://enqqfjpwfd6j" path="res://Scenes/Fonts/mini_pixel-7.ttf" id="3_bly56"]
 [ext_resource type="AudioStream" uid="uid://bl1xvcck5ytap" path="res://Music/MenuPrincipal/musica_menu.ogg" id="3_rkpcb"]
+[ext_resource type="Texture2D" uid="uid://nqdc824lirj" path="res://Scenes/Menus/EscudoIcon.png" id="5_win7y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ee117"]
 font = ExtResource("3_bly56")
@@ -11,6 +12,70 @@ font_size = 300
 font_color = Color(0, 0.8235294, 0.15686275, 1)
 shadow_size = 15
 shadow_color = Color(0, 0, 0, 0.9843137)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlige"]
+atlas = ExtResource("5_win7y")
+region = Rect2(469, 0, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kgmx"]
+atlas = ExtResource("5_win7y")
+region = Rect2(1407, 0, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qybmx"]
+atlas = ExtResource("5_win7y")
+region = Rect2(1876, 0, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g5cc"]
+atlas = ExtResource("5_win7y")
+region = Rect2(0, 512, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rm68"]
+atlas = ExtResource("5_win7y")
+region = Rect2(469, 512, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3ntv"]
+atlas = ExtResource("5_win7y")
+region = Rect2(938, 512, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndje3"]
+atlas = ExtResource("5_win7y")
+region = Rect2(1407, 512, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sbmmb"]
+atlas = ExtResource("5_win7y")
+region = Rect2(1876, 512, 469, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sg3qn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlige")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kgmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qybmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1g5cc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rm68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3ntv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndje3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sbmmb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
 
 [node name="MenuPrincipal" type="Control"]
 layout_mode = 3
@@ -71,3 +136,20 @@ text = "SALIR"
 
 [node name="MusicMenu" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rkpcb")
+
+[node name="IconoCarga" type="AnimatedSprite2D" parent="."]
+position = Vector2(1204, 483)
+scale = Vector2(0.35287845, 0.35287848)
+sprite_frames = SubResource("SpriteFrames_sg3qn")
+frame = 5
+frame_progress = 0.41131762
+
+[node name="Label" type="Label" parent="IconoCarga"]
+offset_left = -144.52567
+offset_top = 229.54076
+offset_right = 148.47433
+offset_bottom = 316.54077
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 63
+text = "Cargando..."
