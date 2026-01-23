@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://d3l6h4o8iaw81" path="res://Scenes/proyectiles/pr_solaris.tscn" id="6_mqkjw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ka56q"]
-size = Vector2(185, 326)
+size = Vector2(192, 344)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kj826"]
 atlas = ExtResource("1_fua58")
@@ -283,10 +283,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqkjw"]
-size = Vector2(2066, 516)
+size = Vector2(2023, 516)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q806i"]
-size = Vector2(194, 326)
+size = Vector2(220, 326)
 
 [node name="solaris_1" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(0.5, 0.5)
@@ -294,30 +294,28 @@ script = ExtResource("1_q806i")
 projectile_scene = ExtResource("6_mqkjw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(26.5, -15)
+position = Vector2(-20, -6)
 shape = SubResource("RectangleShape2D_ka56q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_d8oam")
-animation = &"grow_up"
-frame = 5
-frame_progress = 0.47799203
+animation = &"walk"
 flip_h = true
 
 [node name="TimerAtaque" type="Timer" parent="."]
 
 [node name="AreaDeteccion" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeteccion"]
-position = Vector2(-14, -74)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeteccion" groups=["enemy"]]
+position = Vector2(7.5, -74)
 shape = SubResource("RectangleShape2D_mqkjw")
 
 [node name="PuntoDeDisparo" type="Marker2D" parent="."]
 position = Vector2(-90, -48)
 
 [node name="RaySuelo" type="RayCast2D" parent="."]
-position = Vector2(-44, 100)
+position = Vector2(-50, 118)
 
 [node name="RayMuro" type="RayCast2D" parent="."]
 position = Vector2(-86, -124)
@@ -325,7 +323,7 @@ position = Vector2(-86, -124)
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(31, -13)
+position = Vector2(-18, 3)
 shape = SubResource("RectangleShape2D_q806i")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

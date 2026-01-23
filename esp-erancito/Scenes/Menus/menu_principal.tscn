@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b0tie75ccwpc1"]
+[gd_scene load_steps=14 format=3 uid="uid://b0tie75ccwpc1"]
 
 [ext_resource type="Texture2D" uid="uid://dgoijdayt3h8h" path="res://Scenes/Menus/MenuPrincipal_reduce.png" id="1_5yyhg"]
 [ext_resource type="Script" uid="uid://b2nav58dnt6px" path="res://Scenes/Menus/menu_principal.gd" id="1_ee117"]
@@ -37,14 +37,6 @@ region = Rect2(469, 512, 469, 512)
 atlas = ExtResource("5_win7y")
 region = Rect2(938, 512, 469, 512)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ndje3"]
-atlas = ExtResource("5_win7y")
-region = Rect2(1407, 512, 469, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sbmmb"]
-atlas = ExtResource("5_win7y")
-region = Rect2(1876, 512, 469, 512)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_sg3qn"]
 animations = [{
 "frames": [{
@@ -65,12 +57,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j3ntv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ndje3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sbmmb")
 }],
 "loop": true,
 "name": &"default",
@@ -141,8 +127,7 @@ stream = ExtResource("3_rkpcb")
 position = Vector2(1204, 483)
 scale = Vector2(0.35287845, 0.35287848)
 sprite_frames = SubResource("SpriteFrames_sg3qn")
-frame = 5
-frame_progress = 0.41131762
+frame_progress = 0.32862547
 
 [node name="Label" type="Label" parent="IconoCarga"]
 offset_left = -144.52567
