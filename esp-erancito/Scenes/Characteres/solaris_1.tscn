@@ -331,3 +331,4 @@ shape = SubResource("RectangleShape2D_q806i")
 [connection signal="body_entered" from="AreaDeteccion" to="." method="_on_area_deteccion_body_entered"]
 [connection signal="body_exited" from="AreaDeteccion" to="." method="_on_area_deteccion_body_exited"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]

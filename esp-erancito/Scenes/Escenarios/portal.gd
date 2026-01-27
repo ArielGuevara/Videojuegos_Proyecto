@@ -16,6 +16,7 @@ var is_teleporting = false # Para evitar que actives el portal 2 veces o mientra
 func _ready() -> void:
 	# Buscamos el otro portal del mismo grupo
 	var portals = get_tree().get_nodes_in_group("portal")
+	ascensor_sprite.play("idle")
 	for portal in portals:
 		# Si es del mismo grupo y NO soy yo mismo... es mi destino
 		if portal.group == group and portal != self:
@@ -75,6 +76,8 @@ func recibir_jugador(jugador: Node2D):
 	# 3. Aparecer al jugador y descongelarlo
 	jugador.visible = true
 	jugador.set_physics_process(true)
+	
+	ascensor_sprite.play("cierre")
 	
 	# Opcional: Dejar el ascensor en estado normal
 	ascensor_sprite.play("default") 

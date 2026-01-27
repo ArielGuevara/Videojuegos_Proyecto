@@ -7,6 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://byr7y1ddopv5b" path="res://Assets_Secenes/Elemntos de entorno/acensor/acensor abierto sin esperancito.png" id="5_2fco6"]
 [ext_resource type="Texture2D" uid="uid://td1du7b2f5h4" path="res://Assets_Secenes/Elemntos de entorno/acensor/acensor semicerrado sin esperancito.png" id="6_jqvjo"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fco6"]
+atlas = ExtResource("6_jqvjo")
+region = Rect2(0, 0, 657, 581)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8vkj"]
+atlas = ExtResource("2_brooi")
+region = Rect2(0, 0, 657, 581)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_jqvjo"]
 atlas = ExtResource("2_brooi")
 region = Rect2(0, 0, 657, 581)
@@ -35,16 +43,19 @@ region = Rect2(0, 0, 657, 581)
 atlas = ExtResource("5_2fco6")
 region = Rect2(0, 0, 657, 581)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g8vkj"]
-atlas = ExtResource("6_jqvjo")
-region = Rect2(0, 0, 657, 581)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2fco6"]
-atlas = ExtResource("2_brooi")
-region = Rect2(0, 0, 657, 581)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_l3cde"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fco6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8vkj")
+}],
+"loop": false,
+"name": &"cierre",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jqvjo")
@@ -76,12 +87,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_l3cde")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g8vkj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2fco6")
 }],
 "loop": false,
 "name": &"salida",
@@ -107,7 +112,7 @@ script = ExtResource("1_v7f02")
 position = Vector2(4.611869, -21)
 scale = Vector2(0.22030973, 0.22030981)
 sprite_frames = SubResource("SpriteFrames_l3cde")
-animation = &"salida"
+animation = &"idle"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

@@ -111,11 +111,12 @@ func iniciar_embestida():
 func elegir_ataque():
 	var dado = randf_range(0, 100)
 	if dado < 50:
-		iniciar_ataque_normal()
+		iniciar_embestida()
 	elif dado < 80:
 		iniciar_rafaga()
 	else:
-		iniciar_embestida()
+		iniciar_ataque_normal()
+		
 
 func patrullar():
 	if ray_muro.is_colliding() or not ray_suelo.is_colliding():
@@ -228,7 +229,7 @@ func _on_area_deteccion_body_exited(body):
 		if anim.animation == "attack":
 			anim.play("run" if is_enraged else "walk")
 
-# --- DAÑO POR CONTACTO (CORREGIDO) ---
+# --- DAÑO POR CONTACTO ---
 
 # 1. Cuando entras: Guardamos la referencia
 func _on_hitbox_body_entered(body):
