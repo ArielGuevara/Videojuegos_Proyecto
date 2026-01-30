@@ -1,7 +1,7 @@
 extends Control
 
 
-var escena_nivel_1 = "res://Scenes/Screens/screeen_1.tscn" 
+var escena_nivel_1 = "res://Scenes/Cinematics/cinematicaInicial.tscn" 
 var cargando = false
 @onready var music = $MusicMenu
 

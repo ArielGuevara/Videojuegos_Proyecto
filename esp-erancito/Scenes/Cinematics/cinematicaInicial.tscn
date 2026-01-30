@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkvtdgnkwkeef"]
+
+[ext_resource type="Script" uid="uid://dcs34kv7cgbie" path="res://cinematica.gd" id="1_drryd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drryd"]
+bg_color = Color(8.875291, 12.391425, 8.829024, 0.24705882)
+
+[node name="Cinematica" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1908.0
+offset_bottom = 940.0
+script = ExtResource("1_drryd")
+
+[node name="ImagenHistoria" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1908.0
+offset_bottom = 940.0
+expand_mode = 1
+stretch_mode = 6
+
+[node name="PanelTexto" type="Panel" parent="."]
+modulate = Color(0.724932, 2.6858368, 1.0084363, 1)
+self_modulate = Color(1, 1, 1, 0.5019608)
+layout_mode = 0
+offset_right = 1904.0
+offset_bottom = 235.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_drryd")
+
+[node name="TextoHistoria" type="RichTextLabel" parent="PanelTexto"]
+layout_mode = 0
+offset_right = 1911.0
+offset_bottom = 233.0
+theme_override_colors/default_color = Color(0.36652392, 0.7015521, 0.2059356, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 41
+text = "eEjmplo"
+tab_size = 24
