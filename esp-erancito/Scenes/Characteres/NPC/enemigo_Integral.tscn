@@ -1,0 +1,144 @@
+[gd_scene load_steps=20 format=3 uid="uid://bgx2kci4dgan4"]
+
+[ext_resource type="PackedScene" uid="uid://cwvbvohshvqwt" path="res://Scenes/Characteres/NPC/enemigo_matematico.tscn" id="1_otmop"]
+[ext_resource type="Texture2D" uid="uid://btj7qvksk6aoj" path="res://Caracters_player/NPC/INTEGRAL/Int_patrullaje.png" id="2_40f74"]
+[ext_resource type="Texture2D" uid="uid://ffqyhwcqa7re" path="res://Caracters_player/NPC/INTEGRAL/Int_aplastado.png" id="2_w25ks"]
+[ext_resource type="Texture2D" uid="uid://cix0ysxsolm7v" path="res://Caracters_player/NPC/INTEGRAL/Int_aplastado_movimiento.png" id="3_w25ks"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyv6k"]
+atlas = ExtResource("2_w25ks")
+region = Rect2(0, 0, 375, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dutei"]
+atlas = ExtResource("2_w25ks")
+region = Rect2(375, 0, 375, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe76h"]
+atlas = ExtResource("2_w25ks")
+region = Rect2(750, 0, 375, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74rv8"]
+atlas = ExtResource("2_w25ks")
+region = Rect2(1875, 0, 375, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrihl"]
+atlas = ExtResource("3_w25ks")
+region = Rect2(0, 0, 409, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ca4jg"]
+atlas = ExtResource("3_w25ks")
+region = Rect2(409, 0, 409, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dibm8"]
+atlas = ExtResource("3_w25ks")
+region = Rect2(1636, 0, 409, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cxd5"]
+atlas = ExtResource("3_w25ks")
+region = Rect2(2045, 0, 409, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otmop"]
+atlas = ExtResource("2_40f74")
+region = Rect2(1107, 0, 369, 376)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40f74"]
+atlas = ExtResource("2_40f74")
+region = Rect2(738, 0, 369, 376)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w25ks"]
+atlas = ExtResource("2_40f74")
+region = Rect2(0, 0, 369, 376)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_otmop"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyv6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dutei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe76h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74rv8")
+}],
+"loop": false,
+"name": &"shell",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrihl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ca4jg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dibm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cxd5")
+}],
+"loop": false,
+"name": &"slide",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otmop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40f74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w25ks")
+}],
+"loop": false,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_40f74"]
+size = Vector2(140.00003, 66.62506)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w25ks"]
+size = Vector2(170, 186.01566)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w25ks"]
+radius = 75.00008
+height = 240.00027
+
+[node name="EnemigoIntegral" instance=ExtResource("1_otmop")]
+scale = Vector2(0.1, 0.1)
+platform_wall_layers = 1
+tipo_enemigo = 1
+
+[node name="AnimatedSprite2D" parent="Graficos" index="0"]
+sprite_frames = SubResource("SpriteFrames_otmop")
+animation = &"walk"
+flip_h = true
+
+[node name="RaySuelo" parent="Graficos" index="1"]
+position = Vector2(0, 0)
+target_position = Vector2(0, 70)
+
+[node name="RayMuro" parent="Graficos" index="2"]
+position = Vector2(0, 0)
+target_position = Vector2(-89.99998, 7.6293945e-06)
+
+[node name="CollisionShape2D" parent="Graficos/AreaCabeza" index="0"]
+position = Vector2(10, -89.999985)
+scale = Vector2(0.99999964, 0.99999964)
+shape = SubResource("RectangleShape2D_40f74")
+
+[node name="CollisionShape2D" parent="Graficos/AreaDaño" index="0"]
+position = Vector2(10, 40)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_w25ks")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(9.999999, 9.999999)
+scale = Vector2(0.9999988, 0.9999988)
+shape = SubResource("CapsuleShape2D_w25ks")

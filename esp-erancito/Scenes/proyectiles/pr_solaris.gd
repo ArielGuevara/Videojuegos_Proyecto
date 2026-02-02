@@ -12,42 +12,44 @@ func _on_body_entered(body):
 	# CASO 1: YA FUE REFLEJADO (Ahora busca matar enemigos)
 	if reflected:
 		if body.is_in_group("enemy"):
-			# Si el enemigo tiene función de daño, lo lastimamos
 			if body.has_method("take_damage"):
-				body.take_damage(damage) # Le devolvemos su propio daño
+				body.take_damage(damage)
 			queue_free()
-		elif not body.is_in_group("player"): # Choca con pared
+		elif not body.is_in_group("player"): 
 			queue_free()
-		return # Terminamos aquí para no hacer daño al jugador
+		return
 
 	# CASO 2: COMPORTAMIENTO NORMAL (Busca matar al jugador)
 	if body.is_in_group("player"):
 		var bloqueo_exitoso = false
 		
-		# Solo intentamos calcular si el jugador está intentando bloquear
+		# Solo calculamos si el jugador está bloqueando
 		if body.get("is_blocking"):
-			# 1. Obtenemos hacia dónde mira el jugador
-			# Asumimos que el nodo del sprite se llama "animaciones" como en tu script
-			var sprite_jugador = body.get_node("animaciones")
-			var mira_izquierda = sprite_jugador.flip_h
 			
-			# 2. Calculamos dónde está la bala respecto al jugador
-			# Si (bala.x - jugador.x) es positivo, la bala está a la derecha
+			# --- CORRECCIÓN AQUÍ ---
+			# 1. Obtenemos el nodo contenedor que tiene la escala
+			var graficos = body.get_node("Graficos")
+			
+			# 2. Determinamos si mira a la izquierda basándonos en la escala
+			# Si la escala es -1, mira a la izquierda. Si es 1, mira a la derecha.
+			var mira_izquierda = graficos.scale.x < 0
+			# -----------------------
+			
+			# 3. Calculamos dónde está la bala respecto al jugador
 			var diferencia_x = global_position.x - body.global_position.x
 			
-			# 3. Verificamos coincidencia
+			# 4. Verificamos coincidencia
 			if mira_izquierda and diferencia_x < 0:
-				# Mira izq y bala viene de la izq
+				# Mira izq y bala viene de la izq (diferencia negativa) -> BLOQUEA
 				bloqueo_exitoso = true
 			elif not mira_izquierda and diferencia_x > 0:
-				# Mira der y bala viene de la der
+				# Mira der y bala viene de la der (diferencia positiva) -> BLOQUEA
 				bloqueo_exitoso = true
 				
 		# --- RESULTADO FINAL ---
 		if bloqueo_exitoso:
 			reflexion_parry()
 		else:
-			# Si no bloquea, O si bloquea pero le dimos por la espalda -> DAÑO
 			if body.has_method("take_damage"):
 				body.take_damage(damage, global_position)
 			queue_free()
@@ -68,4 +70,3 @@ func reflexion_parry():
 	rotation_degrees += 180 
 	modulate = Color(0, 1, 1) # Se pone color cyan brillante
 	
-	print("¡PARRY EXITOSO!")
