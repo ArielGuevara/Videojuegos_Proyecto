@@ -37,11 +37,6 @@ func _process(delta):
 	if not cargando:
 		return
 	
-	# --- OPCIONAL: Si tu icono es estático y quieres que gire ---
-	# if icono_carga is Sprite2D:
-	# 	icono_carga.rotation_degrees += 360 * delta
-	# ------------------------------------------------------------
-
 	# 4. Consultar el estado de la carga
 	var estado = ResourceLoader.load_threaded_get_status(escena_nivel_1)
 	

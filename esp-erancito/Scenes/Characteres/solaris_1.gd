@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # --- CONFIGURACIÓN ---
-@export var max_health = 200
+@export var max_health = 300
 @export var speed = 100
 @export var damage_touch = 10 
 @export var projectile_scene: PackedScene 

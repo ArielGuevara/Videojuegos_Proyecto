@@ -15,6 +15,18 @@
 [ext_resource type="Texture2D" uid="uid://bndp6lqxdlhm8" path="res://Caracters_player/Converted_Vampire/Run_first.png" id="12_7o664"]
 [ext_resource type="Texture2D" uid="uid://i2t8efporg4q" path="res://Caracters_player/Converted_Vampire/Walk_first.png" id="14_tsu4s"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmhcq"]
+size = Vector2(31, 79)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjwng"]
+size = Vector2(12, 43)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjwng"]
+bg_color = Color(0.17254902, 0.2, 0.17254902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f02do"]
+bg_color = Color(0.18808609, 0.6547139, 0.39334014, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_pwybw"]
 atlas = ExtResource("4_p4nju")
 region = Rect2(896, 0, 128, 128)
@@ -681,28 +693,12 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmhcq"]
-size = Vector2(27, 79)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjwng"]
-size = Vector2(12, 43)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pjwng"]
-bg_color = Color(0.17254902, 0.2, 0.17254902, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f02do"]
-bg_color = Color(0.18808609, 0.6547139, 0.39334014, 1)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f02do"]
-size = Vector2(25, 12)
+size = Vector2(25, 20)
 
 [node name="boy_1" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ng8he")
-
-[node name="animaciones" type="AnimatedSprite2D" parent="." groups=["player"]]
-position = Vector2(10, -46)
-sprite_frames = SubResource("SpriteFrames_o78fh")
-animation = &"protected"
+limite_caida = 650
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_bottom = 648
@@ -712,7 +708,7 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(11.5, -21.5)
+position = Vector2(9.5, -21.5)
 shape = SubResource("RectangleShape2D_jmhcq")
 
 [node name="coyote_timer" type="Timer" parent="."]
@@ -733,27 +729,46 @@ one_shot = true
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="BarraVida" type="ProgressBar" parent="CanvasLayer" groups=["player"]]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 220.0
-offset_bottom = 50.0
+offset_left = 113.0
+offset_top = 22.0
+offset_right = 313.0
+offset_bottom = 52.0
 theme_override_styles/background = SubResource("StyleBoxFlat_pjwng")
 theme_override_styles/fill = SubResource("StyleBoxFlat_f02do")
 step = 1.0
 value = 50.0
+metadata/_edit_use_anchors_ = true
 
-[node name="RayTecho" type="RayCast2D" parent="."]
-position = Vector2(6, 13)
-target_position = Vector2(0, -50)
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 72.0
+offset_bottom = 47.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Vida:"
 
-[node name="AreaAtaque" type="Area2D" parent="."]
+[node name="Graficos" type="Node2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAtaque"]
-position = Vector2(57.5, -21)
+[node name="animaciones" type="AnimatedSprite2D" parent="Graficos" groups=["player"]]
+position = Vector2(10, -46)
+sprite_frames = SubResource("SpriteFrames_o78fh")
+animation = &"attack_1"
+frame = 4
+frame_progress = 1.0
+
+[node name="AreaAtaque" type="Area2D" parent="Graficos"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graficos/AreaAtaque"]
+position = Vector2(57.5, -17)
 shape = SubResource("RectangleShape2D_f02do")
 disabled = true
 
-[connection signal="animation_finished" from="animaciones" to="." method="_on_animaciones_animation_finished"]
+[node name="RayTecho" type="RayCast2D" parent="Graficos"]
+position = Vector2(0, -7)
+target_position = Vector2(0, -50)
+
 [connection signal="timeout" from="coyote_timer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
-[connection signal="body_entered" from="AreaAtaque" to="." method="_on_area_ataque_body_entered"]
+[connection signal="animation_finished" from="Graficos/animaciones" to="." method="_on_animaciones_animation_finished"]
+[connection signal="body_entered" from="Graficos/AreaAtaque" to="." method="_on_area_ataque_body_entered"]

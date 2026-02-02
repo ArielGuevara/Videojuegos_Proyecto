@@ -11,10 +11,11 @@ var is_crouching: bool = false
 var leaved_floor: bool = false
 var had_jump: bool = false
 var is_blocking: bool = false 
+var is_knocked_back = false # Variable de control para el empuje
 
 # --- VARIABLES DE VIDA ---
-var max_health = 500
-var current_health = 500
+var max_health = 100
+var current_health = 100
 var is_invulnerable = false 
 
 var distancia_ataque: float = 57.5
@@ -25,16 +26,18 @@ var stand_pos_y: float = 0.0
 var crouch_offset: float = 0.0 
 
 @export var damage_amount = 20 
+@export var limite_caida = 1000
 
 # Referencias
 @onready var invul_timer = $InvulnerabilityTimer
 @onready var health_bar = $CanvasLayer/BarraVida
 @onready var collision_shape = $CollisionShape2D
-@onready var ray_techo = $RayTecho 
-@onready var ataque_colision = $AreaAtaque/CollisionShape2D 
-@onready var area_ataque = $AreaAtaque 
-# Referencia corta al AnimatedSprite para escribir menos
-@onready var anim = $animaciones 
+
+@onready var graficos = $Graficos 
+@onready var anim = $Graficos/animaciones # <--- Actualizado
+@onready var area_ataque = $Graficos/AreaAtaque # <--- Actualizado
+@onready var ataque_colision = $Graficos/AreaAtaque/CollisionShape2D # <--- Actualizado
+@onready var ray_techo = $Graficos/RayTecho # <--- Actualizadones 
 
 func _ready():
 	current_health = max_health
@@ -59,13 +62,28 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if current_health <= 0: return
 	
-	# 1. Si la variable dice que bloqueas, pero la animación NO es 'protected'...
-	#    Significa que te quedaste bugeado. ¡Libera al jugador!
+	# Gravedad (Siempre aplica, incluso si te empujan)
+	if not is_on_floor():
+		if not leaved_floor:
+			$coyote_timer.start()
+			leaved_floor = true
+		velocity += get_gravity() * delta
+		
+	if global_position.y > limite_caida:
+		current_health = 0 # Aseguramos que la vida sea 0
+		die() # Llamamos a la función de muerte que ya tienes
+		return # Salimos para no procesar más movimiento
+
+	# --- 1. MODIFICACIÓN CRÍTICA: KNOCKBACK ---
+	# Si estamos siendo empujados, ignoramos los Inputs del jugador
+	if is_knocked_back:
+		move_and_slide()
+		return # <-- "return" aquí evita que el código de abajo (caminar/saltar) se ejecute
+	# ------------------------------------------
+	
+	# Chequeos de seguridad (anti-bug)
 	if is_blocking and anim.animation != "protected":
 		is_blocking = false
-	
-	# 2. Si la variable dice que atacas, pero la animación NO es 'attack_1'...
-	#    ¡Libera al jugador y apaga el daño!
 	if attacking and anim.animation != "attack_1":
 		attacking = false
 		ataque_colision.disabled = true
@@ -82,18 +100,11 @@ func _physics_process(delta: float) -> void:
 	if is_blocking:
 		velocity.x = 0
 		move_and_slide()
-		return # Aquí es donde se atascaba antes
+		return 
 	
 	if is_on_floor():
 		leaved_floor = false
 		had_jump = false
-	
-	# Gravedad
-	if not is_on_floor():
-		if not leaved_floor:
-			$coyote_timer.start()
-			leaved_floor = true
-		velocity += get_gravity() * delta
 
 	# --- LOGICA DE AGACHARSE ---
 	if Input.is_action_pressed("ui_down") and is_on_floor():
@@ -154,13 +165,11 @@ func take_damage(amount: int, source_position: Vector2):
 	if is_invulnerable or current_health <= 0:
 		return
 	
-	# ### NUEVO: ROMPER ESTADOS AL RECIBIR DAÑO ###
-	# Si te pegan, dejas de bloquear y de atacar inmediatamente.
+	# Romper estados
 	if is_blocking: is_blocking = false
 	if attacking: 
 		attacking = false
 		ataque_colision.disabled = true
-	# ---------------------------------------------
 
 	current_health -= amount
 	if health_bar:
@@ -170,17 +179,35 @@ func take_damage(amount: int, source_position: Vector2):
 		die()
 	else:
 		get_hurt_feedback()
-		apply_knockback(source_position)
+		# --- MODIFICACIÓN 3: ELIMINAR LLAMADA AUTOMÁTICA ---
+		# Eliminé "apply_knockback(source_position)" de aquí.
+		# ¿Por qué? Porque el script del Enemigo Sumatoria ya calcula la fuerza
+		# y llama a "apply_knockback" explícitamente después de "take_damage".
+		# Si lo dejamos aquí, daría error de tipos (Vector vs Position).
 
 func get_hurt_feedback():
 	is_invulnerable = true
 	invul_timer.start()
 	modulate = Color(1, 0, 0)
 
-func apply_knockback(source_pos):
-	var knockback_dir = (global_position - source_pos).normalized()
-	velocity = knockback_dir * 300
-	velocity.y = -200 
+# --- 2. MODIFICACIÓN: FUNCIÓN DE EMPUJE CORRECTA ---
+func apply_knockback(fuerza_vector: Vector2):
+	# 1. Aplicamos la velocidad directa (el golpe)
+	velocity = fuerza_vector
+	
+	# 2. Bloqueamos el control
+	is_knocked_back = true
+	
+	# 3. Importante: no usamos move_and_slide aquí porque _physics_process
+	# lo hará en el siguiente frame, pero si quieres efecto inmediato:
+	move_and_slide()
+	
+	# 4. Esperamos un poco antes de devolver el control
+	await get_tree().create_timer(0.3).timeout
+	
+	# 5. Devolvemos control
+	is_knocked_back = false
+# ---------------------------------------------------
 
 func die():
 	anim.play("dead")
@@ -192,8 +219,11 @@ func decide_animation():
 	if current_health <= 0: return
 	if not appeared: return
 	
-	# Los returns aquí son importantes, pero gracias al "Auto-Curación" del principio
-	# ya no son peligrosos.
+	# Si estás siendo empujado, podrías poner una animación de daño (opcional)
+	if is_knocked_back:
+		# anim.play("hurt") # Si tienes animación de herido, ponla aquí
+		return
+
 	if is_blocking:
 		anim.play("protected")
 		return
@@ -205,11 +235,6 @@ func decide_animation():
 		anim.play("crouch")
 		return
 		
-	if anim.flip_h == true:
-		area_ataque.position.x = -distancia_ataque
-	else:
-		area_ataque.position.x = distancia_ataque
-	
 	if velocity.y < 0:
 		anim.play("jump_first")
 		return 
@@ -218,9 +243,10 @@ func decide_animation():
 		anim.play("idle_first")
 	else:
 		if velocity.x < 0:
-			anim.flip_h = true
+			graficos.scale.x = -1 
 		elif velocity.x > 0:
-			anim.flip_h = false
+			# Mirar derecha: Escala normal
+			graficos.scale.x = 1
 			
 		if abs(velocity.x) > SPEED:
 			anim.play("run_first")
@@ -240,7 +266,6 @@ func _on_animaciones_animation_finished() -> void:
 	if anim.animation == "appearing":
 		appeared = true
 	
-	# Reiniciamos estados cuando las animaciones terminan legítimamente
 	if anim.animation == "attack_1":
 		anim.play("idle_first")
 		attacking = false
@@ -261,3 +286,15 @@ func _on_area_ataque_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		if body.has_method("take_damage"):
 			body.take_damage(damage_amount)
+
+# Funciones de los NPC 
+func congelar(tiempo):
+	set_physics_process(false) # Detiene el movimiento
+	modulate = Color(0, 0, 1) # Se pone azul
+	anim.pause() # Pausa la animación
+	
+	await get_tree().create_timer(tiempo).timeout
+	
+	set_physics_process(true)
+	modulate = Color(1, 1, 1)
+	anim.play()

@@ -1,9 +1,63 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkvtdgnkwkeef"]
+[gd_scene load_steps=12 format=3 uid="uid://bkvtdgnkwkeef"]
 
 [ext_resource type="Script" uid="uid://dcs34kv7cgbie" path="res://cinematica.gd" id="1_drryd"]
+[ext_resource type="Texture2D" uid="uid://nqdc824lirj" path="res://Scenes/Menus/EscudoIcon.png" id="2_xoi0x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drryd"]
 bg_color = Color(8.875291, 12.391425, 8.829024, 0.24705882)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlige"]
+atlas = ExtResource("2_xoi0x")
+region = Rect2(469, 0, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kgmx"]
+atlas = ExtResource("2_xoi0x")
+region = Rect2(1407, 0, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qybmx"]
+atlas = ExtResource("2_xoi0x")
+region = Rect2(1876, 0, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g5cc"]
+atlas = ExtResource("2_xoi0x")
+region = Rect2(0, 512, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7rm68"]
+atlas = ExtResource("2_xoi0x")
+region = Rect2(469, 512, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j3ntv"]
+atlas = ExtResource("2_xoi0x")
+region = Rect2(938, 512, 469, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_metcx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlige")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kgmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qybmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1g5cc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7rm68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j3ntv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xoi0x"]
+bg_color = Color(0.40544453, 0.6838034, 0.29546037, 1)
 
 [node name="Cinematica" type="Control"]
 layout_mode = 3
@@ -36,3 +90,29 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 41
 text = "eEjmplo"
 tab_size = 24
+
+[node name="IconoCarga" type="AnimatedSprite2D" parent="."]
+position = Vector2(1793, 830)
+scale = Vector2(0.35287845, 0.35287848)
+sprite_frames = SubResource("SpriteFrames_metcx")
+
+[node name="Label" type="Label" parent="IconoCarga"]
+offset_left = -144.52567
+offset_top = 229.54076
+offset_right = 148.47433
+offset_bottom = 316.54077
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 63
+text = "Cargando..."
+
+[node name="skip" type="Label" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 879.0
+offset_right = 644.0
+offset_bottom = 914.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxFlat_xoi0x")
+text = "Presiona la \"barra espaciadora\" para continuar ..."

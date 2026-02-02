@@ -300,7 +300,7 @@ shape = SubResource("RectangleShape2D_ka56q")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_d8oam")
-animation = &"walk"
+animation = &"desappearing"
 flip_h = true
 
 [node name="TimerAtaque" type="Timer" parent="."]
@@ -311,20 +311,21 @@ flip_h = true
 position = Vector2(7.5, -74)
 shape = SubResource("RectangleShape2D_mqkjw")
 
-[node name="PuntoDeDisparo" type="Marker2D" parent="."]
-position = Vector2(-90, -48)
-
-[node name="RaySuelo" type="RayCast2D" parent="."]
-position = Vector2(-50, 118)
-
-[node name="RayMuro" type="RayCast2D" parent="."]
-position = Vector2(-86, -124)
-
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-18, 3)
 shape = SubResource("RectangleShape2D_q806i")
+
+[node name="PuntoDeDisparo" type="Marker2D" parent="."]
+position = Vector2(-90, -48)
+
+[node name="RayMuro" type="RayCast2D" parent="."]
+position = Vector2(0, -74)
+target_position = Vector2(256, 0)
+
+[node name="RaySuelo" type="RayCast2D" parent="."]
+position = Vector2(64, 130)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="TimerAtaque" to="." method="_on_timer_ataque_timeout"]

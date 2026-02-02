@@ -112,7 +112,7 @@ script = ExtResource("1_v7f02")
 position = Vector2(4.611869, -21)
 scale = Vector2(0.22030973, 0.22030981)
 sprite_frames = SubResource("SpriteFrames_l3cde")
-animation = &"idle"
+animation = &"cierre"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

@@ -1,0 +1,139 @@
+[gd_scene load_steps=19 format=3 uid="uid://co27qk2kntmrx"]
+
+[ext_resource type="PackedScene" uid="uid://cwvbvohshvqwt" path="res://Scenes/Characteres/NPC/enemigo_matematico.tscn" id="1_jbeb6"]
+[ext_resource type="Texture2D" uid="uid://s3qyiknxy2r3" path="res://Caracters_player/NPC/SUMATORIA/sum_aplastado.png" id="2_2d30u"]
+[ext_resource type="Texture2D" uid="uid://bfennkbpgmw6n" path="res://Caracters_player/NPC/SUMATORIA/sum_patrullaje.png" id="2_b287j"]
+[ext_resource type="Texture2D" uid="uid://bcw6fpbi1ohsu" path="res://Caracters_player/NPC/SUMATORIA/sum_aplastado_mov.png" id="3_2d30u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4du6c"]
+atlas = ExtResource("2_2d30u")
+region = Rect2(0, 0, 371, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_315wh"]
+atlas = ExtResource("2_2d30u")
+region = Rect2(371, 0, 371, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwh4f"]
+atlas = ExtResource("2_2d30u")
+region = Rect2(742, 0, 371, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpmep"]
+atlas = ExtResource("2_2d30u")
+region = Rect2(1855, 0, 371, 315)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ea2tb"]
+atlas = ExtResource("3_2d30u")
+region = Rect2(0, 0, 410, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a3yi"]
+atlas = ExtResource("3_2d30u")
+region = Rect2(1640, 0, 410, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yi3o"]
+atlas = ExtResource("3_2d30u")
+region = Rect2(2050, 0, 410, 250)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbeb6"]
+atlas = ExtResource("2_b287j")
+region = Rect2(1119, 0, 373, 391)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b287j"]
+atlas = ExtResource("2_b287j")
+region = Rect2(746, 0, 373, 391)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2d30u"]
+atlas = ExtResource("2_b287j")
+region = Rect2(0, 0, 373, 391)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jbeb6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4du6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_315wh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwh4f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpmep")
+}],
+"loop": false,
+"name": &"shell",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ea2tb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a3yi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yi3o")
+}],
+"loop": false,
+"name": &"slide",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbeb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b287j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2d30u")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b287j"]
+size = Vector2(140.00003, 89.99997)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2d30u"]
+size = Vector2(170.00003, 166.67194)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2d30u"]
+radius = 70.0
+height = 240.00006
+
+[node name="EnemigoSumatoria" instance=ExtResource("1_jbeb6")]
+scale = Vector2(0.1, 0.1)
+tipo_enemigo = 2
+
+[node name="AnimatedSprite2D" parent="Graficos" index="0"]
+sprite_frames = SubResource("SpriteFrames_jbeb6")
+animation = &"walk"
+flip_h = true
+
+[node name="RaySuelo" parent="Graficos" index="1"]
+position = Vector2(0, 0)
+target_position = Vector2(0, 80)
+
+[node name="RayMuro" parent="Graficos" index="2"]
+position = Vector2(0, 0)
+target_position = Vector2(-140, 0)
+
+[node name="CollisionShape2D" parent="Graficos/AreaCabeza" index="0"]
+position = Vector2(-10, -90)
+scale = Vector2(0.9999997, 0.9999997)
+shape = SubResource("RectangleShape2D_b287j")
+
+[node name="CollisionShape2D" parent="Graficos/AreaDaño" index="0"]
+position = Vector2(-5.0000014, 29.999989)
+scale = Vector2(0.99999964, 0.99999964)
+shape = SubResource("RectangleShape2D_2d30u")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 0)
+scale = Vector2(0.99999964, 0.99999964)
+shape = SubResource("CapsuleShape2D_2d30u")
+
+[node name="TimerRecuperacion" parent="." index="2"]
+wait_time = 5.0
