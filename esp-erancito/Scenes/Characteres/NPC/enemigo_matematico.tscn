@@ -121,9 +121,11 @@ animation = &"shell"
 
 [node name="RaySuelo" type="RayCast2D" parent="Graficos"]
 position = Vector2(-82, 75)
+target_position = Vector2(-4, 68)
 
 [node name="RayMuro" type="RayCast2D" parent="Graficos"]
-position = Vector2(-97, -75)
+position = Vector2(-62, -60)
+target_position = Vector2(-108, 2)
 
 [node name="AreaCabeza" type="Area2D" parent="Graficos"]
 

@@ -121,12 +121,12 @@ animation = &"walk"
 flip_h = true
 
 [node name="RaySuelo" parent="Graficos" index="1"]
-position = Vector2(0, 0)
+position = Vector2(-19.999998, 89.99999)
 target_position = Vector2(0, 70)
 
 [node name="RayMuro" parent="Graficos" index="2"]
-position = Vector2(0, 0)
-target_position = Vector2(-89.99998, 7.6293945e-06)
+position = Vector2(-19.999998, -79.99999)
+target_position = Vector2(-109.999985, -7.6293945e-06)
 
 [node name="CollisionShape2D" parent="Graficos/AreaCabeza" index="0"]
 position = Vector2(10, -89.999985)

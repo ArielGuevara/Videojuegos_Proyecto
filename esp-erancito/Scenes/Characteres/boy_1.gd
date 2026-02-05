@@ -213,6 +213,12 @@ func die():
 	anim.play("dead")
 	set_physics_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)
+	
+	# (Puedes usar anim.animation_finished si prefieres esperar a que termine la animación exacta)
+	await get_tree().create_timer(1.5).timeout 
+	
+	# 3. Recargar la escena actual (Reinicia todo)
+	get_tree().reload_current_scene()
 
 # --- ANIMACIONES ---
 func decide_animation():

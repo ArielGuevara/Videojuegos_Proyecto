@@ -111,7 +111,7 @@ animations = [{
 size = Vector2(200.00009, 73.31253)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0m4j6"]
-size = Vector2(220.0001, 165.3594)
+size = Vector2(240.00018, 202.67978)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iro11"]
 radius = 95.000114
@@ -125,12 +125,12 @@ sprite_frames = SubResource("SpriteFrames_meoiv")
 animation = &"walk"
 
 [node name="RaySuelo" parent="Graficos" index="1"]
-position = Vector2(0, 0)
+position = Vector2(-89.99999, 70)
 target_position = Vector2(0, 69.999985)
 
 [node name="RayMuro" parent="Graficos" index="2"]
-position = Vector2(0, 0)
-target_position = Vector2(-119.999985, 0)
+position = Vector2(-69.99999, -69.99999)
+target_position = Vector2(-130, 0)
 
 [node name="CollisionShape2D" parent="Graficos/AreaCabeza" index="0"]
 position = Vector2(-20, -90)
@@ -138,8 +138,8 @@ scale = Vector2(0.9999994, 0.9999994)
 shape = SubResource("RectangleShape2D_6oogl")
 
 [node name="CollisionShape2D" parent="Graficos/AreaDaño" index="0"]
-position = Vector2(-19.999989, 0)
-scale = Vector2(0.99999934, 0.99999934)
+position = Vector2(-19.999994, 18.660164)
+scale = Vector2(0.9999991, 0.9999991)
 shape = SubResource("RectangleShape2D_0m4j6")
 
 [node name="CollisionShape2D" parent="." index="1"]

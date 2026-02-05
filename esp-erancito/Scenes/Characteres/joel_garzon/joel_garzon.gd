@@ -6,8 +6,8 @@ extends CharacterBody2D
 @export var speed_dash = 500
 @export var damage_dash = 20
 # CAMBIO 1: Reducimos la distancia mínima para que no huya tan rápido
-@export var distancia_minima = 90 
-@export var distancia_maxima = 400
+@export var distancia_minima = 80 
+@export var distancia_maxima = 500
 
 # --- ESCENAS DE LOS MINIONS ---
 @export var escena_pi: PackedScene
