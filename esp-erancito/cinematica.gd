@@ -58,8 +58,8 @@ func mostrar_diapositiva():
 	if indice_actual < historia.size():
 		var datos = historia[indice_actual]
 		
-		# Cambiamos el texto
-		texto_label.text = datos["texto"]
+		# Cambiamos el texto (centrado con BBCode)
+		texto_label.text = "[center]" + datos["texto"] + "[/center]"
 		
 		# Cambiamos la imagen
 		imagen_rect.texture = datos["imagen"]

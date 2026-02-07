@@ -1,5 +1,6 @@
-[gd_scene load_steps=27 format=3 uid="uid://d3tjcy6fwdnkg"]
+[gd_scene load_steps=28 format=3 uid="uid://d3tjcy6fwdnkg"]
 
+[ext_resource type="PackedScene" uid="uid://c7xqpm5pause1" path="res://Scenes/Menus/pause_menu.tscn" id="14_pause"]
 [ext_resource type="PackedScene" uid="uid://cjnqmhljoj1jw" path="res://Scenes/Screens/parallax_scene.tscn" id="1_ogk55"]
 [ext_resource type="PackedScene" uid="uid://4tg4fghnxefi" path="res://Scenes/Escenarios/escenario_1.tscn" id="2_ogk55"]
 [ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="2_w3ucr"]
@@ -18341,6 +18342,7 @@ _data = {
 [node name="Screen_1" type="Node2D"]
 position = Vector2(-4, 3)
 
+[node name="PauseMenu" parent="." instance=ExtResource("14_pause")]
 [node name="Parallax2D" parent="." instance=ExtResource("1_ogk55")]
 
 [node name="Escenario1" parent="." instance=ExtResource("2_ogk55")]

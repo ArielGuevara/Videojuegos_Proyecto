@@ -120,7 +120,7 @@ theme_override_fonts/font = ExtResource("3_bly56")
 theme_override_font_sizes/font_size = 60
 text = "SALIR"
 
-[node name="MusicMenu" type="AudioStreamPlayer" parent="."]
+[node name="MusicMenu" type="AudioStreamPlayer" parent="." groups=["music"]]
 stream = ExtResource("3_rkpcb")
 
 [node name="IconoCarga" type="AnimatedSprite2D" parent="."]

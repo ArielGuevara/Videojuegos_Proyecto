@@ -4,7 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://nqdc824lirj" path="res://Scenes/Menus/EscudoIcon.png" id="2_xoi0x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drryd"]
-bg_color = Color(8.875291, 12.391425, 8.829024, 0.24705882)
+bg_color = Color(0.06, 0.09, 0.06, 0.92)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlige"]
 atlas = ExtResource("2_xoi0x")
@@ -74,8 +78,6 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="PanelTexto" type="Panel" parent="."]
-modulate = Color(0.724932, 2.6858368, 1.0084363, 1)
-self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 0
 offset_right = 1904.0
 offset_bottom = 235.0
@@ -83,12 +85,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_drryd")
 
 [node name="TextoHistoria" type="RichTextLabel" parent="PanelTexto"]
 layout_mode = 0
-offset_right = 1911.0
-offset_bottom = 233.0
-theme_override_colors/default_color = Color(0.36652392, 0.7015521, 0.2059356, 1)
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 1884.0
+offset_bottom = 223.0
+theme_override_colors/default_color = Color(0.95, 1, 0.9, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 41
-text = "eEjmplo"
+bbcode_enabled = true
+text = "[center]eEjmplo[/center]"
 tab_size = 24
 
 [node name="IconoCarga" type="AnimatedSprite2D" parent="."]
