@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://nqdc824lirj" path="res://Scenes/Menus/EscudoIcon.png" id="2_xoi0x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drryd"]
-bg_color = Color(0.06, 0.09, 0.06, 0.92)
+bg_color = Color(0.06, 0.09, 0.06, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -65,36 +65,63 @@ bg_color = Color(0.40544453, 0.6838034, 0.29546037, 1)
 
 [node name="Cinematica" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1908.0
-offset_bottom = 940.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_drryd")
 
 [node name="ImagenHistoria" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 1908.0
-offset_bottom = 940.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 expand_mode = 1
 stretch_mode = 6
 
 [node name="PanelTexto" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 1904.0
-offset_bottom = 235.0
+layout_mode = 1
+anchors_preset = 10
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_drryd")
 
-[node name="TextoHistoria" type="RichTextLabel" parent="PanelTexto"]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 10.0
-offset_right = 1884.0
-offset_bottom = 223.0
+[node name="MarginContainer" type="MarginContainer" parent="PanelTexto"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 16
+
+[node name="TextoHistoria" type="RichTextLabel" parent="PanelTexto/MarginContainer"]
+layout_mode = 2
 theme_override_colors/default_color = Color(0.95, 1, 0.9, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 41
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[center]eEjmplo[/center]"
+horizontal_alignment = 0
+text = "eEjmplo"
 tab_size = 24
+scroll_active = false
+scroll_following = false
+fit_content = false
+autowrap_mode = 2
 
 [node name="IconoCarga" type="AnimatedSprite2D" parent="."]
 position = Vector2(1793, 830)

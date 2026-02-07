@@ -5,7 +5,7 @@ var siguiente_escena = "res://Scenes/Screens/screeen_1.tscn"
 
 # Referencias
 @onready var imagen_rect = $ImagenHistoria
-@onready var texto_label = $PanelTexto/TextoHistoria
+@onready var texto_label = $PanelTexto/MarginContainer/TextoHistoria
 @onready var icono_carga = $IconoCarga
 
 # Variables de control
@@ -58,16 +58,21 @@ func mostrar_diapositiva():
 	if indice_actual < historia.size():
 		var datos = historia[indice_actual]
 		
-		# Cambiamos el texto (centrado con BBCode)
-		texto_label.text = "[center]" + datos["texto"] + "[/center]"
+		# Texto alineado a la izquierda para que no se mueva: solo se revela como si avanzara el cursor
+		texto_label.text = datos["texto"]
 		
 		# Cambiamos la imagen
 		imagen_rect.texture = datos["imagen"]
 		
-		# EFECTO MÁQUINA DE ESCRIBIR (Opcional pero recomendado)
-		texto_label.visible_ratio = 0
+		# Mensaje fijo: texto oculto al inicio; esperamos un frame para que el layout sea fijo
+		texto_label.visible_ratio = 0.0
+		await get_tree().process_frame
+		# Ajustar altura del recuadro al contenido del texto (márgenes 16+16 + contenido)
+		var panel = $PanelTexto
+		panel.custom_minimum_size.y = texto_label.get_content_height() + 32
+		# Efecto de escritura: se va revelando como si se escribiera, sin que se mueva nada
 		var tween = create_tween()
-		tween.tween_property(texto_label, "visible_ratio", 1.0, 4.0) # Tarda 2 segundos en escribir
+		tween.tween_property(texto_label, "visible_ratio", 1.0, 4.0)
 
 func avanzar_historia():
 	# Si el texto aún se está escribiendo, lo mostramos completo de golpe
