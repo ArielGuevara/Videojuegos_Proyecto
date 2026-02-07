@@ -7,6 +7,7 @@ var siguiente_escena = "res://Scenes/Screens/screeen_1.tscn"
 @onready var imagen_rect = $ImagenHistoria
 @onready var texto_label = $PanelTexto/MarginContainer/TextoHistoria
 @onready var icono_carga = $IconoCarga
+@onready var musica_cinema = $MusicaCinema
 
 # Variables de control
 var indice_actual = 0
@@ -15,6 +16,7 @@ var historia = [] # Aquí guardaremos los datos
 func _ready():
 	# --- CONFIGURACIÓN DE LA HISTORIA ---
 	icono_carga.visible = false
+	musica_cinema.play()
 	
 	historia = [
 		{

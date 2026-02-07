@@ -76,7 +76,7 @@ text = "Controles"
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_font")
 theme_override_font_sizes/font_size = 32
-text = "Música: ON"
+text = "Musica: ON"
 
 [node name="BotonSalir" type="Button" parent="PanelPrincipal/MarginContainer/VBox"]
 layout_mode = 2

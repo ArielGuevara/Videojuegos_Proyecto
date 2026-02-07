@@ -3,22 +3,28 @@ extends Control
 
 var escena_nivel_1 = "res://Scenes/Cinematics/cinematicaInicial.tscn" 
 var cargando = false
-@onready var music = $MusicMenu
+var musica_activada = true
 
+@onready var music = $MusicMenu
 @onready var icono_carga = $IconoCarga
 @onready var boton_jugar = $VBoxContainer/BotonJugar
 @onready var boton_salir = $VBoxContainer/BotonSalir
+@onready var boton_musica = $VBoxContainer/BotonMusica
+@onready var panel_controles = $PanelControles
 
 func _ready():
-	# Nos aseguramos de que el ratón sea visible (por si lo ocultaste en el juego)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	icono_carga.visible = false
+	panel_controles.visible = false
 	
-	# Conectamos las señales de los botones mediante código (es más limpio)
-	# O puedes hacerlo manual desde la pestaña Nodos si prefieres.
 	$VBoxContainer/BotonJugar.pressed.connect(_on_jugar_pressed)
+	$VBoxContainer/BotonControles.pressed.connect(_on_controles_pressed)
+	$VBoxContainer/BotonMusica.pressed.connect(_on_musica_pressed)
 	$VBoxContainer/BotonSalir.pressed.connect(_on_salir_pressed)
+	$PanelControles/MarginContainer/VBox/BotonVolver.pressed.connect(_on_volver_controles_pressed)
 	
+	actualizar_texto_musica()
+	music.stream_paused = not musica_activada
 	music.play()
 
 func _on_jugar_pressed():
@@ -59,6 +65,23 @@ func _process(delta):
 			boton_jugar.disabled = false # Reactivar botón si falla
 			icono_carga.visible = false
 	
+func _on_controles_pressed():
+	# Al seleccionar Controles se muestra u oculta el recuadro (toggle)
+	panel_controles.visible = not panel_controles.visible
+
+func _on_volver_controles_pressed():
+	panel_controles.visible = false
+
+func _on_musica_pressed():
+	musica_activada = not musica_activada
+	music.stream_paused = not musica_activada
+	actualizar_texto_musica()
+
+func actualizar_texto_musica():
+	if musica_activada:
+		boton_musica.text = "MUSICA: ON"
+	else:
+		boton_musica.text = "MUSICA: OFF"
+
 func _on_salir_pressed():
-	# Cierra el juego
 	get_tree().quit()

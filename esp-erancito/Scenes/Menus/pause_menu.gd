@@ -67,9 +67,9 @@ func _on_musica_pressed():
 
 func actualizar_texto_musica():
 	if musica_activada:
-		boton_musica.text = "Música: ON"
+		boton_musica.text = "Musica: ON"
 	else:
-		boton_musica.text = "Música: OFF"
+		boton_musica.text = "Musica: OFF"
 
 func _on_salir_pressed():
 	get_tree().paused = false

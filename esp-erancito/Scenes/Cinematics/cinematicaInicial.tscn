@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkvtdgnkwkeef"]
+[gd_scene load_steps=13 format=3 uid="uid://bkvtdgnkwkeef"]
 
 [ext_resource type="Script" uid="uid://dcs34kv7cgbie" path="res://cinematica.gd" id="1_drryd"]
 [ext_resource type="Texture2D" uid="uid://nqdc824lirj" path="res://Scenes/Menus/EscudoIcon.png" id="2_xoi0x"]
+[ext_resource type="AudioStream" uid="uid://dctgjlocefyl8" path="res://Music/Cinema/alone-unplugged_KOtkf0d0.mp3" id="3_cinema"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drryd"]
 bg_color = Color(0.06, 0.09, 0.06, 1)
@@ -71,6 +72,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_drryd")
+
+[node name="MusicaCinema" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_cinema")
 
 [node name="ImagenHistoria" type="TextureRect" parent="."]
 layout_mode = 1

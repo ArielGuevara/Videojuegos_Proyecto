@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b0tie75ccwpc1"]
+[gd_scene load_steps=16 format=3 uid="uid://b0tie75ccwpc1"]
 
 [ext_resource type="Texture2D" uid="uid://dgoijdayt3h8h" path="res://Scenes/Menus/MenuPrincipal_reduce.png" id="1_5yyhg"]
 [ext_resource type="Script" uid="uid://b2nav58dnt6px" path="res://Scenes/Menus/menu_principal.gd" id="1_ee117"]
@@ -36,6 +36,18 @@ region = Rect2(469, 512, 469, 512)
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3ntv"]
 atlas = ExtResource("5_win7y")
 region = Rect2(938, 512, 469, 512)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.06, 0.09, 0.06, 0.98)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.6, 0.25, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sg3qn"]
 animations = [{
@@ -103,22 +115,95 @@ label_settings = SubResource("LabelSettings_ee117")
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = -382.0
-offset_top = 408.0
+offset_top = 260.0
 offset_right = -116.0
-offset_bottom = 571.0
+offset_bottom = 423.0
 
 [node name="BotonJugar" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bly56")
 theme_override_font_sizes/font_size = 60
-text = "JUGAR
-"
+text = "JUGAR"
+
+[node name="BotonControles" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bly56")
+theme_override_font_sizes/font_size = 60
+text = "CONTROLES"
+
+[node name="BotonMusica" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bly56")
+theme_override_font_sizes/font_size = 60
+text = "MUSICA: ON"
 
 [node name="BotonSalir" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bly56")
 theme_override_font_sizes/font_size = 60
 text = "SALIR"
+
+[node name="PanelControles" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchor_left = 0.18
+anchor_top = 0.30
+anchor_right = 0.18
+anchor_bottom = 0.30
+offset_left = -280.0
+offset_top = -280.0
+offset_right = 280.0
+offset_bottom = 280.0
+grow_horizontal = 1
+grow_vertical = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelControles"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBox" type="VBoxContainer" parent="PanelControles/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TituloControles" type="Label" parent="PanelControles/MarginContainer/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bly56")
+theme_override_font_sizes/font_size = 52
+theme_override_colors/font_color = Color(0.3, 0.9, 0.35, 1)
+text = "Controles"
+horizontal_alignment = 1
+
+[node name="ListaControles" type="RichTextLabel" parent="PanelControles/MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/normal_font = ExtResource("3_bly56")
+theme_override_font_sizes/normal_font_size = 38
+theme_override_colors/default_color = Color(0.9, 0.95, 0.9, 1)
+bbcode_enabled = true
+text = "[center]Movimiento: [b]Flechas izquierda y derecha[/b]
+Saltar: [b]Espacio[/b] o [b]Enter[/b]
+Correr: [b]Flechas + Ctrl[/b]
+Atacar: [b]X[/b]
+Bloquear / Parry: [b]Z[/b]
+Interactuar: [b]E[/b]
+Pausa: [b]ESC[/b][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="BotonVolver" type="Button" parent="PanelControles/MarginContainer/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bly56")
+theme_override_font_sizes/font_size = 42
+text = "Volver"
 
 [node name="MusicMenu" type="AudioStreamPlayer" parent="." groups=["music"]]
 stream = ExtResource("3_rkpcb")
