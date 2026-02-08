@@ -1,6 +1,5 @@
 [gd_scene load_steps=28 format=3 uid="uid://d3tjcy6fwdnkg"]
 
-[ext_resource type="PackedScene" uid="uid://c7xqpm5pause1" path="res://Scenes/Menus/pause_menu.tscn" id="14_pause"]
 [ext_resource type="PackedScene" uid="uid://cjnqmhljoj1jw" path="res://Scenes/Screens/parallax_scene.tscn" id="1_ogk55"]
 [ext_resource type="PackedScene" uid="uid://4tg4fghnxefi" path="res://Scenes/Escenarios/escenario_1.tscn" id="2_ogk55"]
 [ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="2_w3ucr"]
@@ -14,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://co27qk2kntmrx" path="res://Scenes/Characteres/NPC/enemigo_Sumatoria.tscn" id="12_peqkq"]
 [ext_resource type="PackedScene" uid="uid://bgx2kci4dgan4" path="res://Scenes/Characteres/NPC/enemigo_Integral.tscn" id="13_4em4g"]
 [ext_resource type="PackedScene" uid="uid://deqf8f5i8e2ne" path="res://Scenes/Characteres/joel_garzon/joel_garzon.tscn" id="13_wtf22"]
+[ext_resource type="PackedScene" uid="uid://c7xqpm5pause1" path="res://Scenes/Menus/pause_menu.tscn" id="14_pause"]
 
 [sub_resource type="Curve2D" id="Curve2D_kvtqo"]
 _data = {
@@ -18301,6 +18301,21 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="Animation" id="Animation_r2p5x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_wtf22"]
 resource_name = "move"
 length = 5.0
@@ -18318,21 +18333,6 @@ tracks/0/keys = {
 "values": [0.0, 1.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_r2p5x"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jqqcc"]
 _data = {
 &"RESET": SubResource("Animation_r2p5x"),
@@ -18343,6 +18343,7 @@ _data = {
 position = Vector2(-4, 3)
 
 [node name="PauseMenu" parent="." instance=ExtResource("14_pause")]
+
 [node name="Parallax2D" parent="." instance=ExtResource("1_ogk55")]
 
 [node name="Escenario1" parent="." instance=ExtResource("2_ogk55")]

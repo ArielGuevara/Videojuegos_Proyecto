@@ -124,6 +124,7 @@ func _physics_process(delta: float) -> void:
 			attacking = true
 			anim.play("attack_1")
 			ataque_colision.disabled = false
+			print("🗡️ ESPERANCITO: ¡Iniciando ataque!")
 			return 
 
 	# --- MOVIMIENTO ---
@@ -289,9 +290,19 @@ func _on_invulnerability_timer_timeout() -> void:
 	modulate = Color(1, 1, 1)
 
 func _on_area_ataque_body_entered(body: Node2D) -> void:
+	print("👊 COLISIÓN detectada con: ", body.name)  # ⬅ AGREGAR PRIMERO
+	
 	if body.is_in_group("enemy"):
+		print("✅ Es un enemigo del grupo 'enemy'")  # ⬅ AGREGAR
+		
 		if body.has_method("take_damage"):
-			body.take_damage(damage_amount)
+			print("✅ Tiene método take_damage")  # ⬅ AGREGAR
+			body.take_damage(damage_amount, global_position)
+			print("💥 GOLPE ENVIADO - Daño: ", damage_amount)  # ⬅ AGREGAR
+		else:
+			print("❌ NO tiene método take_damage")  # ⬅ AGREGAR
+	else:
+		print("❌ NO está en grupo 'enemy'")  # ⬅ AGREGAR
 
 # Funciones de los NPC 
 func congelar(tiempo):
