@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://gmejeqs4jhfc"]
+
+[ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="1_5pk8s"]
+[ext_resource type="Texture2D" uid="uid://cpu614x88w06l" path="res://Assets_Secenes/Backgraunds/backgraun nvl2.png" id="1_8vntt"]
+[ext_resource type="PackedScene" uid="uid://uu1qj5bbfovd" path="res://Scenes/Escenarios/escen_nivel2/ecen_lv2.tscn" id="3_8vntt"]
+
+[node name="node_nvl2" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(1908, 0)
+
+[node name="BackgraunNvl2" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(953.50006, 471.00003)
+scale = Vector2(1.5102849, 1.1061321)
+texture = ExtResource("1_8vntt")
+
+[node name="TileMap" parent="." instance=ExtResource("3_8vntt")]
+position = Vector2(1, -9)
+
+[node name="boy_1" parent="." instance=ExtResource("1_5pk8s")]
+position = Vector2(104, 527)
+limite_caida = 950
