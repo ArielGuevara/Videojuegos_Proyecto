@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b0tie75ccwpc1"]
+[gd_scene load_steps=15 format=3 uid="uid://b0tie75ccwpc1"]
 
 [ext_resource type="Texture2D" uid="uid://dgoijdayt3h8h" path="res://Scenes/Menus/MenuPrincipal_reduce.png" id="1_5yyhg"]
 [ext_resource type="Script" uid="uid://b2nav58dnt6px" path="res://Scenes/Menus/menu_principal.gd" id="1_ee117"]
@@ -12,6 +12,18 @@ font_size = 300
 font_color = Color(0, 0.8235294, 0.15686275, 1)
 shadow_size = 15
 shadow_color = Color(0, 0, 0, 0.9843137)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.06, 0.09, 0.06, 0.98)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2, 0.6, 0.25, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlige"]
 atlas = ExtResource("5_win7y")
@@ -36,18 +48,6 @@ region = Rect2(469, 512, 469, 512)
 [sub_resource type="AtlasTexture" id="AtlasTexture_j3ntv"]
 atlas = ExtResource("5_win7y")
 region = Rect2(938, 512, 469, 512)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-bg_color = Color(0.06, 0.09, 0.06, 0.98)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.2, 0.6, 0.25, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_sg3qn"]
 animations = [{
@@ -137,6 +137,12 @@ theme_override_fonts/font = ExtResource("3_bly56")
 theme_override_font_sizes/font_size = 60
 text = "MUSICA: ON"
 
+[node name="BotonCreditos" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_bly56")
+theme_override_font_sizes/font_size = 60
+text = "CRÉDITOS"
+
 [node name="BotonSalir" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_bly56")
@@ -146,16 +152,15 @@ text = "SALIR"
 [node name="PanelControles" type="Panel" parent="."]
 visible = false
 layout_mode = 1
+anchors_preset = -1
 anchor_left = 0.18
-anchor_top = 0.30
+anchor_top = 0.3
 anchor_right = 0.18
-anchor_bottom = 0.30
+anchor_bottom = 0.3
 offset_left = -280.0
 offset_top = -280.0
 offset_right = 280.0
 offset_bottom = 280.0
-grow_horizontal = 1
-grow_vertical = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelControles"]
@@ -176,18 +181,18 @@ theme_override_constants/separation = 16
 
 [node name="TituloControles" type="Label" parent="PanelControles/MarginContainer/VBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.9, 0.35, 1)
 theme_override_fonts/font = ExtResource("3_bly56")
 theme_override_font_sizes/font_size = 52
-theme_override_colors/font_color = Color(0.3, 0.9, 0.35, 1)
 text = "Controles"
 horizontal_alignment = 1
 
 [node name="ListaControles" type="RichTextLabel" parent="PanelControles/MarginContainer/VBox"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.9, 0.95, 0.9, 1)
 theme_override_fonts/normal_font = ExtResource("3_bly56")
 theme_override_font_sizes/normal_font_size = 38
-theme_override_colors/default_color = Color(0.9, 0.95, 0.9, 1)
 bbcode_enabled = true
 text = "[center]Movimiento: [b]Flechas izquierda y derecha[/b]
 Saltar: [b]Espacio[/b] o [b]Enter[/b]

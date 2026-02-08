@@ -2,12 +2,14 @@ extends Control
 
 
 var escena_nivel_1 = "res://Scenes/Cinematics/cinematicaInicial.tscn" 
+var escena_creditos = "res://Scenes/Menus/creditos.tscn"
 var cargando = false
 var musica_activada = true
 
 @onready var music = $MusicMenu
 @onready var icono_carga = $IconoCarga
 @onready var boton_jugar = $VBoxContainer/BotonJugar
+@onready var boton_creditos = $VBoxContainer/BotonCreditos 
 @onready var boton_salir = $VBoxContainer/BotonSalir
 @onready var boton_musica = $VBoxContainer/BotonMusica
 @onready var panel_controles = $PanelControles
@@ -19,6 +21,7 @@ func _ready():
 	
 	$VBoxContainer/BotonJugar.pressed.connect(_on_jugar_pressed)
 	$VBoxContainer/BotonControles.pressed.connect(_on_controles_pressed)
+	$VBoxContainer/BotonCreditos.pressed.connect(_on_creditos_pressed)
 	$VBoxContainer/BotonMusica.pressed.connect(_on_musica_pressed)
 	$VBoxContainer/BotonSalir.pressed.connect(_on_salir_pressed)
 	$PanelControles/MarginContainer/VBox/BotonVolver.pressed.connect(_on_volver_controles_pressed)
@@ -82,6 +85,8 @@ func actualizar_texto_musica():
 		boton_musica.text = "MUSICA: ON"
 	else:
 		boton_musica.text = "MUSICA: OFF"
+func _on_creditos_pressed():
+	get_tree().change_scene_to_file(escena_creditos)
 
 func _on_salir_pressed():
 	get_tree().quit()
