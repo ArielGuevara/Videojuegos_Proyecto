@@ -7,9 +7,12 @@
 
 [sub_resource type="Curve2D" id="Curve2D_wkfrf"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1345, 865, 0, 0, 0, 0, 1344, 406.93604)
+"points": PackedVector2Array(0, 0, 0, 0, 1345, 716.7946, 0, 0, 0, 0, 1344, 406.93604)
 }
 point_count = 2
+
+[sub_resource type="Animation" id="Animation_iwhlc"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_wkfrf"]
 resource_name = "mov_regular_desk"
@@ -28,13 +31,25 @@ tracks/0/keys = {
 "values": [0.0, 1.0, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_iwhlc"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lu3al"]
 _data = {
 &"RESET": SubResource("Animation_iwhlc"),
 &"mov_regular_desk": SubResource("Animation_wkfrf")
+}
+
+[sub_resource type="Animation" id="Animation_jj7ym"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_lu3al"]
@@ -52,21 +67,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [1.0, 0.0, 1.0]
-}
-
-[sub_resource type="Animation" id="Animation_jj7ym"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1e86a"]
@@ -89,7 +89,7 @@ texture = ExtResource("1_8vntt")
 position = Vector2(1, -9)
 
 [node name="boy_1" parent="." instance=ExtResource("1_5pk8s")]
-position = Vector2(4332, 729)
+position = Vector2(7387, 323)
 limite_caida = 950
 
 [node name="Path2D_up" type="Path2D" parent="."]
@@ -98,8 +98,8 @@ scale = Vector2(-1, 0.99331105)
 curve = SubResource("Curve2D_wkfrf")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D_up"]
-position = Vector2(1345, 865)
-rotation = -1.5729795
+position = Vector2(1345, 716.7946)
+rotation = -1.5740236
 loop = false
 
 [node name="moving_desk_plataform" parent="Path2D_up/PathFollow2D" instance=ExtResource("4_wkfrf")]
@@ -118,8 +118,8 @@ scale = Vector2(-1, 0.99331105)
 curve = SubResource("Curve2D_wkfrf")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D_up_2"]
-position = Vector2(1345, 865)
-rotation = -1.5729795
+position = Vector2(1345, 716.7946)
+rotation = -1.5740236
 loop = false
 
 [node name="moving_desk_plataform" parent="Path2D_up_2/PathFollow2D" instance=ExtResource("4_wkfrf")]
@@ -138,9 +138,9 @@ scale = Vector2(-1, 0.99331105)
 curve = SubResource("Curve2D_wkfrf")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D_down"]
-position = Vector2(1344, 406.9361)
-rotation = -1.5729795
-progress = 458.06427
+position = Vector2(1344, 406.93597)
+rotation = -1.5740236
+progress = 309.86008
 loop = false
 
 [node name="moving_desk_plataform" parent="Path2D_down/PathFollow2D" instance=ExtResource("4_wkfrf")]
@@ -148,6 +148,27 @@ rotation = -1.5686132
 scale = Vector2(1, -1.006734)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D_down/PathFollow2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_1e86a")
+}
+autoplay = "desk_mov_down"
+
+[node name="Path2D_down_2" type="Path2D" parent="."]
+position = Vector2(6945, 68)
+scale = Vector2(-1, 0.99331105)
+curve = SubResource("Curve2D_wkfrf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D_down_2"]
+position = Vector2(1344, 406.93597)
+rotation = -1.5740236
+progress = 309.86008
+loop = false
+
+[node name="moving_desk_plataform" parent="Path2D_down_2/PathFollow2D" instance=ExtResource("4_wkfrf")]
+rotation = -1.5686132
+scale = Vector2(1, -1.006734)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D_down_2/PathFollow2D"]
 libraries = {
 &"": SubResource("AnimationLibrary_1e86a")
 }
