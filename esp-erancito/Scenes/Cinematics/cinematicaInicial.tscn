@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bkvtdgnkwkeef"]
+[gd_scene load_steps=14 format=3 uid="uid://bkvtdgnkwkeef"]
 
 [ext_resource type="Script" uid="uid://dcs34kv7cgbie" path="res://cinematica.gd" id="1_drryd"]
+[ext_resource type="AudioStream" uid="uid://bkxve6hfbcigu" path="res://Music/Cinema/bit-inicial.mp3" id="2_metcx"]
 [ext_resource type="Texture2D" uid="uid://nqdc824lirj" path="res://Scenes/Menus/EscudoIcon.png" id="2_xoi0x"]
-[ext_resource type="AudioStream" uid="uid://dctgjlocefyl8" path="res://Music/Cinema/alone-unplugged_KOtkf0d0.mp3" id="3_cinema"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drryd"]
-bg_color = Color(0.06, 0.09, 0.06, 1)
+bg_color = Color(0.05882353, 0.09019608, 0.05882353, 0.7764706)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -64,6 +64,9 @@ animations = [{
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xoi0x"]
 bg_color = Color(0.40544453, 0.6838034, 0.29546037, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_metcx"]
+bg_color = Color(0.4122129, 0.29991105, 0.99996024, 1)
+
 [node name="Cinematica" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -74,13 +77,17 @@ grow_vertical = 2
 script = ExtResource("1_drryd")
 
 [node name="MusicaCinema" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_cinema")
+stream = ExtResource("2_metcx")
 
 [node name="ImagenHistoria" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 27.0
+offset_right = 13.0
+offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
@@ -89,16 +96,11 @@ stretch_mode = 6
 [node name="PanelTexto" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 10
-anchor_left = 0.0
-anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = -10.0
-offset_bottom = 0.0
 grow_horizontal = 2
-grow_vertical = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_drryd")
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelTexto"]
@@ -119,15 +121,13 @@ theme_override_colors/default_color = Color(0.95, 1, 0.9, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-horizontal_alignment = 0
 text = "eEjmplo"
-tab_size = 24
 scroll_active = false
-scroll_following = false
-fit_content = false
 autowrap_mode = 2
+tab_size = 24
 
 [node name="IconoCarga" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(1793, 830)
 scale = Vector2(0.35287845, 0.35287848)
 sprite_frames = SubResource("SpriteFrames_metcx")
@@ -152,3 +152,26 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxFlat_xoi0x")
 text = "Presiona la \"barra espaciadora\" para continuar ..."
+
+[node name="BarraSkip" type="ProgressBar" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1702.0
+offset_top = 731.0
+offset_right = 1855.0
+offset_bottom = 765.0
+theme_override_styles/background = SubResource("StyleBoxFlat_metcx")
+max_value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="BarraSkip"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.8820001
+offset_left = 4.0
+offset_top = 36.0
+offset_right = 82.5
+offset_bottom = 25.831997
+theme_override_font_sizes/font_size = 25
+text = "Omitir intro"

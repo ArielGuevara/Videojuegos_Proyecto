@@ -8,14 +8,19 @@ var siguiente_escena = "res://Scenes/Screens/screeen_1.tscn"
 @onready var texto_label = $PanelTexto/MarginContainer/TextoHistoria
 @onready var icono_carga = $IconoCarga
 @onready var musica_cinema = $MusicaCinema
+@onready var barra_skip = $BarraSkip
 
 # Variables de control
+var tiempo_presionado = 0.0
+const TIEMPO_PARA_SALTAR = 1.5
 var indice_actual = 0
 var historia = [] # Aquí guardaremos los datos
+var cargando_nivel = false
 
 func _ready():
 	# --- CONFIGURACIÓN DE LA HISTORIA ---
 	icono_carga.visible = false
+	barra_skip.visible = false
 	musica_cinema.play()
 	
 	historia = [
@@ -51,9 +56,41 @@ Al fondo se ve una luz donde parece verse... ¿El sello del bloque B? ¿El mismo
 	mostrar_diapositiva()
 
 func _process(delta):
-	# Detectar clic o tecla para avanzar
-	if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("interactuar") or Input.is_action_just_pressed("attack"):
+	# Si ya estamos cargando, ignoramos todo input
+	if cargando_nivel: return
+	# --- LÓGICA DE SALTAR CINEMÁTICA (MANTENER) ---
+	if Input.is_action_pressed("ui_accept"): # O "skip" si creas esa acción
+		tiempo_presionado += delta
+		barra_skip.visible = true
+		barra_skip.value = (tiempo_presionado / TIEMPO_PARA_SALTAR) * 100
+		
+		# Si se completó el tiempo...
+		if tiempo_presionado >= TIEMPO_PARA_SALTAR:
+			saltar_cinematica_completa()
+	else:
+		# Si suelta la tecla, reseteamos
+		if tiempo_presionado > 0:
+			tiempo_presionado -= delta * 2 # Baja el doble de rápido (efecto visual agradable)
+			if tiempo_presionado < 0: tiempo_presionado = 0
+			barra_skip.value = (tiempo_presionado / TIEMPO_PARA_SALTAR) * 100
+		
+		# Ocultamos la barra si está vacía
+		if tiempo_presionado <= 0:
+			barra_skip.visible = false
+
+	# --- LÓGICA DE AVANZAR TEXTO (UN CLIC) ---
+	# Usamos is_action_just_pressed para avanzar normal (clic a clic)
+	if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("attack"):
 		avanzar_historia()
+
+# --- NUEVA FUNCIÓN PARA EL SKIP ---
+func saltar_cinematica_completa():
+	cargando_nivel = true
+	barra_skip.visible = false # Ocultamos la barra
+	musica_cinema.stop() # Paramos la música si quieres
+	
+	# Llamamos directamente a la carga
+	iniciar_carga()
 
 func mostrar_diapositiva():
 	# Verificamos que el índice sea válido
@@ -79,6 +116,8 @@ func mostrar_diapositiva():
 func avanzar_historia():
 	# Si el texto aún se está escribiendo, lo mostramos completo de golpe
 	if texto_label.visible_ratio < 1.0:
+		var tween = get_tree().create_tween() # Matamos el tween anterior si existe
+		tween.kill()
 		texto_label.visible_ratio = 1.0
 		return
 
@@ -88,12 +127,19 @@ func avanzar_historia():
 	if indice_actual < historia.size():
 		mostrar_diapositiva()
 	else:
-		# ¡FIN DE LA HISTORIA! Cambiamos de escena
-		icono_carga.visible = true
-		if icono_carga is AnimatedSprite2D:
-			icono_carga.play("default")
-		cambiar_a_juego()
+		# ¡FIN DE LA HISTORIA!
+		iniciar_carga() # Llamamos a una función nueva
+
+func iniciar_carga():
+	cargando_nivel = true # Candado de seguridad
+	icono_carga.visible = true
+	if icono_carga is AnimatedSprite2D:
+		icono_carga.play("default")
+	
+	await get_tree().process_frame
+	await get_tree().process_frame
+	
+	cambiar_a_juego()
 
 func cambiar_a_juego():
-	
 	get_tree().change_scene_to_file(siguiente_escena)
