@@ -694,7 +694,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f02do"]
-size = Vector2(25, 20)
+size = Vector2(80, 60)
 
 [node name="boy_1" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ng8he")
@@ -760,7 +760,7 @@ frame_progress = 1.0
 [node name="AreaAtaque" type="Area2D" parent="Graficos"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graficos/AreaAtaque"]
-position = Vector2(57.5, -17)
+position = Vector2(70.5, -30)
 shape = SubResource("RectangleShape2D_f02do")
 disabled = true
 

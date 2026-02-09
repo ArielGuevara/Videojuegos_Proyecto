@@ -1,0 +1,326 @@
+[gd_scene load_steps=45 format=3 uid="uid://dcvqsjyd2l36r"]
+
+[ext_resource type="Script" uid="uid://82rrdv3tv230" path="res://Scenes/Characteres/solivan_1_boss.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://b8j48v47jiyd3" path="res://Caracters_player/Profesor Solivan/aparecer.png" id="2_aparecer"]
+[ext_resource type="Texture2D" uid="uid://x5iu82841d26" path="res://Caracters_player/Profesor Solivan/espera.png" id="3_espera"]
+[ext_resource type="Texture2D" uid="uid://bhwtb6h3t1eoi" path="res://Caracters_player/Profesor Solivan/caminar 1.png" id="4_caminar"]
+[ext_resource type="Texture2D" uid="uid://dg2fsnk1gmtw3" path="res://Caracters_player/Profesor Solivan/envestir.png" id="5_envestir"]
+[ext_resource type="Texture2D" uid="uid://cxgnmhtxq2gbp" path="res://Caracters_player/Profesor Solivan/ataque monstruo.png" id="6_ataque1"]
+[ext_resource type="Texture2D" uid="uid://40qloab57xpy" path="res://Caracters_player/Profesor Solivan/transformar 1.png" id="8_transform"]
+[ext_resource type="Texture2D" uid="uid://dyu5olnu7dj4a" path="res://Caracters_player/Profesor Solivan/desvancer monstruo.png" id="9_desaparecer"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aparecer_1"]
+atlas = ExtResource("2_aparecer")
+region = Rect2(0, 0, 329, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aparecer_2"]
+atlas = ExtResource("2_aparecer")
+region = Rect2(329, 0, 329, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aparecer_3"]
+atlas = ExtResource("2_aparecer")
+region = Rect2(658, 0, 329, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aparecer_4"]
+atlas = ExtResource("2_aparecer")
+region = Rect2(987, 0, 329, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aparecer_5"]
+atlas = ExtResource("2_aparecer")
+region = Rect2(1316, 0, 329, 388)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_envestir_1"]
+atlas = ExtResource("5_envestir")
+region = Rect2(0, 0, 368, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_envestir_2"]
+atlas = ExtResource("5_envestir")
+region = Rect2(368, 0, 368, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_envestir_3"]
+atlas = ExtResource("5_envestir")
+region = Rect2(736, 0, 368, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_envestir_4"]
+atlas = ExtResource("5_envestir")
+region = Rect2(1104, 0, 368, 325)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ataque1_1"]
+atlas = ExtResource("6_ataque1")
+region = Rect2(0, 0, 441, 583)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ataque1_2"]
+atlas = ExtResource("6_ataque1")
+region = Rect2(441, 0, 441, 583)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ataque1_3"]
+atlas = ExtResource("6_ataque1")
+region = Rect2(882, 0, 441, 583)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ataque1_4"]
+atlas = ExtResource("6_ataque1")
+region = Rect2(1323, 0, 441, 583)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ataque1_5"]
+atlas = ExtResource("6_ataque1")
+region = Rect2(1764, 0, 441, 583)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ay7jc"]
+atlas = ExtResource("4_caminar")
+region = Rect2(65, 0, 308, 489)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yi7vo"]
+atlas = ExtResource("4_caminar")
+region = Rect2(373, 0, 308, 489)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t5fkl"]
+atlas = ExtResource("4_caminar")
+region = Rect2(681, 0, 308, 489)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_733hd"]
+atlas = ExtResource("4_caminar")
+region = Rect2(989, 0, 308, 489)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_desaparecer_1"]
+atlas = ExtResource("9_desaparecer")
+region = Rect2(0, 0, 396, 550)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_desaparecer_2"]
+atlas = ExtResource("9_desaparecer")
+region = Rect2(396, 0, 396, 550)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_desaparecer_3"]
+atlas = ExtResource("9_desaparecer")
+region = Rect2(792, 0, 396, 550)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_desaparecer_4"]
+atlas = ExtResource("9_desaparecer")
+region = Rect2(1188, 0, 396, 550)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_desaparecer_5"]
+atlas = ExtResource("9_desaparecer")
+region = Rect2(1584, 0, 396, 550)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_transform_1"]
+atlas = ExtResource("8_transform")
+region = Rect2(0, 0, 466, 567)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_transform_2"]
+atlas = ExtResource("8_transform")
+region = Rect2(466, 0, 466, 567)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_transform_3"]
+atlas = ExtResource("8_transform")
+region = Rect2(932, 0, 466, 567)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_espera_1"]
+atlas = ExtResource("3_espera")
+region = Rect2(0, 0, 282, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_espera_2"]
+atlas = ExtResource("3_espera")
+region = Rect2(282, 0, 282, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_espera_3"]
+atlas = ExtResource("3_espera")
+region = Rect2(564, 0, 282, 521)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_espera_4"]
+atlas = ExtResource("3_espera")
+region = Rect2(846, 0, 282, 521)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_solivan"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aparecer_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aparecer_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aparecer_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aparecer_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aparecer_5")
+}],
+"loop": false,
+"name": &"appearing",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_envestir_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_envestir_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_envestir_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_envestir_4")
+}],
+"loop": false,
+"name": &"atack1",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ataque1_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ataque1_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ataque1_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ataque1_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ataque1_5")
+}],
+"loop": false,
+"name": &"atack2",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ay7jc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yi7vo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t5fkl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_733hd")
+}],
+"loop": true,
+"name": &"caminar",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_desaparecer_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_desaparecer_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_desaparecer_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_desaparecer_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_desaparecer_5")
+}],
+"loop": false,
+"name": &"desappearing",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_transform_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_transform_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_transform_3")
+}],
+"loop": false,
+"name": &"transformation",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_espera_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_espera_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_espera_3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_espera_4")
+}],
+"loop": true,
+"name": &"wait",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 91.0
+height = 350.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_deteccion"]
+size = Vector2(1200, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ataque"]
+size = Vector2(180, 300)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.2, 0.2, 0.2, 0.8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill"]
+bg_color = Color(0.8, 0.1, 0.1, 1)
+
+[node name="SolivanBoss" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_solivan")
+animation = &"transformation"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(22, 29)
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="AreaDeteccion" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeteccion"]
+shape = SubResource("RectangleShape2D_deteccion")
+
+[node name="AreaAtaque" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAtaque"]
+position = Vector2(100, 0)
+shape = SubResource("RectangleShape2D_ataque")
+
+[node name="TimerAtaque" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BarraVida" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 400.0
+offset_top = 80.0
+offset_right = 800.0
+offset_bottom = 110.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill")
+max_value = 200.0
+value = 200.0
+show_percentage = false
+
+[node name="LabelNombre" type="Label" parent="CanvasLayer"]
+offset_left = 500.0
+offset_top = 50.0
+offset_right = 700.0
+offset_bottom = 75.0
+theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 32
+text = "PROFESOR SOLIVAN"
+horizontal_alignment = 1
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

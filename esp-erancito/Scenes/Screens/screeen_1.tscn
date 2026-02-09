@@ -18343,7 +18343,6 @@ _data = {
 position = Vector2(-4, 3)
 
 [node name="PauseMenu" parent="." instance=ExtResource("14_pause")]
-visible = false
 
 [node name="Parallax2D" parent="." instance=ExtResource("1_ogk55")]
 
@@ -18364,7 +18363,7 @@ position = Vector2(412, -641)
 group = 2
 
 [node name="boy1" parent="." instance=ExtResource("2_w3ucr")]
-position = Vector2(2854, 443)
+position = Vector2(212, 429)
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(-209.27771, 0)
@@ -18430,10 +18429,10 @@ position = Vector2(195, -238)
 position = Vector2(1133, -138)
 
 [node name="EnemigoSumatoria2" parent="." instance=ExtResource("12_peqkq")]
-position = Vector2(2972, -71.000015)
+position = Vector2(1787, -209)
 
 [node name="EnemigoSumatoria3" parent="." instance=ExtResource("12_peqkq")]
-position = Vector2(3216, -85.00001)
+position = Vector2(2477, -152)
 
 [node name="EnemigoSumatoria4" parent="." instance=ExtResource("12_peqkq")]
 position = Vector2(3593, 544)

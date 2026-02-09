@@ -1,0 +1,281 @@
+[gd_scene load_steps=8 format=3 uid="uid://by5tl15ht0eir"]
+
+[ext_resource type="Texture2D" uid="uid://dgoijdayt3h8h" path="res://Scenes/Menus/MenuPrincipal_reduce.png" id="1_fondo"]
+[ext_resource type="Script" uid="uid://cdnlvnrtevu01" path="res://Scenes/Menus/creditos.gd" id="2_script"]
+[ext_resource type="Texture2D" uid="uid://bn24lpq2pptee" path="res://Assets_Secenes/Assets_ESPE/logo pixel.png" id="3_7krpp"]
+[ext_resource type="FontFile" uid="uid://enqqfjpwfd6j" path="res://Scenes/Fonts/mini_pixel-7.ttf" id="3_font"]
+[ext_resource type="AudioStream" uid="uid://bl1xvcck5ytap" path="res://Music/MenuPrincipal/musica_menu.ogg" id="4_music"]
+
+[sub_resource type="Animation" id="Animation_scroll"]
+resource_name = "scroll_creditos"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScrollContainer/VBoxContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 800), Vector2(0, -2000)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_creditos"]
+_data = {
+&"scroll_creditos": SubResource("Animation_scroll")
+}
+
+[node name="Creditos" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_script")
+
+[node name="FondoTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_fondo")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ScrollContainer" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 800.0
+offset_right = 1670.0
+offset_bottom = 2800.0
+theme_override_constants/separation = 40
+
+[node name="LogoESPE" type="TextureRect" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_7krpp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Espacio1" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="TituloJuego" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.82, 0.16, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 120
+text = "ESPerancito"
+horizontal_alignment = 1
+
+[node name="Copyright" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 40
+text = "© 2025 - Todos los derechos reservados"
+horizontal_alignment = 1
+
+[node name="Espacio2" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="SeccionDesarrollo" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.9, 0.35, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 80
+text = "DESARROLLO"
+horizontal_alignment = 1
+
+[node name="Desarrollador" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 50
+text = "Denilson Cachiguango 
+Ariel Guevara
+John Limones
+Leonardo Obando"
+horizontal_alignment = 1
+
+[node name="RolDesarrollador" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.8, 0.7, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 35
+text = "Programación, Diseño y Dirección"
+horizontal_alignment = 1
+
+[node name="Espacio3" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="SeccionMusica" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.9, 0.35, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 80
+text = "MÚSICA Y SONIDO"
+horizontal_alignment = 1
+
+[node name="Musica" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 45
+text = "Esperancito music"
+horizontal_alignment = 1
+
+[node name="Espacio4" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="SeccionArte" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.9, 0.35, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 80
+text = "ARTE Y GRÁFICOS"
+horizontal_alignment = 1
+
+[node name="Arte" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 45
+text = "Leonardo Obando"
+horizontal_alignment = 1
+
+[node name="Espacio5" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="SeccionMotor" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.9, 0.35, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 80
+text = "MOTOR DE JUEGO"
+horizontal_alignment = 1
+
+[node name="Motor" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 45
+text = "Godot Engine 4.5"
+horizontal_alignment = 1
+
+[node name="Espacio6" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="SeccionAgradecimientos" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.9, 0.35, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 80
+text = "AGRADECIMIENTOS ESPECIALES"
+horizontal_alignment = 1
+
+[node name="Agradecimientos" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 0.9, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 45
+text = "A todos los que apoyaron este proyecto
+Familiares, amigos y la comunidad de Godot"
+horizontal_alignment = 1
+
+[node name="Espacio7" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="AvisoLegal" type="RichTextLabel" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0.7, 0.75, 0.7, 1)
+theme_override_fonts/normal_font = ExtResource("3_font")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]AVISO LEGAL
+
+Este juego es un proyecto educativo desarrollado como parte
+de un trabajo académico en la Universidad de las Fuerzas Armadas ESPE.
+
+Todos los personajes, nombres, lugares y eventos presentados
+en este juego son ficticios. Cualquier parecido con personas,
+lugares o eventos reales es pura coincidencia.
+
+ESPE® y el logo de ESPE son marcas registradas de la
+Universidad de las Fuerzas Armadas - ESPE.
+
+El uso de recursos de terceros está sujeto a sus respectivas licencias.[/center]"
+fit_content = true
+
+[node name="Espacio8" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="MensajeFinal" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.82, 0.16, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 90
+text = "¡Gracias por jugar!"
+horizontal_alignment = 1
+
+[node name="Espacio9" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="BotonVolver" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 50
+text = "Volver al Menú"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_creditos")
+}
+autoplay = "scroll_creditos"
+
+[node name="MusicaCreditos" type="AudioStreamPlayer" parent="." groups=["music"]]
+stream = ExtResource("4_music")
+autoplay = true
