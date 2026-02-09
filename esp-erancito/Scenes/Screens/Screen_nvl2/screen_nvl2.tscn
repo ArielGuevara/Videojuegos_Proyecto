@@ -1,16 +1,87 @@
-[gd_scene load_steps=4 format=3 uid="uid://gmejeqs4jhfc"]
+[gd_scene load_steps=12 format=3 uid="uid://gmejeqs4jhfc"]
 
 [ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="1_5pk8s"]
 [ext_resource type="Texture2D" uid="uid://cpu614x88w06l" path="res://Assets_Secenes/Backgraunds/backgraun nvl2.png" id="1_8vntt"]
 [ext_resource type="PackedScene" uid="uid://uu1qj5bbfovd" path="res://Scenes/Escenarios/escen_nivel2/ecen_lv2.tscn" id="3_8vntt"]
+[ext_resource type="PackedScene" uid="uid://cq006otjqd1y5" path="res://Scenes/Escenarios/escen_nivel2/moving_desk_plataform.tscn" id="4_wkfrf"]
 
-[node name="node_nvl2" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_wkfrf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1345, 865, 0, 0, 0, 0, 1344, 406.93604)
+}
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_wkfrf"]
+resource_name = "mov_regular_desk"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_iwhlc"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lu3al"]
+_data = {
+&"RESET": SubResource("Animation_iwhlc"),
+&"mov_regular_desk": SubResource("Animation_wkfrf")
+}
+
+[sub_resource type="Animation" id="Animation_lu3al"]
+resource_name = "desk_mov_down"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_jj7ym"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1e86a"]
+_data = {
+&"RESET": SubResource("Animation_jj7ym"),
+&"desk_mov_down": SubResource("Animation_lu3al")
+}
+
+[node name="screen_nvl2" type="Node2D"]
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
-repeat_size = Vector2(1908, 0)
+repeat_size = Vector2(1908, 940)
 
 [node name="BackgraunNvl2" type="Sprite2D" parent="Parallax2D"]
-position = Vector2(953.50006, 471.00003)
+position = Vector2(953.50006, 471.00006)
 scale = Vector2(1.5102849, 1.1061321)
 texture = ExtResource("1_8vntt")
 
@@ -18,5 +89,66 @@ texture = ExtResource("1_8vntt")
 position = Vector2(1, -9)
 
 [node name="boy_1" parent="." instance=ExtResource("1_5pk8s")]
-position = Vector2(104, 527)
+position = Vector2(4332, 729)
 limite_caida = 950
+
+[node name="Path2D_up" type="Path2D" parent="."]
+position = Vector2(2688, 5.7859497)
+scale = Vector2(-1, 0.99331105)
+curve = SubResource("Curve2D_wkfrf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D_up"]
+position = Vector2(1345, 865)
+rotation = -1.5729795
+loop = false
+
+[node name="moving_desk_plataform" parent="Path2D_up/PathFollow2D" instance=ExtResource("4_wkfrf")]
+rotation = -1.5686132
+scale = Vector2(1, -1.006734)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D_up/PathFollow2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_lu3al")
+}
+autoplay = "mov_regular_desk"
+
+[node name="Path2D_up_2" type="Path2D" parent="."]
+position = Vector2(4234, 3.0000002)
+scale = Vector2(-1, 0.99331105)
+curve = SubResource("Curve2D_wkfrf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D_up_2"]
+position = Vector2(1345, 865)
+rotation = -1.5729795
+loop = false
+
+[node name="moving_desk_plataform" parent="Path2D_up_2/PathFollow2D" instance=ExtResource("4_wkfrf")]
+rotation = -1.5686132
+scale = Vector2(1, -1.006734)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D_up_2/PathFollow2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_lu3al")
+}
+autoplay = "mov_regular_desk"
+
+[node name="Path2D_down" type="Path2D" parent="."]
+position = Vector2(4963, -3.9999998)
+scale = Vector2(-1, 0.99331105)
+curve = SubResource("Curve2D_wkfrf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D_down"]
+position = Vector2(1344, 406.9361)
+rotation = -1.5729795
+progress = 458.06427
+loop = false
+
+[node name="moving_desk_plataform" parent="Path2D_down/PathFollow2D" instance=ExtResource("4_wkfrf")]
+rotation = -1.5686132
+scale = Vector2(1, -1.006734)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Path2D_down/PathFollow2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_1e86a")
+}
+autoplay = "desk_mov_down"
