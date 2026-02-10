@@ -1,9 +1,13 @@
-[gd_scene load_steps=24 format=3 uid="uid://bxou6kgthfiug"]
+[gd_scene load_steps=25 format=3 uid="uid://bxou6kgthfiug"]
 
 [ext_resource type="Texture2D" uid="uid://y3iyfqn63gs" path="res://Caracters_player/NPC/C++/C++_Disparo.png" id="1_iu826"]
 [ext_resource type="Script" uid="uid://c631kifqpld16" path="res://Scenes/Characteres/NPC/NPC_nvl2/enemigo_c++.gd" id="1_xgudt"]
+[ext_resource type="PackedScene" uid="uid://dfpg6uwxjr40k" path="res://Scenes/Characteres/NPC/NPC_nvl2/Proyectil_C++.tscn" id="2_6lode"]
 [ext_resource type="Texture2D" uid="uid://dq3kcd3f7e1ya" path="res://Caracters_player/NPC/C++/C++_Morir.png" id="2_xgudt"]
 [ext_resource type="Texture2D" uid="uid://ok8o3i8lubh5" path="res://Caracters_player/NPC/C++/C++_Patrullar.png" id="3_6lode"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s800b"]
+radius = 26.076809
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gkcrq"]
 atlas = ExtResource("1_iu826")
@@ -84,7 +88,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sp21e")
 }],
-"loop": true,
+"loop": false,
 "name": &"disparo",
 "speed": 5.0
 }, {
@@ -107,7 +111,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7owj1")
 }],
-"loop": true,
+"loop": false,
 "name": &"morir",
 "speed": 5.0
 }, {
@@ -131,42 +135,45 @@ animations = [{
 "texture": SubResource("AtlasTexture_peyia")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"patrullar",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_s800b"]
-radius = 26.076809
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgrug"]
-size = Vector2(60, 55)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6lode"]
+size = Vector2(232, 52.5)
 
 [node name="enemigo_c++" type="CharacterBody2D"]
 script = ExtResource("1_xgudt")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.15, 0.15)
-sprite_frames = SubResource("SpriteFrames_m1jad")
-animation = &"walk"
+escena_proyectil = ExtResource("2_6lode")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_s800b")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_m1jad")
+animation = &"disparo"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1, -0.5)
-shape = SubResource("RectangleShape2D_pgrug")
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(25, -1)
+gizmo_extents = 0.8
 
 [node name="RayCast2D_suelo" type="RayCast2D" parent="."]
-position = Vector2(-27, 6)
-target_position = Vector2(0, 34)
+position = Vector2(27, 2)
+target_position = Vector2(1, 51)
 
 [node name="RayCast2D_muro" type="RayCast2D" parent="."]
-position = Vector2(-10, -9)
-target_position = Vector2(-49, -1)
+position = Vector2(17, -11)
+target_position = Vector2(28, 0)
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(21, 0)
+[node name="AreaDeteccion" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeteccion"]
+shape = SubResource("RectangleShape2D_6lode")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="AreaDeteccion" to="." method="_on_area_deteccion_body_entered"]
+[connection signal="body_exited" from="AreaDeteccion" to="." method="_on_area_deteccion_body_exited"]

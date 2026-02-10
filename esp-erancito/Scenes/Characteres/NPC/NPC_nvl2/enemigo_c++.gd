@@ -1,86 +1,144 @@
 extends CharacterBody2D
 
-var bala_scene = preload("res://Scenes/Characteres/NPC/NPC_nvl2/Proyectil_C++.tscn")
+# --- CONFIGURACIÓN ---
+@export var velocidad = 100.0
+@export var gravedad = 980.0
+@export var escena_proyectil: PackedScene
 
-enum Estado { PATRULLA, ATAQUE }
-var estado_actual = Estado.PATRULLA
-
-@export var velocidad = 50.0
-var direccion = 1 
-
-@onready var sprite = $AnimatedSprite2D
+# --- NODOS ---
+@onready var anim = $AnimatedSprite2D
 @onready var ray_suelo = $RayCast2D_suelo
 @onready var ray_muro = $RayCast2D_muro
-@onready var timer_disparo = $Timer
-@onready var marker_disparo = $Marker2D
+@onready var punto_disparo = $Marker2D
+@onready var timer_disparo = $Timer 
+
+# --- VARIABLES ---
+enum Estado {PATRULLAR, DISPARAR, MORIR}
+var estado_actual = Estado.PATRULLAR
+var direccion = 1 
+var puede_disparar = true 
+var target_player = null 
 
 func _ready():
-	$Area2D.body_entered.connect(_al_ver_jugador)
-	$Area2D.body_exited.connect(_al_perder_jugador)
-	
-	if timer_disparo.timeout.is_connected(_on_timer_timeout) == false:
-		timer_disparo.timeout.connect(_on_timer_timeout)
+	timer_disparo.wait_time = 1.0
+	timer_disparo.one_shot = true
+	anim.play("patrullar")
 
 func _physics_process(delta):
-	# Gravedad simple (opcional, ayuda a que no floten si hay desniveles)
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+	if estado_actual == Estado.MORIR:
+		return
 
-	if estado_actual == Estado.PATRULLA:
-		comportamiento_patrulla(delta)
-	elif estado_actual == Estado.ATAQUE:
-		comportamiento_ataque()
+	# 1. Gravedad
+	if not is_on_floor():
+		velocity.y += gravedad * delta
+
+	# 2. MÁQUINA DE ESTADOS
 	
+	# Verificamos si la animación de disparo está activa REALMENTE
+	var disparando_actualmente = (estado_actual == Estado.DISPARAR and anim.animation == "disparo" and anim.is_playing())
+	
+	if target_player:
+		estado_actual = Estado.DISPARAR
+		mirar_al_jugador()
+	elif disparando_actualmente:
+		# Si el jugador se fue pero estamos a mitad del disparo, terminamos de disparar
+		estado_actual = Estado.DISPARAR
+		velocity.x = 0 
+	else:
+		estado_actual = Estado.PATRULLAR
+
+	# 3. COMPORTAMIENTO
+	match estado_actual:
+		Estado.PATRULLAR:
+			comportamiento_patrullar()
+		Estado.DISPARAR:
+			comportamiento_disparar()
+
 	move_and_slide()
 
-func comportamiento_patrulla(delta):
-	velocity.x = direccion * velocidad
-	sprite.play("walk") 
+# --- LÓGICA DE MOVIMIENTO ---
+
+func mirar_al_jugador():
+	if target_player == null: return
+
+	var diferencia = target_player.global_position.x - global_position.x
 	
-	### CORRECCIÓN 1: ANTI-MOONWALK ###
-	# Forzamos que la vista coincida SIEMPRE con la velocidad
-	if velocity.x > 0:
-		scale.x = abs(scale.x) * 1 # Mirar derecha
-	elif velocity.x < 0:
-		scale.x = abs(scale.x) * -1 # Mirar izquierda
+	if diferencia > 0 and direccion == -1:
+		cambiar_direccion(1)
+	elif diferencia < 0 and direccion == 1:
+		cambiar_direccion(-1)
+
+func cambiar_direccion(nueva_dir):
+	direccion = nueva_dir
+	anim.flip_h = (direccion == -1)
 	
-	if not ray_suelo.is_colliding() or ray_muro.is_colliding():
-		girar()
+	ray_suelo.position.x = abs(ray_suelo.position.x) * direccion
+	ray_muro.target_position.x = abs(ray_muro.target_position.x) * direccion
+	punto_disparo.position.x = abs(punto_disparo.position.x) * direccion
 
-func comportamiento_ataque():
-	velocity.x = 0
-	sprite.play("disparo")
+func comportamiento_patrullar():
+	velocity.x = velocidad * direccion
+	anim.play("patrullar")
 
-func girar():
-	direccion *= -1
+	if is_on_floor():
+		if ray_muro.is_colliding() or not ray_suelo.is_colliding():
+			cambiar_direccion(direccion * -1)
+
+func comportamiento_disparar():
+	velocity.x = 0 
 	
-	### CORRECCIÓN 2: ANTI-GLITCH ###
-	# Empujamos al NPC un poquito lejos del borde/pared para que el RayCast
-	# deje de detectar el peligro inmediatamente.
-	position.x += direccion * 10 
+	# -- CORRECCIÓN AQUÍ --
+	if not puede_disparar:
+		if anim.animation != "disparo":
+			if anim.animation != "patrullar":
+				anim.play("patrullar")
+				anim.stop() 
+				anim.frame = 0
+		return
 
-# --- SEÑALES Y DISPARO (Esto estaba bien) ---
+	# Si llegamos aquí, es porque puede_disparar es TRUE.
+	# Disparamos sin condiciones para desatascar la animación si hace falta.
+	anim.play("disparo")
+	puede_disparar = false
 
-func _al_ver_jugador(body):
-	# Usamos grupos para asegurar detección
-	if body.name == "Esperancito" or body.is_in_group("jugador"):
-		estado_actual = Estado.ATAQUE
+# --- COMBATE ---
+
+func instanciar_proyectil():
+	if escena_proyectil:
+		var bala = escena_proyectil.instantiate()
+		get_parent().add_child(bala)
+		bala.global_position = punto_disparo.global_position
+		
+		if "direccion" in bala:
+			bala.direccion = Vector2(direccion, 0)
+		
+		if direccion == -1:
+			bala.rotation_degrees = 180
+		else:
+			bala.rotation_degrees = 0
+
+# --- SEÑALES ---
+
+func _on_animated_sprite_2d_animation_finished():
+	if anim.animation == "disparo":
+		instanciar_proyectil()
 		timer_disparo.start()
-
-func _al_perder_jugador(body):
-	if body.name == "Esperancito" or body.is_in_group("jugador"):
-		estado_actual = Estado.PATRULLA
-		timer_disparo.stop()
+		
+		# Forzamos visualmente el cambio a patrulla para evitar bloqueos
+		anim.play("patrullar") 
+		
+	elif anim.animation == "morir":
+		queue_free()
 
 func _on_timer_timeout():
-	if estado_actual == Estado.ATAQUE:
-		var bala = bala_scene.instantiate()
-		bala.global_position = marker_disparo.global_position
-		
-		# Usamos scale.x para la dirección de la bala
-		if scale.x > 0: 
-			bala.direccion = Vector2.RIGHT
-		else:
-			bala.direccion = Vector2.LEFT
-			
-		get_parent().add_child(bala)
+	puede_disparar = true
+
+# --- SEÑALES DEL AREA ---
+
+func _on_area_deteccion_body_entered(body):
+	if body.name == "boy_1" or body.is_in_group("jugador"):
+		target_player = body
+
+func _on_area_deteccion_body_exited(body):
+	if body == target_player:
+		target_player = null

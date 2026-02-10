@@ -91,7 +91,7 @@ texture = ExtResource("1_8vntt")
 position = Vector2(1, -9)
 
 [node name="boy_1" parent="." instance=ExtResource("1_5pk8s")]
-position = Vector2(2468, 316)
+position = Vector2(2113, 316)
 limite_caida = 950
 
 [node name="solaris_1" parent="." instance=ExtResource("5_iwhlc")]
@@ -242,4 +242,4 @@ libraries = {
 autoplay = "desk_mov_down"
 
 [node name="enemigo_c++" parent="." instance=ExtResource("6_lu3al")]
-position = Vector2(2147, 351)
+position = Vector2(2300, 354)
