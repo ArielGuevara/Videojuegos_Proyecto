@@ -1,19 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgirhp416xuve"]
+[gd_scene load_steps=7 format=3 uid="uid://cgirhp416xuve"]
 
 [ext_resource type="PackedScene" uid="uid://c7xqpm5pause1" path="res://Scenes/Menus/pause_menu.tscn" id="1_pause"]
 [ext_resource type="PackedScene" uid="uid://cvse13q2uwv7j" path="res://Scenes/Screens/parallax_biblioteca.tscn" id="2_parallax"]
-<<<<<<< HEAD
-[ext_resource type="PackedScene" uid="uid://35c3pea40rp5" path="res://Scenes/Escenarios/escenario_3.tscn" id="3_escenario"]
-=======
 [ext_resource type="PackedScene" uid="uid://bkf6dgkw2y7fp" path="res://Scenes/Escenarios/escenario_3.tscn" id="3_escenario"]
->>>>>>> 359435b0b50f32e06cc9140d182ae9dbb2d1933e
 [ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="4_boy"]
 [ext_resource type="PackedScene" uid="uid://dcvqsjyd2l36r" path="res://Scenes/Characteres/solivan_1_boss.tscn" id="5_boss"]
+[ext_resource type="AudioStream" uid="uid://dqas77m2i48rp" path="res://Music/Cinema/Level Clear Skyline.mp3" id="6_hr18l"]
 
 [node name="Screen3" type="Node2D"]
-
-; Iluminación: se elimina el CanvasModulate oscuro para igualar a la escena 2
-
 
 [node name="PauseMenu" parent="." instance=ExtResource("1_pause")]
 
@@ -28,3 +22,7 @@ can_attack = true
 [node name="SolivanBoss" parent="." instance=ExtResource("5_boss")]
 position = Vector2(1200, 400)
 scale = Vector2(0.3, 0.3)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_hr18l")
+autoplay = true
