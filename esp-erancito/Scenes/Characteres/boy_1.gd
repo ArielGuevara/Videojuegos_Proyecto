@@ -28,6 +28,7 @@ var crouch_offset: float = 0.0
 
 @export var damage_amount = 20 
 @export var limite_caida = 1000
+@export var can_attack: bool
 
 # Referencias
 @onready var invul_timer = $InvulnerabilityTimer
@@ -122,7 +123,7 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("ui_accept") and right_to_jump():
 			velocity.y = JUMP_VELOCITY
 		
-		if Input.is_action_just_pressed("attack") and not attacking:
+		if can_attack and Input.is_action_just_pressed("attack") and not attacking:
 			attacking = true
 			anim.play("attack_1")
 			ataque_colision.disabled = false
