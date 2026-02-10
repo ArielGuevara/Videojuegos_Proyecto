@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://gmejeqs4jhfc"]
+[gd_scene load_steps=22 format=3 uid="uid://gmejeqs4jhfc"]
 
 [ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="1_5pk8s"]
 [ext_resource type="Texture2D" uid="uid://cpu614x88w06l" path="res://Assets_Secenes/Backgraunds/backgraun nvl2.png" id="1_8vntt"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/Items/hud.tscn" id="10_t343d"]
 [ext_resource type="PackedScene" uid="uid://rds3wpbxe8uh" path="res://Scenes/Characteres/miro_1.tscn" id="11_nc64w"]
 [ext_resource type="Script" uid="uid://d0lkcg2uqugk1" path="res://Scenes/Screens/Screen_nvl2/validador_solaris.gd" id="12_cuyos"]
+[ext_resource type="AudioStream" uid="uid://bfaynj4etsk0" path="res://Music/Cinema/Midnight Faculty Intro.mp3" id="13_4lwfe"]
 
 [sub_resource type="Curve2D" id="Curve2D_wkfrf"]
 _data = {
@@ -106,9 +107,8 @@ position = Vector2(2899, 228.00003)
 position = Vector2(5602, 189)
 
 [node name="boy1" parent="." instance=ExtResource("1_5pk8s")]
-position = Vector2(104, 720)
+position = Vector2(21, 506)
 limite_caida = 950
-can_attack = true
 
 [node name="solaris_1" parent="." instance=ExtResource("5_iwhlc")]
 position = Vector2(9098, 811)
@@ -289,33 +289,53 @@ visible = false
 
 [node name="ItemHistoria" parent="." instance=ExtResource("8_1e86a")]
 position = Vector2(1708, 366)
-frase_del_juego = "Un problema gigante asusta a cualquiera. No intentes resolver todo el examen de una sola vez; partelo en trocitos pequenos y faciles. Si resuelves cada pedacito por separado, la solucion grande aparecera sola."
+frase_del_juego = "Un problema gigante asusta a cualquiera. 
+No intentes resolver todo el examen de una sola vez; 
+partelo en trocitos pequenos y faciles. 
+Si resuelves cada pedacito por separado, 
+la solucion grande aparecera sola."
 
 [node name="ItemHistoria2" parent="." instance=ExtResource("8_1e86a")]
 position = Vector2(3257, 231)
-frase_del_juego = "Imagina buscar un libro en una biblioteca donde todo esta tirado en el suelo. Imposible, ¿verdad? En programación pasa lo mismo: mantén tus datos ordenados y etiquetados, y encontrarás todo al instante."
+frase_del_juego = "Imagina buscar un libro en una biblioteca donde todo 
+esta tirado en el suelo. Imposible, verdad? 
+En programacion pasa lo mismo: manten tus datos ordenados y etiquetados,
+y encontraras todo al instante."
 
 [node name="ItemHistoria3" parent="." instance=ExtResource("8_1e86a")]
 position = Vector2(4947, 693)
-frase_del_juego = "Si te ves haciendo la misma tarea aburrida una y otra vez, ¡para! Las computadoras aman la repetición, tú no. Crea una regla (un bucle) que haga el trabajo sucio por ti mientras tú descansas."
+frase_del_juego = "Si te ves haciendo la misma tarea aburrida 
+una y otra vez, ¡para! 
+Las computadoras aman la repeticion, 
+tu no. Crea una regla (un bucle) 
+que haga el trabajo sucio por ti mientras tu descansas."
 
 [node name="ItemHistoria4" parent="." instance=ExtResource("8_1e86a")]
 position = Vector2(5868, 405)
-frase_del_juego = "A veces la vida es una fila india, pero otras veces es como lavar platos: el último plato que pones encima es el primero que tienes que lavar. Aprende a identificar en qué orden debes atender las cosas para no bloquearte."
+frase_del_juego = "A veces la vida es una fila india, 
+pero otras veces es como lavar platos: 
+el ultimo plato que pones encima es el primero 
+que tienes que lavar. Aprende a identificar en que orden debes atender 
+las cosas para no bloquearte."
 
 [node name="ItemHistoria5" parent="." instance=ExtResource("8_1e86a")]
 position = Vector2(7213, 83)
-frase_del_juego = "Cuando veas letras rojas o algo falle, no entres en pánico. El error no te está regañando, te está dando una pista. Léelo, respira y sigue el rastro; te dirá exactamente qué tornillo debes apretar."
+frase_del_juego = "Cuando veas letras rojas o algo falle, 
+no entres en panico. 
+El error no te esta reganando, te esta dando una pista. 
+Leelo, respira y sigue el rastro; 
+te dira exactamente que tornillo debes apretar."
 
 [node name="HUD" parent="." instance=ExtResource("10_t343d")]
 
 [node name="miro_1" parent="." instance=ExtResource("11_nc64w")]
 position = Vector2(137, 826)
-consejo = "Has logrado salir de las materias Exactas, tu reto aun no termina."
+consejo = "Has logrado salir de las materias Exactas, tu reto aun no termina.
+Usa Z para usar el parri."
 
 [node name="miro_2" parent="." instance=ExtResource("11_nc64w")]
 position = Vector2(4363, 741)
-consejo = "Recuerda conseguir todos los fragmetos."
+consejo = "Recuerda conseguir todos los fragmetos de Sabiduria."
 
 [node name="ValidadorSolaris" type="Area2D" parent="." node_paths=PackedStringArray("jefe_solaris")]
 script = ExtResource("12_cuyos")
@@ -324,3 +344,7 @@ jefe_solaris = NodePath("../solaris_1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ValidadorSolaris"]
 position = Vector2(7879.25, 216)
 shape = SubResource("RectangleShape2D_4lwfe")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_4lwfe")
+autoplay = true

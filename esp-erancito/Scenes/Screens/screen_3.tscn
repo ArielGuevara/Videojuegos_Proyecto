@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://euyd00exohay"]
+[gd_scene load_steps=6 format=3 uid="uid://cgirhp416xuve"]
 
 [ext_resource type="PackedScene" uid="uid://c7xqpm5pause1" path="res://Scenes/Menus/pause_menu.tscn" id="1_pause"]
-
-[ext_resource type="PackedScene" path="res://Scenes/Screens/parallax_biblioteca.tscn" id="2_parallax"]
+[ext_resource type="PackedScene" uid="uid://cvse13q2uwv7j" path="res://Scenes/Screens/parallax_biblioteca.tscn" id="2_parallax"]
 [ext_resource type="PackedScene" uid="uid://35c3pea40rp5" path="res://Scenes/Escenarios/escenario_3.tscn" id="3_escenario"]
 [ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="4_boy"]
 [ext_resource type="PackedScene" uid="uid://dcvqsjyd2l36r" path="res://Scenes/Characteres/solivan_1_boss.tscn" id="5_boss"]
@@ -20,6 +19,7 @@ color = Color(0.3, 0.3, 0.4, 1)
 
 [node name="boy_1" parent="." instance=ExtResource("4_boy")]
 position = Vector2(100, 400)
+can_attack = true
 
 [node name="SolivanBoss" parent="." instance=ExtResource("5_boss")]
 position = Vector2(1200, 400)

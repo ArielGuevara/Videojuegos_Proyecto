@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="ESPErancito"
-run/main_scene="uid://bkvtdgnkwkeef"
+run/main_scene="uid://b0tie75ccwpc1"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
