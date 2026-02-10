@@ -137,8 +137,32 @@ func iniciar_ataque():
 		anim.play("atack2") # Ataque monstruo más rápido
 	else:
 		anim.play("atack1") # Envestir normal
-	
+
+	# Intentar aplicar daño en el momento del impacto,
+	# incluso si el jugador ya estaba dentro del área.
+	aplicar_daño_despues_de_inicio_ataque()
+
 	timer_ataque.start()
+
+# Aplica daño si el jugador está dentro del AreaAtaque cuando el golpe "conecta"
+func aplicar_daño_despues_de_inicio_ataque():
+	# Pequeño retraso para sincronizar con la animación de ataque
+	await get_tree().create_timer(0.25).timeout
+	
+	if estado_actual != Estado.ATACANDO:
+		return
+	
+	for body in area_ataque.get_overlapping_bodies():
+		if body.is_in_group("player") and body.has_method("take_damage"):
+			var daño = damage_fase2 if is_transformed else damage_fase1
+			body.take_damage(daño, global_position)
+			
+			# Retroceso de Esperancito cuando el golpe conecta
+			if body.has_method("apply_knockback"):
+				var dir: Vector2 = (body.global_position - global_position).normalized()
+				var fuerza: Vector2 = Vector2(dir.x * 700, -250)
+				body.apply_knockback(fuerza)
+			break
 
 func _on_timer_ataque_timeout():
 	can_attack = true
@@ -153,6 +177,12 @@ func _on_area_ataque_body_entered(body):
 		if body.has_method("take_damage"):
 			var daño = damage_fase2 if is_transformed else damage_fase1
 			body.take_damage(daño, global_position)
+			
+			# Retroceso inmediato si entra en el área durante el ataque
+			if body.has_method("apply_knockback"):
+				var dir: Vector2 = (body.global_position - global_position).normalized()
+				var fuerza: Vector2 = Vector2(dir.x * 700, -250)
+				body.apply_knockback(fuerza)
 
 # === SISTEMA DE DAÑO ===
 func take_damage(amount: int, _source_position: Vector2 = Vector2.ZERO):
