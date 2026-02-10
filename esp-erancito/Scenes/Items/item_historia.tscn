@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4awo6yh7np3f"]
+
+[ext_resource type="Script" uid="uid://ch3x6udi115b1" path="res://item_historia.gd" id="1_015hm"]
+[ext_resource type="Texture2D" uid="uid://bdm4rdt2y5l05" path="res://Assets_Secenes/Nivel 2/elementos de entorno.png" id="2_kow37"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5pqy"]
+atlas = ExtResource("2_kow37")
+region = Rect2(249, 74, 83, 74)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jy6gx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5pqy")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhtwb"]
+size = Vector2(56.5, 60)
+
+[node name="ItemHistoria" type="Area2D" groups=["historias"]]
+script = ExtResource("1_015hm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1.5)
+scale = Vector2(1, 0.9594595)
+sprite_frames = SubResource("SpriteFrames_jy6gx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fhtwb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

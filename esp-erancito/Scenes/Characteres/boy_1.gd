@@ -126,7 +126,6 @@ func _physics_process(delta: float) -> void:
 			attacking = true
 			anim.play("attack_1")
 			ataque_colision.disabled = false
-			print("🗡️ ESPERANCITO: ¡Iniciando ataque!")
 			return 
 
 	# --- MOVIMIENTO ---
@@ -315,10 +314,6 @@ func _on_area_ataque_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		if body.has_method("take_damage"):
 			body.take_damage(damage_amount, global_position)
-		else:
-			print("❌ NO tiene método take_damage")  # ⬅ AGREGAR
-	else:
-		print("❌ NO está en grupo 'enemy'")  # ⬅ AGREGAR
 
 # Funciones de los NPC 
 func congelar(tiempo):
@@ -334,4 +329,3 @@ func congelar(tiempo):
 
 func actualizar_checkpoint(nueva_posicion: Vector2):
 	respawn_position = nueva_posicion
-	print("Checkpoint guardado en: ", respawn_position)
