@@ -240,8 +240,13 @@ func morir():
 	# Esperar a que termine la animación
 	await anim.animation_finished
 	
-	print("👻 BOSS: Eliminado")
-	queue_free()
+	print("🎉 BOSS: ¡Derrotado! Cambiando a créditos...")
+	await get_tree().create_timer(2.0).timeout
+	
+	# Cambiar a créditos
+	get_tree().change_scene_to_file("res://Scenes/Menus/creditos.tscn")
+
+
 
 # === DETECCIÓN DEL JUGADOR ===
 func _on_deteccion_jugador_entered(body):
