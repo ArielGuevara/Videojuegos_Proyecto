@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://kwewkf78srw2"
+path="res://.godot/imported/Falling Into the Syllabus.mp3-6eec2ed3d02ce50a8ff0871672871a51.mp3str"
+
+[deps]
+
+source_file="res://Music/Cinema/Falling Into the Syllabus.mp3"
+dest_files=["res://.godot/imported/Falling Into the Syllabus.mp3-6eec2ed3d02ce50a8ff0871672871a51.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

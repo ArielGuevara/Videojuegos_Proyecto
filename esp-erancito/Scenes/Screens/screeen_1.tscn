@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d3tjcy6fwdnkg"]
+[gd_scene load_steps=36 format=3 uid="uid://d3tjcy6fwdnkg"]
 
 [ext_resource type="PackedScene" uid="uid://cjnqmhljoj1jw" path="res://Scenes/Screens/parallax_scene.tscn" id="1_ogk55"]
 [ext_resource type="PackedScene" uid="uid://4tg4fghnxefi" path="res://Scenes/Escenarios/escenario_1.tscn" id="2_ogk55"]
@@ -17,9 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://e7fj6n5tegd1" path="res://Scenes/Characteres/Checkpoints/checkpoint.tscn" id="15_r2p5x"]
 [ext_resource type="PackedScene" uid="uid://cx5dh0gxdbofi" path="res://Scenes/Items/interfaz_historia.tscn" id="16_yu7iy"]
 [ext_resource type="PackedScene" uid="uid://b4awo6yh7np3f" path="res://Scenes/Items/item_historia.tscn" id="17_sytg1"]
-[ext_resource type="Script" uid="uid://dqj7hld73d2qx" path="res://Scenes/Screens/zona_bloqueo_jefe.gd" id="18_sytg1"]
+[ext_resource type="Script" path="res://Scenes/Screens/zona_bloqueo_jefe.gd" id="18_sytg1"]
 [ext_resource type="PackedScene" uid="uid://rds3wpbxe8uh" path="res://Scenes/Characteres/miro_1.tscn" id="19_htm06"]
-[ext_resource type="PackedScene" uid="uid://veiaa0u3q2vd" path="res://Scenes/Items/hud.tscn" id="20_52ei7"]
+[ext_resource type="PackedScene" path="res://Scenes/Items/hud.tscn" id="20_52ei7"]
+[ext_resource type="AudioStream" uid="uid://kwewkf78srw2" path="res://Music/Cinema/Falling Into the Syllabus.mp3" id="21_oltfm"]
 
 [sub_resource type="Curve2D" id="Curve2D_kvtqo"]
 _data = {
@@ -18519,5 +18520,9 @@ consejo = "Muy bien muchacho, pero asegurate de tener todas las pistas recogidas
 Joel Garzon."
 
 [node name="HUD" parent="." instance=ExtResource("20_52ei7")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_oltfm")
+autoplay = true
 
 [connection signal="body_entered" from="ZonaBloqueoJefe" to="ZonaBloqueoJefe" method="_on_body_entered"]
