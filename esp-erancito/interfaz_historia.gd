@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal historia_cerrada
+
 @onready var texto_label = $Panel/Label
 @onready var panel = $Panel
 @onready var fondo = $ColorRect
@@ -16,6 +18,7 @@ func mostrar_historia(frase: String):
 func ocultar_interfaz():
 	visible = false
 	get_tree().paused = false # REANUDA EL JUEGO
+	emit_signal("historia_cerrada")
 
 func _on_button_pressed():
 	ocultar_interfaz()

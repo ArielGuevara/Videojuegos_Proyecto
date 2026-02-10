@@ -9,6 +9,10 @@ func _on_body_entered(body):
 		if interfaz:
 			interfaz.mostrar_historia(frase_del_juego)
 		
+		# --- ACTUALIZAR EL CONTADOR ---
+		var hud = get_tree().get_first_node_in_group("hud")
+		if hud:
+			hud.sumar_item()
 		# 2. --- NUEVA LÓGICA: INVOCAR AL JEFE ---
 		verificar_si_es_el_ultimo()
 		
