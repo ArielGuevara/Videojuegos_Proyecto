@@ -142,7 +142,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6lode"]
 size = Vector2(232, 52.5)
 
-[node name="enemigo_c++" type="CharacterBody2D"]
+[node name="enemigo_c++" type="CharacterBody2D" groups=["enemigo"]]
 script = ExtResource("1_xgudt")
 escena_proyectil = ExtResource("2_6lode")
 

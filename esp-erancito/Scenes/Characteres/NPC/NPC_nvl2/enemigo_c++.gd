@@ -18,6 +18,7 @@ var estado_actual = Estado.PATRULLAR
 var direccion = 1 
 var puede_disparar = true 
 var target_player = null 
+var vida = 30 # La vida del enemigo
 
 func _ready():
 	timer_disparo.wait_time = 1.0
@@ -142,3 +143,19 @@ func _on_area_deteccion_body_entered(body):
 func _on_area_deteccion_body_exited(body):
 	if body == target_player:
 		target_player = null
+
+func take_damage(cantidad):
+	vida -= cantidad
+	modulate = Color(1, 0, 0) # Se pone rojo al recibir daño
+	
+	# Efecto visual rápido de parpadeo
+	var tween = create_tween()
+	tween.tween_property(self, "modulate", Color(1,1,1), 0.2)
+	
+	if vida <= 0:
+		morir()
+
+func morir():
+	estado_actual = Estado.MORIR
+	anim.play("morir")
+	# El queue_free() ya está en tu señal _on_animated_sprite_2d_animation_finished
