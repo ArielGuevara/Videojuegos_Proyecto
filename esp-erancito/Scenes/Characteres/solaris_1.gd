@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var projectile_scene: PackedScene 
 @export var safe_distance = 150
 
-#--------VARIABLES DE ATAUQE-----------
+#--------VARIABLES DE ATAQUE-----------
 var is_dashing = false 
 var dash_speed = 400   
 var dash_duration = 0.5 
@@ -19,7 +19,7 @@ var is_enraged = false
 var target_player = null 
 
 # --- NUEVA VARIABLE PARA EL DAÑO CONTINUO ---
-var player_in_contact = null # Guardará al jugador si lo estamos tocando
+var player_in_contact = null 
 
 # Referencias
 @onready var anim = $AnimatedSprite2D
@@ -27,11 +27,18 @@ var player_in_contact = null # Guardará al jugador si lo estamos tocando
 @onready var punto_disparo = $PuntoDeDisparo 
 @onready var ray_suelo = $RaySuelo
 @onready var ray_muro = $RayMuro
+@onready var health_bar = $CanvasLayer/BarraVida
 
 func _ready():
 	current_health = max_health
-	anim.play("walk") 
 	
+	# --- CONFIGURACIÓN INICIAL DE LA BARRA ---
+	if health_bar:
+		health_bar.max_value = max_health
+		health_bar.value = current_health
+		health_bar.visible = false # <--- 1. OCULTO LA BARRA AL INICIO
+		
+	anim.play("walk")
 	if timer_ataque.is_stopped():
 		timer_ataque.start()
 
@@ -40,13 +47,10 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		
-	# --- NUEVO: Procesar daño por contacto en cada frame ---
+	# --- Procesar daño por contacto en cada frame ---
 	if player_in_contact and current_health > 0:
-		# Intentamos dañar al jugador constantemente.
-		# El script del jugador se encargará de rechazar el daño si está invulnerable.
 		if player_in_contact.has_method("take_damage"):
 			player_in_contact.take_damage(damage_touch, global_position)
-	# -----------------------------------------------------
 
 	# --- MODIFICACION DASH ---
 	if is_dashing:
@@ -116,7 +120,6 @@ func elegir_ataque():
 		iniciar_rafaga()
 	else:
 		iniciar_ataque_normal()
-		
 
 func patrullar():
 	if ray_muro.is_colliding() or not ray_suelo.is_colliding():
@@ -194,6 +197,12 @@ func lanzar_proyectil():
 # --- DAÑO Y FASES ---
 func take_damage(amount):
 	current_health -= amount
+	
+	# --- 2. ACTUALIZAR BARRA DE VIDA ---
+	if health_bar:
+		var tween = create_tween()
+		tween.tween_property(health_bar, "value", current_health, 0.2).set_trans(Tween.TRANS_SINE)
+	
 	modulate = Color(10,10,10) 
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color(1,1,1), 0.1)
@@ -213,6 +222,12 @@ func die():
 	timer_ataque.stop() 
 	target_player = null 
 	anim.play("desappearing")
+	
+	# --- 3. OCULTAR BARRA AL MORIR ---
+	if health_bar:
+		var tween = create_tween()
+		tween.tween_property(health_bar, "modulate:a", 0.0, 1.0)
+		
 	set_physics_process(false)
 	$CollisionShape2D.call_deferred("set_disabled", true) 
 	await anim.animation_finished
@@ -222,6 +237,9 @@ func die():
 func _on_area_deteccion_body_entered(body):
 	if body.is_in_group("player"):
 		target_player = body
+		# --- 4. MOSTRAR BARRA CUANDO ENTRA EL JUGADOR ---
+		if health_bar and not health_bar.visible:
+			health_bar.visible = true
 
 func _on_area_deteccion_body_exited(body):
 	if body == target_player:
@@ -236,12 +254,12 @@ func _on_hitbox_body_entered(body):
 	if current_health <= 0: return
 	
 	if body.is_in_group("player"):
-		player_in_contact = body # Guardamos al jugador en la variable
+		player_in_contact = body 
 
-# 2. Cuando sales: Borramos la referencia (¡IMPORTANTE CONECTAR ESTA SEÑAL!)
+# 2. Cuando sales: Borramos la referencia
 func _on_hitbox_body_exited(body):
 	if body == player_in_contact:
-		player_in_contact = null # Ya no lo estamos tocando
+		player_in_contact = null 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if anim.animation == "attack":

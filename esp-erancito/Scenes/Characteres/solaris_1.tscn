@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://e5gslaiy8s0w"]
+[gd_scene load_steps=49 format=3 uid="uid://e5gslaiy8s0w"]
 
 [ext_resource type="Texture2D" uid="uid://cdqp156bu8dl8" path="res://Caracters_player/Profesor solaris/aparece.png" id="1_fua58"]
 [ext_resource type="Script" uid="uid://h5abjh503ydm" path="res://Scenes/Characteres/solaris_1.gd" id="1_q806i"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b7qno6uk1ek67" path="res://Caracters_player/Profesor solaris/correr.png" id="3_mqkjw"]
 [ext_resource type="Texture2D" uid="uid://bq82q2p8od53e" path="res://Caracters_player/Profesor solaris/derecha.png" id="4_q806i"]
 [ext_resource type="PackedScene" uid="uid://d3l6h4o8iaw81" path="res://Scenes/proyectiles/pr_solaris.tscn" id="6_mqkjw"]
+[ext_resource type="FontFile" uid="uid://enqqfjpwfd6j" path="res://Scenes/Fonts/mini_pixel-7.ttf" id="8_ls61h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ka56q"]
 size = Vector2(192, 344)
@@ -288,6 +289,11 @@ size = Vector2(2023, 516)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q806i"]
 size = Vector2(220, 326)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q806i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ls61h"]
+bg_color = Color(0.77398074, 0.20252961, 0.8371041, 1)
+
 [node name="solaris_1" type="CharacterBody2D" groups=["enemy"]]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_q806i")
@@ -300,7 +306,7 @@ shape = SubResource("RectangleShape2D_ka56q")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_d8oam")
-animation = &"desappearing"
+animation = &"grow_up"
 flip_h = true
 
 [node name="TimerAtaque" type="Timer" parent="."]
@@ -326,6 +332,18 @@ target_position = Vector2(256, 0)
 
 [node name="RaySuelo" type="RayCast2D" parent="."]
 position = Vector2(64, 130)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BarraVida" type="ProgressBar" parent="CanvasLayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 969.0
+offset_bottom = 27.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("8_ls61h")
+theme_override_styles/background = SubResource("StyleBoxFlat_q806i")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ls61h")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="TimerAtaque" to="." method="_on_timer_ataque_timeout"]

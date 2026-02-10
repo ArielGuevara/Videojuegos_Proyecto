@@ -18,7 +18,7 @@ var estado_actual = Estado.PATRULLAR
 var direccion = 1 
 var puede_disparar = true 
 var target_player = null 
-var vida = 30 # La vida del enemigo
+var vida = 10 # La vida del enemigo
 
 func _ready():
 	timer_disparo.wait_time = 1.0
