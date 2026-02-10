@@ -36,11 +36,47 @@ func _ready():
 	if health_bar:
 		health_bar.max_value = max_health
 		health_bar.value = current_health
-		health_bar.visible = false # <--- 1. OCULTO LA BARRA AL INICIO
+		health_bar.visible = false 
 		
+	# --- CAMBIO IMPORTANTE: INICIAR DESACTIVADO ---
+	# El jefe empieza oculto y no hace nada hasta que el Area2D lo llame
+	desactivar_jefe()
+
+# --- FUNCIONES DE ACTIVACIÓN/DESACTIVACIÓN (NUEVO) ---
+
+func activar_jefe():
+	print("¡Solaris ha despertado!")
+	visible = true
+	set_physics_process(true)
+	set_process(true)
+	
+	# Reactivar colisiones
+	$CollisionShape2D.set_deferred("disabled", false)
+	# Si tienes un área de detección específica, reactívala también:
+	if has_node("Graficos/AreaDeteccion/CollisionShape2D"):
+		$Graficos/AreaDeteccion/CollisionShape2D.set_deferred("disabled", false)
+	
+	# Mostrar barra (opcional, o esperar a que te vea)
+	if health_bar: health_bar.visible = true
+	
+	# Iniciar lógica
 	anim.play("walk")
-	if timer_ataque.is_stopped():
-		timer_ataque.start()
+	timer_ataque.start() # <--- IMPORTANTE: Arrancar el timer aquí
+
+func desactivar_jefe():
+	visible = false            
+	set_physics_process(false) 
+	set_process(false)         
+	
+	# Desactivar colisiones
+	$CollisionShape2D.set_deferred("disabled", true)
+	if has_node("Graficos/AreaDeteccion/CollisionShape2D"):
+		$Graficos/AreaDeteccion/CollisionShape2D.set_deferred("disabled", true)
+	
+	# --- CORRECCIÓN: DETENER EL TIMER ---
+	timer_ataque.stop() # Para que no dispare mientras es invisible
+
+# -------------------------------------------------------
 
 func _physics_process(delta):
 	# 1. Gravedad
@@ -231,6 +267,7 @@ func die():
 	set_physics_process(false)
 	$CollisionShape2D.call_deferred("set_disabled", true) 
 	await anim.animation_finished
+	get_tree().change_scene_to_file("res://Scenes/Screens/screen_3.tscn")
 	queue_free()
 
 # --- SEÑALES DE VISIÓN ---

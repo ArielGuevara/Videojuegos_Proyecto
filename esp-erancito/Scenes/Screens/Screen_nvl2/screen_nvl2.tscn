@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://gmejeqs4jhfc"]
+[gd_scene load_steps=21 format=3 uid="uid://gmejeqs4jhfc"]
 
 [ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="1_5pk8s"]
 [ext_resource type="Texture2D" uid="uid://cpu614x88w06l" path="res://Assets_Secenes/Backgraunds/backgraun nvl2.png" id="1_8vntt"]
@@ -6,6 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://cq006otjqd1y5" path="res://Scenes/Escenarios/escen_nivel2/moving_desk_plataform.tscn" id="4_wkfrf"]
 [ext_resource type="PackedScene" uid="uid://e5gslaiy8s0w" path="res://Scenes/Characteres/solaris_1.tscn" id="5_iwhlc"]
 [ext_resource type="PackedScene" uid="uid://bxou6kgthfiug" path="res://Scenes/Characteres/NPC/NPC_nvl2/enemigo_c++.tscn" id="6_lu3al"]
+[ext_resource type="PackedScene" uid="uid://e7fj6n5tegd1" path="res://Scenes/Characteres/Checkpoints/checkpoint.tscn" id="7_jj7ym"]
+[ext_resource type="PackedScene" uid="uid://b4awo6yh7np3f" path="res://Scenes/Items/item_historia.tscn" id="8_1e86a"]
+[ext_resource type="PackedScene" uid="uid://cx5dh0gxdbofi" path="res://Scenes/Items/interfaz_historia.tscn" id="8_3w8gs"]
+[ext_resource type="PackedScene" path="res://Scenes/Items/hud.tscn" id="10_t343d"]
+[ext_resource type="PackedScene" uid="uid://rds3wpbxe8uh" path="res://Scenes/Characteres/miro_1.tscn" id="11_nc64w"]
+[ext_resource type="Script" uid="uid://d0lkcg2uqugk1" path="res://Scenes/Screens/Screen_nvl2/validador_solaris.gd" id="12_cuyos"]
 
 [sub_resource type="Curve2D" id="Curve2D_wkfrf"]
 _data = {
@@ -77,6 +83,9 @@ _data = {
 &"desk_mov_down": SubResource("Animation_lu3al")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4lwfe"]
+size = Vector2(647.5, 1354)
+
 [node name="screen_nvl2" type="Node2D"]
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
@@ -90,9 +99,16 @@ texture = ExtResource("1_8vntt")
 [node name="TileMap" parent="." instance=ExtResource("3_8vntt")]
 position = Vector2(1, -9)
 
-[node name="boy_1" parent="." instance=ExtResource("1_5pk8s")]
-position = Vector2(7032, 158)
+[node name="Checkpoint" parent="." instance=ExtResource("7_jj7ym")]
+position = Vector2(2899, 228.00003)
+
+[node name="Checkpoint2" parent="." instance=ExtResource("7_jj7ym")]
+position = Vector2(5602, 189)
+
+[node name="boy1" parent="." instance=ExtResource("1_5pk8s")]
+position = Vector2(104, 720)
 limite_caida = 950
+can_attack = true
 
 [node name="solaris_1" parent="." instance=ExtResource("5_iwhlc")]
 position = Vector2(9098, 811)
@@ -242,13 +258,13 @@ libraries = {
 autoplay = "desk_mov_down"
 
 [node name="enemigo_c++" parent="." instance=ExtResource("6_lu3al")]
-position = Vector2(2409, 354)
+position = Vector2(2411, 358)
 
 [node name="enemigo_c++2" parent="." instance=ExtResource("6_lu3al")]
 position = Vector2(1003, 826)
 
 [node name="enemigo_c++3" parent="." instance=ExtResource("6_lu3al")]
-position = Vector2(3269, 772)
+position = Vector2(3265, 776)
 
 [node name="enemigo_c++4" parent="." instance=ExtResource("6_lu3al")]
 position = Vector2(3956, 832)
@@ -267,3 +283,44 @@ position = Vector2(7004, 398)
 
 [node name="enemigo_c++5" parent="." instance=ExtResource("6_lu3al")]
 position = Vector2(4535, 875)
+
+[node name="InterfazHistoria" parent="." instance=ExtResource("8_3w8gs")]
+visible = false
+
+[node name="ItemHistoria" parent="." instance=ExtResource("8_1e86a")]
+position = Vector2(1708, 366)
+frase_del_juego = "Un problema gigante asusta a cualquiera. No intentes resolver todo el examen de una sola vez; partelo en trocitos pequenos y faciles. Si resuelves cada pedacito por separado, la solucion grande aparecera sola."
+
+[node name="ItemHistoria2" parent="." instance=ExtResource("8_1e86a")]
+position = Vector2(3257, 231)
+frase_del_juego = "Imagina buscar un libro en una biblioteca donde todo esta tirado en el suelo. Imposible, ¿verdad? En programación pasa lo mismo: mantén tus datos ordenados y etiquetados, y encontrarás todo al instante."
+
+[node name="ItemHistoria3" parent="." instance=ExtResource("8_1e86a")]
+position = Vector2(4947, 693)
+frase_del_juego = "Si te ves haciendo la misma tarea aburrida una y otra vez, ¡para! Las computadoras aman la repetición, tú no. Crea una regla (un bucle) que haga el trabajo sucio por ti mientras tú descansas."
+
+[node name="ItemHistoria4" parent="." instance=ExtResource("8_1e86a")]
+position = Vector2(5868, 405)
+frase_del_juego = "A veces la vida es una fila india, pero otras veces es como lavar platos: el último plato que pones encima es el primero que tienes que lavar. Aprende a identificar en qué orden debes atender las cosas para no bloquearte."
+
+[node name="ItemHistoria5" parent="." instance=ExtResource("8_1e86a")]
+position = Vector2(7213, 83)
+frase_del_juego = "Cuando veas letras rojas o algo falle, no entres en pánico. El error no te está regañando, te está dando una pista. Léelo, respira y sigue el rastro; te dirá exactamente qué tornillo debes apretar."
+
+[node name="HUD" parent="." instance=ExtResource("10_t343d")]
+
+[node name="miro_1" parent="." instance=ExtResource("11_nc64w")]
+position = Vector2(137, 826)
+consejo = "Has logrado salir de las materias Exactas, tu reto aun no termina."
+
+[node name="miro_2" parent="." instance=ExtResource("11_nc64w")]
+position = Vector2(4363, 741)
+consejo = "Recuerda conseguir todos los fragmetos."
+
+[node name="ValidadorSolaris" type="Area2D" parent="." node_paths=PackedStringArray("jefe_solaris")]
+script = ExtResource("12_cuyos")
+jefe_solaris = NodePath("../solaris_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ValidadorSolaris"]
+position = Vector2(7879.25, 216)
+shape = SubResource("RectangleShape2D_4lwfe")

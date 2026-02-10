@@ -17,9 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://e7fj6n5tegd1" path="res://Scenes/Characteres/Checkpoints/checkpoint.tscn" id="15_r2p5x"]
 [ext_resource type="PackedScene" uid="uid://cx5dh0gxdbofi" path="res://Scenes/Items/interfaz_historia.tscn" id="16_yu7iy"]
 [ext_resource type="PackedScene" uid="uid://b4awo6yh7np3f" path="res://Scenes/Items/item_historia.tscn" id="17_sytg1"]
-[ext_resource type="Script" uid="uid://dqj7hld73d2qx" path="res://Scenes/Screens/zona_bloqueo_jefe.gd" id="18_sytg1"]
+[ext_resource type="Script" path="res://Scenes/Screens/zona_bloqueo_jefe.gd" id="18_sytg1"]
 [ext_resource type="PackedScene" uid="uid://rds3wpbxe8uh" path="res://Scenes/Characteres/miro_1.tscn" id="19_htm06"]
-[ext_resource type="PackedScene" uid="uid://veiaa0u3q2vd" path="res://Scenes/Items/hud.tscn" id="20_52ei7"]
+[ext_resource type="PackedScene" path="res://Scenes/Items/hud.tscn" id="20_52ei7"]
 
 [sub_resource type="Curve2D" id="Curve2D_kvtqo"]
 _data = {
