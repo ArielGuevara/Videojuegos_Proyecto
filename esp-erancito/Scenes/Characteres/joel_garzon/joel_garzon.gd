@@ -45,8 +45,37 @@ func _ready():
 	current_health = max_health
 	barra_vida.max_value = max_health
 	barra_vida.value = current_health
-	barra_vida.visible = false 
+	
+	desactivar_jefe()
+	
+func desactivar_jefe():
+	visible = false            # Lo hace invisible
+	set_physics_process(false) # Detiene su cerebro (no piensa ni se mueve)
+	set_process(false)         # Detiene otros procesos
+	# Desactivamos sus colisiones para que no choques con un fantasma
+	$CollisionShape2D.set_deferred("disabled", true)
+	$Graficos/AreaDeteccion/CollisionShape2D.set_deferred("disabled", true) # Si tienes area de detección
+	
+	# Ocultamos la UI del jefe por si acaso
+	barra_vida.visible = false
 	tag_life.visible = false
+
+func aparecer_jefe():
+	print(" ¡EL JEFE HA APARECIDO!")
+	visible = true
+	
+	# Efecto opcional de aparición (Tween de transparencia)
+	modulate.a = 0 # Empieza transparente
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 1.0, 1.5) # Aparece en 1.5 segundos
+	
+	await tween.finished # Espera a que sea visible totalmente
+	
+	# Reactivamos todo
+	set_physics_process(true)
+	set_process(true)
+	$CollisionShape2D.set_deferred("disabled", false)
+	$Graficos/AreaDeteccion/CollisionShape2D.set_deferred("disabled", false)
 	
 	anim.play("idle")
 
