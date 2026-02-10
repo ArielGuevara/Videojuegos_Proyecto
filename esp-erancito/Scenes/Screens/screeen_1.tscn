@@ -18379,7 +18379,6 @@ position = Vector2(3101, -653)
 
 [node name="boy1" parent="." instance=ExtResource("2_w3ucr")]
 position = Vector2(117, 381)
-can_attack = true
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(-210, 0)
@@ -18487,7 +18486,7 @@ position = Vector2(6698, 550)
 frase_del_juego = "Organiza tu tiempo, tu puedes con todo, pero no todo a la vez, sino un poco cadad dia."
 
 [node name="ItemHistoria2" parent="." instance=ExtResource("17_sytg1")]
-position = Vector2(-2285, -122)
+position = Vector2(-2326, -96)
 frase_del_juego = "Nunca dejes ingles para el final, aunque no lo parezca, los primeros niveles son mas llevaderos."
 
 [node name="ZonaBloqueoJefe" type="Area2D" parent="."]
