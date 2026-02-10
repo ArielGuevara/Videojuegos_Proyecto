@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq006otjqd1y5"]
+
+[ext_resource type="Texture2D" uid="uid://bn0uiio7axmoe" path="res://Assets_Secenes/Nivel 2/escritorios_pcs.png" id="1_24a85"]
+[ext_resource type="Script" uid="uid://d2y3a6y16ale8" path="res://Scenes/Escenarios/escen_nivel2/moving_desk_plataform.gd" id="1_scmpr"]
+
+[node name="moving_desk_plataform" type="AnimatableBody2D"]
+script = ExtResource("1_scmpr")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-49, -38, 67, -37, 67, 14, 47, 36, -68, 34, -68, -17)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+texture = ExtResource("1_24a85")
+region_enabled = true
+region_rect = Rect2(172, 114, 134, 72)

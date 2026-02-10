@@ -701,7 +701,7 @@ script = ExtResource("1_ng8he")
 limite_caida = 650
 
 [node name="Camera2D" type="Camera2D" parent="."]
-limit_bottom = 648
+limit_bottom = 940
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_limits = true

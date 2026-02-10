@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfpg6uwxjr40k"]
+
+[ext_resource type="Script" uid="uid://dporgjx5oo8es" path="res://Scenes/Characteres/NPC/NPC_nvl2/proyectil_c++.gd" id="1_d34sv"]
+[ext_resource type="Texture2D" uid="uid://cb2cagowjf7wp" path="res://Caracters_player/NPC/C++/C++_Proyectil.png" id="1_wdwlh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d34sv"]
+radius = 15.033297
+
+[node name="Proyectil_C++" type="Area2D"]
+script = ExtResource("1_d34sv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.7683716e-07, 4.7683716e-07)
+scale = Vector2(0.17550854, 0.1929945)
+texture = ExtResource("1_wdwlh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(7, 0)
+shape = SubResource("CircleShape2D_d34sv")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(14, 7)
+rect = Rect2(-10, -10, 7, 7)
