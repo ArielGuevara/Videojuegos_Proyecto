@@ -1,8 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://rds3wpbxe8uh"]
+[gd_scene load_steps=19 format=3 uid="uid://rds3wpbxe8uh"]
 
 [ext_resource type="Texture2D" uid="uid://c4jljjsfnsui0" path="res://Caracters_player/Profesor miro/Profesor miro.png" id="1_6u8dw"]
+[ext_resource type="Script" uid="uid://brvfd8j1dwkdv" path="res://Scenes/Characteres/miro_1.gd" id="1_vs67b"]
 [ext_resource type="Texture2D" uid="uid://b1wr6wckd2t1h" path="res://Caracters_player/Profesor miro/Profesor miro 2.png" id="2_idamh"]
 [ext_resource type="Texture2D" uid="uid://owf8n6xrn0tg" path="res://Caracters_player/Profesor miro/Profesor miro 3.png" id="3_vs67b"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_idamh"]
+radius = 26.0
+height = 228.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqn0y"]
 atlas = ExtResource("1_6u8dw")
@@ -57,8 +62,8 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fdj2r")
 }],
-"loop": true,
-"name": &"appearing",
+"loop": false,
+"name": &"desappearing",
 "speed": 5.0
 }, {
 "frames": [{
@@ -99,18 +104,31 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ppclg")
 }],
-"loop": true,
+"loop": false,
 "name": &"walk",
-"speed": 5.0
+"speed": 6.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vs67b"]
+radius = 240.0
+height = 480.0
+
 [node name="miro_1" type="CharacterBody2D"]
-position = Vector2(0, 1)
+scale = Vector2(0.3, 0.3)
+script = ExtResource("1_vs67b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_idamh")
 
 [node name="animaciones" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ecoqx")
-animation = &"run"
+animation = &"desappearing"
+frame = 1
+frame_progress = 1.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="AreaDialogo" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDialogo"]
+shape = SubResource("CapsuleShape2D_vs67b")
+
+[connection signal="body_entered" from="AreaDialogo" to="." method="_on_area_dialogo_body_entered"]

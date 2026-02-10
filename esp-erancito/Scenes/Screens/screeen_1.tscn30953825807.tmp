@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d3tjcy6fwdnkg"]
+[gd_scene load_steps=34 format=3 uid="uid://d3tjcy6fwdnkg"]
 
 [ext_resource type="PackedScene" uid="uid://cjnqmhljoj1jw" path="res://Scenes/Screens/parallax_scene.tscn" id="1_ogk55"]
 [ext_resource type="PackedScene" uid="uid://4tg4fghnxefi" path="res://Scenes/Escenarios/escenario_1.tscn" id="2_ogk55"]
@@ -19,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://b4awo6yh7np3f" path="res://Scenes/Items/item_historia.tscn" id="17_sytg1"]
 [ext_resource type="Script" uid="uid://dqj7hld73d2qx" path="res://Scenes/Screens/zona_bloqueo_jefe.gd" id="18_sytg1"]
 [ext_resource type="PackedScene" uid="uid://rds3wpbxe8uh" path="res://Scenes/Characteres/miro_1.tscn" id="19_htm06"]
-[ext_resource type="PackedScene" uid="uid://veiaa0u3q2vd" path="res://Scenes/Items/hud.tscn" id="20_52ei7"]
 
 [sub_resource type="Curve2D" id="Curve2D_kvtqo"]
 _data = {
@@ -18375,11 +18374,10 @@ position = Vector2(412, -641)
 group = 2
 
 [node name="Checkpoint" parent="." instance=ExtResource("15_r2p5x")]
-position = Vector2(3101, -653)
+position = Vector2(3106, -691.9999)
 
 [node name="boy1" parent="." instance=ExtResource("2_w3ucr")]
-position = Vector2(117, 381)
-can_attack = true
+position = Vector2(202, 435)
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(-210, 0)
@@ -18483,11 +18481,11 @@ layer_0/tile_data = PackedInt32Array(1376288, 983044, 12, 1441824, 983044, 10, 1
 visible = false
 
 [node name="ItemHistoria" parent="." instance=ExtResource("17_sytg1")]
-position = Vector2(6698, 550)
+position = Vector2(2656, 492)
 frase_del_juego = "Organiza tu tiempo, tu puedes con todo, pero no todo a la vez, sino un poco cadad dia."
 
 [node name="ItemHistoria2" parent="." instance=ExtResource("17_sytg1")]
-position = Vector2(-2285, -122)
+position = Vector2(2789, -97)
 frase_del_juego = "Nunca dejes ingles para el final, aunque no lo parezca, los primeros niveles son mas llevaderos."
 
 [node name="ZonaBloqueoJefe" type="Area2D" parent="."]
@@ -18499,26 +18497,12 @@ position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_yu7iy")
 
 [node name="ItemHistoria3" parent="." instance=ExtResource("17_sytg1")]
-position = Vector2(2943, -653)
+position = Vector2(95, -673)
 frase_del_juego = "Apunta tus pendientes donde sepas que siempre revisas, para que no se te olvide entregar nada."
 
 [node name="miro_1" parent="." instance=ExtResource("19_htm06")]
-position = Vector2(697, 505)
+position = Vector2(671, 407)
 consejo = "Que pasa doctor!  
-¿Te sientes perdido? tranquilo es normal, pero tu puedes!
-Por cierto soy Miro tu guia en esta busqueda, ten cuidado con los enemigos mas adelante"
-
-[node name="miro_2" parent="." instance=ExtResource("19_htm06")]
-position = Vector2(2902, 505)
-consejo = "Sigue por las plataformas y encontraras un valiso consejo, anotalo y busque mas como ese...
- los necesitaras!"
-
-[node name="miro_3" parent="." instance=ExtResource("19_htm06")]
-position = Vector2(2796, -635)
-consejo = "Muy bien muchacho, pero aegurate de tener todas las pistas recogidas, ya que si no tienes todas,
- no podras enfrentarte al Jefe final, 
-Joel Garzon."
-
-[node name="HUD" parent="." instance=ExtResource("20_52ei7")]
+Soy Miro tu guia en esta busqueda, ten cuidado con los enemigos mas adelante"
 
 [connection signal="body_entered" from="ZonaBloqueoJefe" to="ZonaBloqueoJefe" method="_on_body_entered"]

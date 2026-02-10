@@ -267,6 +267,7 @@ func die():
 	collision_mask = 1 # Asegúrate que la máscara 1 sea el suelo en tu proyecto
 	
 	await anim.animation_finished
+	get_tree().change_scene_to_file("res://Scenes/Screens/Screen_nvl2/screen_nvl2.tscn")
 	queue_free()
 
 func _on_area_deteccion_body_entered(body):
