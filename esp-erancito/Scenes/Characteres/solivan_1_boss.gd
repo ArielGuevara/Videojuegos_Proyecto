@@ -6,8 +6,9 @@ extends CharacterBody2D
 @export var speed_fase2 = 350
 @export var damage_fase1 = 20
 @export var damage_fase2 = 35
+@export var damage_contact = 15   # Daño al tocar directamente el cuerpo del boss
 @export var distancia_ataque = 150    # ⬅️ AUMENTADO de 80 a 150
-@export var distancia_deteccion = 600
+@export var distancia_deteccion = 2000
 
 # === ESTADO ===
 enum Estado { IDLE, PERSIGUIENDO, ATACANDO, TRANSFORMANDO, MUERTO }
@@ -75,6 +76,10 @@ func _physics_process(delta):
 			velocity.x = 0
 	
 	move_and_slide()
+
+	# Comprobar colisiones directas con el jugador (daño por contacto)
+	verificar_contacto_con_jugador()
+
 
 # === COMPORTAMIENTOS ===
 func comportamiento_idle():
@@ -239,11 +244,10 @@ func morir():
 	# Esperar a que termine la animación
 	await anim.animation_finished
 	
-	print("🎉 BOSS: ¡Derrotado! Cambiando a créditos...")
-	await get_tree().create_timer(2.0).timeout
+	print("🎉 BOSS: ¡Derrotado! Mostrando escena de despertar...")
 	
-	# Cambiar a créditos
-	get_tree().change_scene_to_file("res://Scenes/Menus/creditos.tscn")
+	# Mostrar CINEMÁTICA FINAL antes de los créditos
+	get_tree().change_scene_to_file("res://Scenes/Cinematics/cinematica_final_sueno.tscn")
 
 
 
@@ -282,3 +286,21 @@ func _on_animated_sprite_2d_animation_finished():
 		"transformation":
 			# Ya manejado en iniciar_transformacion()
 			pass
+
+
+# === DAÑO POR CONTACTO DIRECTO CON EL JUGADOR ===
+func verificar_contacto_con_jugador():
+	# Recorremos todas las colisiones del frame
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		if not collision:
+			continue
+		var body = collision.get_collider()
+		if body and body.is_in_group("player"):
+			if body.has_method("take_damage"):
+				body.take_damage(damage_contact, global_position)
+			# Retroceso al jugador al tocar el boss
+			if body.has_method("apply_knockback"):
+				var dir: Vector2 = (body.global_position - global_position).normalized()
+				var fuerza: Vector2 = Vector2(dir.x * 600, -200)
+				body.apply_knockback(fuerza)

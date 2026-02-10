@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d3tjcy6fwdnkg"]
+[gd_scene load_steps=36 format=3 uid="uid://d3tjcy6fwdnkg"]
 
 [ext_resource type="PackedScene" uid="uid://cjnqmhljoj1jw" path="res://Scenes/Screens/parallax_scene.tscn" id="1_ogk55"]
 [ext_resource type="PackedScene" uid="uid://4tg4fghnxefi" path="res://Scenes/Escenarios/escenario_1.tscn" id="2_ogk55"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://Scenes/Screens/zona_bloqueo_jefe.gd" id="18_sytg1"]
 [ext_resource type="PackedScene" uid="uid://rds3wpbxe8uh" path="res://Scenes/Characteres/miro_1.tscn" id="19_htm06"]
 [ext_resource type="PackedScene" path="res://Scenes/Items/hud.tscn" id="20_52ei7"]
+[ext_resource type="AudioStream" uid="uid://kwewkf78srw2" path="res://Music/Cinema/Falling Into the Syllabus.mp3" id="21_oltfm"]
 
 [sub_resource type="Curve2D" id="Curve2D_kvtqo"]
 _data = {
@@ -18483,10 +18484,10 @@ visible = false
 
 [node name="ItemHistoria" parent="." instance=ExtResource("17_sytg1")]
 position = Vector2(6698, 550)
-frase_del_juego = "Organiza tu tiempo, tu puedes con todo, pero no todo a la vez, sino un poco cadad dia."
+frase_del_juego = "Organiza tu tiempo, tu puedes con todo, pero no todo a la vez, sino un poco cada día."
 
 [node name="ItemHistoria2" parent="." instance=ExtResource("17_sytg1")]
-position = Vector2(-2285, -122)
+position = Vector2(-2326, -96)
 frase_del_juego = "Nunca dejes ingles para el final, aunque no lo parezca, los primeros niveles son mas llevaderos."
 
 [node name="ZonaBloqueoJefe" type="Area2D" parent="."]
@@ -18509,15 +18510,19 @@ Por cierto soy Miro tu guia en esta busqueda, ten cuidado con los enemigos mas a
 
 [node name="miro_2" parent="." instance=ExtResource("19_htm06")]
 position = Vector2(2902, 505)
-consejo = "Sigue por las plataformas y encontraras un valiso consejo, anotalo y busque mas como ese...
- los necesitaras!"
+consejo = "Sigue por las plataformas y encontrarás un valioso consejo, anótalo y busca mas como ese...
+ Los necesitaras!"
 
 [node name="miro_3" parent="." instance=ExtResource("19_htm06")]
 position = Vector2(2796, -635)
-consejo = "Muy bien muchacho, pero aegurate de tener todas las pistas recogidas, ya que si no tienes todas,
+consejo = "Muy bien muchacho, pero asegurate de tener todas las pistas recogidas, ya que si no tienes todas,
  no podras enfrentarte al Jefe final, 
 Joel Garzon."
 
 [node name="HUD" parent="." instance=ExtResource("20_52ei7")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_oltfm")
+autoplay = true
 
 [connection signal="body_entered" from="ZonaBloqueoJefe" to="ZonaBloqueoJefe" method="_on_body_entered"]
