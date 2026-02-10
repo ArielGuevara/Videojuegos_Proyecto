@@ -17,9 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://e7fj6n5tegd1" path="res://Scenes/Characteres/Checkpoints/checkpoint.tscn" id="15_r2p5x"]
 [ext_resource type="PackedScene" uid="uid://cx5dh0gxdbofi" path="res://Scenes/Items/interfaz_historia.tscn" id="16_yu7iy"]
 [ext_resource type="PackedScene" uid="uid://b4awo6yh7np3f" path="res://Scenes/Items/item_historia.tscn" id="17_sytg1"]
-[ext_resource type="Script" path="res://Scenes/Screens/zona_bloqueo_jefe.gd" id="18_sytg1"]
+[ext_resource type="Script" uid="uid://dqj7hld73d2qx" path="res://Scenes/Screens/zona_bloqueo_jefe.gd" id="18_sytg1"]
 [ext_resource type="PackedScene" uid="uid://rds3wpbxe8uh" path="res://Scenes/Characteres/miro_1.tscn" id="19_htm06"]
-[ext_resource type="PackedScene" path="res://Scenes/Items/hud.tscn" id="20_52ei7"]
+[ext_resource type="PackedScene" uid="uid://veiaa0u3q2vd" path="res://Scenes/Items/hud.tscn" id="20_52ei7"]
 
 [sub_resource type="Curve2D" id="Curve2D_kvtqo"]
 _data = {
@@ -18483,7 +18483,7 @@ visible = false
 
 [node name="ItemHistoria" parent="." instance=ExtResource("17_sytg1")]
 position = Vector2(6698, 550)
-frase_del_juego = "Organiza tu tiempo, tu puedes con todo, pero no todo a la vez, sino un poco cadad dia."
+frase_del_juego = "Organiza tu tiempo, tu puedes con todo, pero no todo a la vez, sino un poco cada día."
 
 [node name="ItemHistoria2" parent="." instance=ExtResource("17_sytg1")]
 position = Vector2(-2326, -96)
@@ -18509,12 +18509,12 @@ Por cierto soy Miro tu guia en esta busqueda, ten cuidado con los enemigos mas a
 
 [node name="miro_2" parent="." instance=ExtResource("19_htm06")]
 position = Vector2(2902, 505)
-consejo = "Sigue por las plataformas y encontraras un valiso consejo, anotalo y busque mas como ese...
- los necesitaras!"
+consejo = "Sigue por las plataformas y encontrarás un valioso consejo, anótalo y busca mas como ese...
+ Los necesitaras!"
 
 [node name="miro_3" parent="." instance=ExtResource("19_htm06")]
 position = Vector2(2796, -635)
-consejo = "Muy bien muchacho, pero aegurate de tener todas las pistas recogidas, ya que si no tienes todas,
+consejo = "Muy bien muchacho, pero asegurate de tener todas las pistas recogidas, ya que si no tienes todas,
  no podras enfrentarte al Jefe final, 
 Joel Garzon."
 
