@@ -13,7 +13,7 @@ func _ready():
 	actualizar_marcador()
 
 func actualizar_marcador():
-	etiqueta.text = "Reliquias: " + str(items_recogidos) + " / " + str(total_items)
+	etiqueta.text = "Pistas: " + str(items_recogidos) + " / " + str(total_items)
 
 # Esta función la llamará el item cuando lo toques
 func sumar_item():
