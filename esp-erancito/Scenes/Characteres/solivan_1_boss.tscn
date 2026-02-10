@@ -1,11 +1,11 @@
-[gd_scene load_steps=45 format=3 uid="uid://dcvqsjyd2l36r"]
+[gd_scene load_steps=43 format=3 uid="uid://dcvqsjyd2l36r"]
 
 [ext_resource type="Script" uid="uid://82rrdv3tv230" path="res://Scenes/Characteres/solivan_1_boss.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://b8j48v47jiyd3" path="res://Caracters_player/Profesor Solivan/aparecer.png" id="2_aparecer"]
 [ext_resource type="Texture2D" uid="uid://x5iu82841d26" path="res://Caracters_player/Profesor Solivan/espera.png" id="3_espera"]
+[ext_resource type="Texture2D" uid="uid://d4lgmfg5h3vej" path="res://Caracters_player/Profesor Solivan/new_atack.png" id="4_ay7jc"]
 [ext_resource type="Texture2D" uid="uid://bhwtb6h3t1eoi" path="res://Caracters_player/Profesor Solivan/caminar 1.png" id="4_caminar"]
 [ext_resource type="Texture2D" uid="uid://dg2fsnk1gmtw3" path="res://Caracters_player/Profesor Solivan/envestir.png" id="5_envestir"]
-[ext_resource type="Texture2D" uid="uid://cxgnmhtxq2gbp" path="res://Caracters_player/Profesor Solivan/ataque monstruo.png" id="6_ataque1"]
 [ext_resource type="Texture2D" uid="uid://40qloab57xpy" path="res://Caracters_player/Profesor Solivan/transformar 1.png" id="8_transform"]
 [ext_resource type="Texture2D" uid="uid://dyu5olnu7dj4a" path="res://Caracters_player/Profesor Solivan/desvancer monstruo.png" id="9_desaparecer"]
 
@@ -45,25 +45,17 @@ region = Rect2(736, 0, 368, 325)
 atlas = ExtResource("5_envestir")
 region = Rect2(1104, 0, 368, 325)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ataque1_1"]
-atlas = ExtResource("6_ataque1")
-region = Rect2(0, 0, 441, 583)
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvgoy"]
+atlas = ExtResource("4_ay7jc")
+region = Rect2(0, 0, 636, 523)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ataque1_2"]
-atlas = ExtResource("6_ataque1")
-region = Rect2(441, 0, 441, 583)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq4kp"]
+atlas = ExtResource("4_ay7jc")
+region = Rect2(636, 0, 636, 523)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ataque1_3"]
-atlas = ExtResource("6_ataque1")
-region = Rect2(882, 0, 441, 583)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ataque1_4"]
-atlas = ExtResource("6_ataque1")
-region = Rect2(1323, 0, 441, 583)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ataque1_5"]
-atlas = ExtResource("6_ataque1")
-region = Rect2(1764, 0, 441, 583)
+[sub_resource type="AtlasTexture" id="AtlasTexture_llwur"]
+atlas = ExtResource("4_ay7jc")
+region = Rect2(1272, 0, 636, 523)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ay7jc"]
 atlas = ExtResource("4_caminar")
@@ -170,19 +162,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ataque1_1")
+"texture": SubResource("AtlasTexture_wvgoy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ataque1_2")
+"texture": SubResource("AtlasTexture_jq4kp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ataque1_3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ataque1_4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ataque1_5")
+"texture": SubResource("AtlasTexture_llwur")
 }],
 "loop": false,
 "name": &"atack2",
@@ -275,12 +261,11 @@ bg_color = Color(0.8, 0.1, 0.1, 1)
 
 [node name="SolivanBoss" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 1 
 script = ExtResource("1_script")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_solivan")
-animation = &"transformation"
+animation = &"atack2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(22, 29)
