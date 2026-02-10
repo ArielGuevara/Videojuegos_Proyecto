@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://e7fj6n5tegd1"]
+
+[ext_resource type="Texture2D" uid="uid://nqdc824lirj" path="res://Scenes/Menus/EscudoIcon.png" id="1_nhx4l"]
+[ext_resource type="Script" uid="uid://2iif8sb7xxab" path="res://Scenes/Characteres/Checkpoints/checkpoint.gd" id="1_rmec6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gpeyu"]
+atlas = ExtResource("1_nhx4l")
+region = Rect2(0, 0, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvm1x"]
+atlas = ExtResource("1_nhx4l")
+region = Rect2(1407, 0, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uj8u5"]
+atlas = ExtResource("1_nhx4l")
+region = Rect2(0, 512, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82qcc"]
+atlas = ExtResource("1_nhx4l")
+region = Rect2(2345, 512, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eikpa"]
+atlas = ExtResource("1_nhx4l")
+region = Rect2(1876, 512, 469, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u327j"]
+atlas = ExtResource("1_nhx4l")
+region = Rect2(0, 1024, 469, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_il86o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gpeyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvm1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj8u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82qcc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uj8u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eikpa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u327j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rmec6"]
+radius = 140.00002
+height = 310.00003
+
+[node name="Checkpoint" type="Area2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_rmec6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_il86o")
+frame_progress = 0.82891256
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(-1, -423)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("CapsuleShape2D_rmec6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

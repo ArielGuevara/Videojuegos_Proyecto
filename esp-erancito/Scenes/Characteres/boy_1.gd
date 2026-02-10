@@ -19,6 +19,7 @@ var current_health = 100
 var is_invulnerable = false 
 
 var distancia_ataque: float = 57.5
+var respawn_position: Vector2
 
 # --- CONFIGURACIÓN DE AGACHARSE ---
 var stand_size_y: float = 0.0 
@@ -40,6 +41,7 @@ var crouch_offset: float = 0.0
 @onready var ray_techo = $Graficos/RayTecho # <--- Actualizadones 
 
 func _ready():
+	respawn_position = global_position # El inicio del nivel es el primer checkpoint
 	current_health = max_health
 	anim.play("appearing")
 	
@@ -214,12 +216,32 @@ func die():
 	anim.play("dead")
 	set_physics_process(false)
 	$CollisionShape2D.set_deferred("disabled", true)
+	is_invulnerable = true
 	
 	# (Puedes usar anim.animation_finished si prefieres esperar a que termine la animación exacta)
 	await get_tree().create_timer(1.5).timeout 
+	# --- RESPAWN (REVIVIR) ---
+	# 1. Teletransportar al último checkpoint
+	global_position = respawn_position
 	
-	# 3. Recargar la escena actual (Reinicia todo)
-	get_tree().reload_current_scene()
+	# 2. Restaurar vida y variables
+	current_health = max_health
+	if health_bar:
+		health_bar.value = current_health
+	
+	# 3. Resetear estados negativos
+	is_knocked_back = false
+	attacking = false
+	is_blocking = false
+	
+	# 4. Reactivar físicas y colisiones
+	set_physics_process(true)
+	$CollisionShape2D.set_deferred("disabled", false)
+	
+	# 5. Dar un momento de invulnerabilidad al revivir (opcional pero recomendado)
+	anim.play("appearing") # O "idle_first" si prefieres
+	await get_tree().create_timer(1.0).timeout
+	is_invulnerable = false
 
 # --- ANIMACIONES ---
 func decide_animation():
@@ -290,15 +312,9 @@ func _on_invulnerability_timer_timeout() -> void:
 	modulate = Color(1, 1, 1)
 
 func _on_area_ataque_body_entered(body: Node2D) -> void:
-	print("👊 COLISIÓN detectada con: ", body.name)  # ⬅ AGREGAR PRIMERO
-	
 	if body.is_in_group("enemy"):
-		print("✅ Es un enemigo del grupo 'enemy'")  # ⬅ AGREGAR
-		
 		if body.has_method("take_damage"):
-			print("✅ Tiene método take_damage")  # ⬅ AGREGAR
 			body.take_damage(damage_amount, global_position)
-			print("💥 GOLPE ENVIADO - Daño: ", damage_amount)  # ⬅ AGREGAR
 		else:
 			print("❌ NO tiene método take_damage")  # ⬅ AGREGAR
 	else:
@@ -315,3 +331,7 @@ func congelar(tiempo):
 	set_physics_process(true)
 	modulate = Color(1, 1, 1)
 	anim.play()
+
+func actualizar_checkpoint(nueva_posicion: Vector2):
+	respawn_position = nueva_posicion
+	print("Checkpoint guardado en: ", respawn_position)
