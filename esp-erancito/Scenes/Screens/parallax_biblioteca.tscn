@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvse13q2uwv7j"]
+
+[ext_resource type="Texture2D" uid="uid://75sq6jkmdmmo" path="res://Assets_Secenes/Nivel 3/biblioteca.png" id="1_jcotw"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer_Cielo" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Cielo" type="ColorRect" parent="ParallaxLayer_Cielo"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.08, 0.06, 0.12, 1)
+
+[node name="ParallaxLayer_Edificios_Lejanos" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="EdificiosLejanos" type="Sprite2D" parent="ParallaxLayer_Edificios_Lejanos"]
+modulate = Color(0.2, 0.2, 0.3, 0.5)
+position = Vector2(960, 540)
+scale = Vector2(4, 4)
+texture = ExtResource("1_jcotw")
+
+[node name="ParallaxLayer_Edificios_Cercanos" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="EdificiosCercanos" type="Sprite2D" parent="ParallaxLayer_Edificios_Cercanos"]
+modulate = Color(0.25, 0.25, 0.35, 0.8)
+position = Vector2(960, 540)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("1_jcotw")
+
+[node name="ParallaxLayer_InterioBiblioteca" type="ParallaxLayer" parent="."]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="InteriorBiblioteca" type="ColorRect" parent="ParallaxLayer_InterioBiblioteca"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.12, 0.1, 0.15, 0.6)

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dqas77m2i48rp"
+path="res://.godot/imported/Level Clear Skyline.mp3-6d01ca264a8b6f4e9a05ab1b967e8093.mp3str"
+
+[deps]
+
+source_file="res://Music/Cinema/Level Clear Skyline.mp3"
+dest_files=["res://.godot/imported/Level Clear Skyline.mp3-6d01ca264a8b6f4e9a05ab1b967e8093.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

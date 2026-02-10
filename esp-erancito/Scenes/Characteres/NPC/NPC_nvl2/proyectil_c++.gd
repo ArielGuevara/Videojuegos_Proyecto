@@ -25,7 +25,7 @@ func _on_body_entered(body):
 		return
 
 	# --- CASO B: COMPORTAMIENTO NORMAL (Busca matar al jugador) ---
-	if body.name == "boy_1" or body.is_in_group("jugador"):
+	if body.name == "boy1" or body.is_in_group("jugador"):
 		
 		# 1. VERIFICAR BLOQUEO
 		if body.get("is_blocking"):

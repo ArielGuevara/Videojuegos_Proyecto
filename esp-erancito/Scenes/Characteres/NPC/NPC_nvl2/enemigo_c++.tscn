@@ -164,7 +164,7 @@ target_position = Vector2(1, 51)
 
 [node name="RayCast2D_muro" type="RayCast2D" parent="."]
 position = Vector2(17, -11)
-target_position = Vector2(28, 0)
+target_position = Vector2(76, -1)
 
 [node name="Timer" type="Timer" parent="."]
 

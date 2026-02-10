@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://gmejeqs4jhfc"]
+[gd_scene load_steps=22 format=3 uid="uid://gmejeqs4jhfc"]
 
 [ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="1_5pk8s"]
 [ext_resource type="Texture2D" uid="uid://cpu614x88w06l" path="res://Assets_Secenes/Backgraunds/backgraun nvl2.png" id="1_8vntt"]
@@ -6,6 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cq006otjqd1y5" path="res://Scenes/Escenarios/escen_nivel2/moving_desk_plataform.tscn" id="4_wkfrf"]
 [ext_resource type="PackedScene" uid="uid://e5gslaiy8s0w" path="res://Scenes/Characteres/solaris_1.tscn" id="5_iwhlc"]
 [ext_resource type="PackedScene" uid="uid://bxou6kgthfiug" path="res://Scenes/Characteres/NPC/NPC_nvl2/enemigo_c++.tscn" id="6_lu3al"]
+[ext_resource type="PackedScene" uid="uid://e7fj6n5tegd1" path="res://Scenes/Characteres/Checkpoints/checkpoint.tscn" id="7_jj7ym"]
+[ext_resource type="PackedScene" uid="uid://b4awo6yh7np3f" path="res://Scenes/Items/item_historia.tscn" id="8_1e86a"]
+[ext_resource type="PackedScene" uid="uid://cx5dh0gxdbofi" path="res://Scenes/Items/interfaz_historia.tscn" id="8_3w8gs"]
+[ext_resource type="PackedScene" path="res://Scenes/Items/hud.tscn" id="10_t343d"]
+[ext_resource type="PackedScene" uid="uid://rds3wpbxe8uh" path="res://Scenes/Characteres/miro_1.tscn" id="11_nc64w"]
+[ext_resource type="Script" uid="uid://d0lkcg2uqugk1" path="res://Scenes/Screens/Screen_nvl2/validador_solaris.gd" id="12_cuyos"]
+[ext_resource type="AudioStream" uid="uid://bfaynj4etsk0" path="res://Music/Cinema/Midnight Faculty Intro.mp3" id="13_4lwfe"]
 
 [sub_resource type="Curve2D" id="Curve2D_wkfrf"]
 _data = {
@@ -77,6 +84,9 @@ _data = {
 &"desk_mov_down": SubResource("Animation_lu3al")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4lwfe"]
+size = Vector2(647.5, 1354)
+
 [node name="screen_nvl2" type="Node2D"]
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
@@ -90,8 +100,14 @@ texture = ExtResource("1_8vntt")
 [node name="TileMap" parent="." instance=ExtResource("3_8vntt")]
 position = Vector2(1, -9)
 
-[node name="boy_1" parent="." instance=ExtResource("1_5pk8s")]
-position = Vector2(2468, 316)
+[node name="Checkpoint" parent="." instance=ExtResource("7_jj7ym")]
+position = Vector2(2899, 228.00003)
+
+[node name="Checkpoint2" parent="." instance=ExtResource("7_jj7ym")]
+position = Vector2(5602, 189)
+
+[node name="boy1" parent="." instance=ExtResource("1_5pk8s")]
+position = Vector2(21, 506)
 limite_caida = 950
 
 [node name="solaris_1" parent="." instance=ExtResource("5_iwhlc")]
@@ -242,4 +258,93 @@ libraries = {
 autoplay = "desk_mov_down"
 
 [node name="enemigo_c++" parent="." instance=ExtResource("6_lu3al")]
-position = Vector2(2147, 351)
+position = Vector2(2411, 358)
+
+[node name="enemigo_c++2" parent="." instance=ExtResource("6_lu3al")]
+position = Vector2(1003, 826)
+
+[node name="enemigo_c++3" parent="." instance=ExtResource("6_lu3al")]
+position = Vector2(3265, 776)
+
+[node name="enemigo_c++4" parent="." instance=ExtResource("6_lu3al")]
+position = Vector2(3956, 832)
+
+[node name="enemigo_c++6" parent="." instance=ExtResource("6_lu3al")]
+position = Vector2(4861, 875)
+
+[node name="enemigo_c++7" parent="." instance=ExtResource("6_lu3al")]
+position = Vector2(5243, 407)
+
+[node name="enemigo_c++8" parent="." instance=ExtResource("6_lu3al")]
+position = Vector2(6466, 395)
+
+[node name="enemigo_c++9" parent="." instance=ExtResource("6_lu3al")]
+position = Vector2(7004, 398)
+
+[node name="enemigo_c++5" parent="." instance=ExtResource("6_lu3al")]
+position = Vector2(4535, 875)
+
+[node name="InterfazHistoria" parent="." instance=ExtResource("8_3w8gs")]
+visible = false
+
+[node name="ItemHistoria" parent="." instance=ExtResource("8_1e86a")]
+position = Vector2(1708, 366)
+frase_del_juego = "Un problema gigante asusta a cualquiera. 
+No intentes resolver todo el examen de una sola vez; 
+partelo en trocitos pequenos y faciles. 
+Si resuelves cada pedacito por separado, 
+la solucion grande aparecera sola."
+
+[node name="ItemHistoria2" parent="." instance=ExtResource("8_1e86a")]
+position = Vector2(3257, 231)
+frase_del_juego = "Imagina buscar un libro en una biblioteca donde todo 
+esta tirado en el suelo. Imposible, verdad? 
+En programacion pasa lo mismo: manten tus datos ordenados y etiquetados,
+y encontraras todo al instante."
+
+[node name="ItemHistoria3" parent="." instance=ExtResource("8_1e86a")]
+position = Vector2(4947, 693)
+frase_del_juego = "Si te ves haciendo la misma tarea aburrida 
+una y otra vez, ¡para! 
+Las computadoras aman la repeticion, 
+tu no. Crea una regla (un bucle) 
+que haga el trabajo sucio por ti mientras tu descansas."
+
+[node name="ItemHistoria4" parent="." instance=ExtResource("8_1e86a")]
+position = Vector2(5868, 405)
+frase_del_juego = "A veces la vida es una fila india, 
+pero otras veces es como lavar platos: 
+el ultimo plato que pones encima es el primero 
+que tienes que lavar. Aprende a identificar en que orden debes atender 
+las cosas para no bloquearte."
+
+[node name="ItemHistoria5" parent="." instance=ExtResource("8_1e86a")]
+position = Vector2(7213, 83)
+frase_del_juego = "Cuando veas letras rojas o algo falle, 
+no entres en panico. 
+El error no te esta reganando, te esta dando una pista. 
+Leelo, respira y sigue el rastro; 
+te dira exactamente que tornillo debes apretar."
+
+[node name="HUD" parent="." instance=ExtResource("10_t343d")]
+
+[node name="miro_1" parent="." instance=ExtResource("11_nc64w")]
+position = Vector2(137, 826)
+consejo = "Has logrado salir de las materias Exactas, tu reto aun no termina.
+Usa Z para usar el parri."
+
+[node name="miro_2" parent="." instance=ExtResource("11_nc64w")]
+position = Vector2(4363, 741)
+consejo = "Recuerda conseguir todos los fragmetos de Sabiduria."
+
+[node name="ValidadorSolaris" type="Area2D" parent="." node_paths=PackedStringArray("jefe_solaris")]
+script = ExtResource("12_cuyos")
+jefe_solaris = NodePath("../solaris_1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ValidadorSolaris"]
+position = Vector2(7879.25, 216)
+shape = SubResource("RectangleShape2D_4lwfe")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_4lwfe")
+autoplay = true

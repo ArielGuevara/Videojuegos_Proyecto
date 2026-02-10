@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkvtdgnkwkeef"]
+[gd_scene load_steps=15 format=3 uid="uid://bkvtdgnkwkeef"]
 
 [ext_resource type="Script" uid="uid://dcs34kv7cgbie" path="res://cinematica.gd" id="1_drryd"]
-[ext_resource type="AudioStream" uid="uid://bkxve6hfbcigu" path="res://Music/Cinema/bit-inicial.mp3" id="2_metcx"]
+[ext_resource type="AudioStream" uid="uid://blxmonnj85h5l" path="res://Music/Cinema/Night Shift at the Quad.mp3" id="2_metcx"]
 [ext_resource type="Texture2D" uid="uid://nqdc824lirj" path="res://Scenes/Menus/EscudoIcon.png" id="2_xoi0x"]
+[ext_resource type="FontFile" uid="uid://enqqfjpwfd6j" path="res://Scenes/Fonts/mini_pixel-7.ttf" id="4_yfval"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drryd"]
 bg_color = Color(0.05882353, 0.09019608, 0.05882353, 0.7764706)
@@ -149,6 +150,7 @@ offset_top = 879.0
 offset_right = 644.0
 offset_bottom = 914.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_yfval")
 theme_override_font_sizes/font_size = 25
 theme_override_styles/focus = SubResource("StyleBoxFlat_xoi0x")
 text = "Presiona la \"barra espaciadora\" para continuar ..."
@@ -173,5 +175,6 @@ offset_left = 4.0
 offset_top = 36.0
 offset_right = 82.5
 offset_bottom = 25.831997
+theme_override_fonts/font = ExtResource("4_yfval")
 theme_override_font_sizes/font_size = 25
 text = "Omitir intro"
