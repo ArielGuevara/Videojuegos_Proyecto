@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://gmejeqs4jhfc"]
+[gd_scene load_steps=23 format=3 uid="uid://gmejeqs4jhfc"]
 
 [ext_resource type="PackedScene" uid="uid://bhd61nlu4lfy7" path="res://Scenes/Characteres/boy_1.tscn" id="1_5pk8s"]
 [ext_resource type="Texture2D" uid="uid://cpu614x88w06l" path="res://Assets_Secenes/Backgraunds/backgraun nvl2.png" id="1_8vntt"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://rds3wpbxe8uh" path="res://Scenes/Characteres/miro_1.tscn" id="11_nc64w"]
 [ext_resource type="Script" uid="uid://d0lkcg2uqugk1" path="res://Scenes/Screens/Screen_nvl2/validador_solaris.gd" id="12_cuyos"]
 [ext_resource type="AudioStream" uid="uid://bfaynj4etsk0" path="res://Music/Cinema/Midnight Faculty Intro.mp3" id="13_4lwfe"]
+[ext_resource type="PackedScene" uid="uid://c7xqpm5pause1" path="res://Scenes/Menus/pause_menu.tscn" id="14_4gb7t"]
 
 [sub_resource type="Curve2D" id="Curve2D_wkfrf"]
 _data = {
@@ -107,7 +108,7 @@ position = Vector2(2899, 228.00003)
 position = Vector2(5602, 189)
 
 [node name="boy1" parent="." instance=ExtResource("1_5pk8s")]
-position = Vector2(21, 506)
+position = Vector2(8426, 692)
 limite_caida = 950
 
 [node name="solaris_1" parent="." instance=ExtResource("5_iwhlc")]
@@ -348,3 +349,6 @@ shape = SubResource("RectangleShape2D_4lwfe")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_4lwfe")
 autoplay = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("14_4gb7t")]
+visible = false
