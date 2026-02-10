@@ -106,9 +106,13 @@ func comportamiento_perseguir():
 	
 	# Animación de correr
 	if is_transformed:
-		if anim.animation != "caminar" or not anim.is_playing():
-			anim.play("caminar")
+	# Mantener sprite transformado mientras camina
+		if anim.animation != "transformation":
+			anim.play("transformation")
+			anim.pause()
+			anim.frame = 2  # Último frame de transformation (índice 2)
 	else:
+	# Forma normal - usar animación de caminar
 		if anim.animation != "caminar" or not anim.is_playing():
 			anim.play("caminar")
 
@@ -146,18 +150,13 @@ func iniciar_ataque():
 
 # Aplica daño si el jugador está dentro del AreaAtaque cuando el golpe "conecta"
 func aplicar_daño_despues_de_inicio_ataque():
-	# Pequeño retraso para sincronizar con la animación de ataque
-	await get_tree().create_timer(0.25).timeout
-	
-	if estado_actual != Estado.ATACANDO:
-		return
+	await get_tree().create_timer(0.1).timeout
 	
 	for body in area_ataque.get_overlapping_bodies():
 		if body.is_in_group("player") and body.has_method("take_damage"):
 			var daño = damage_fase2 if is_transformed else damage_fase1
 			body.take_damage(daño, global_position)
 			
-			# Retroceso de Esperancito cuando el golpe conecta
 			if body.has_method("apply_knockback"):
 				var dir: Vector2 = (body.global_position - global_position).normalized()
 				var fuerza: Vector2 = Vector2(dir.x * 700, -250)
