@@ -6,12 +6,12 @@ extends CharacterBody2D
 @export var speed_fase2 = 350
 @export var damage_fase1 = 20
 @export var damage_fase2 = 35
-@export var distancia_ataque = 80
+@export var distancia_ataque = 150    # ⬅️ AUMENTADO de 80 a 150
 @export var distancia_deteccion = 600
 
 # === ESTADO ===
-enum Estado { APARECIENDO, IDLE, PERSIGUIENDO, ATACANDO, TRANSFORMANDO, MUERTO }
-var estado_actual = Estado.APARECIENDO
+enum Estado { IDLE, PERSIGUIENDO, ATACANDO, TRANSFORMANDO, MUERTO }
+var estado_actual = Estado.IDLE       # ⬅️ CAMBIO: Empieza en IDLE, no APARECIENDO
 var current_health = 200
 var target_player = null
 var is_transformed = false
@@ -30,7 +30,7 @@ var direction = 1
 func _ready():
 	add_to_group("enemy")
 	add_to_group("boss")
-	print("🎯 BOSS: Inicializado - Vida: ", max_health)  # ⬅ AGREGAR
+	print("🎯 BOSS: Inicializado - Vida: ", max_health)
 	
 	current_health = max_health
 	
@@ -43,18 +43,21 @@ func _ready():
 	if label_nombre:
 		label_nombre.visible = false
 	
-	# Iniciar animación de aparición
-	anim.play("appearing")
-	set_physics_process(false) # Desactivar física durante aparición
+	# ⬅️ CAMBIO: Empieza directo en IDLE con animación "wait"
+	anim.play("wait")
+	estado_actual = Estado.IDLE
+	# set_physics_process ya está activo por defecto
 	
 	# Conectar señales
 	area_deteccion.body_entered.connect(_on_deteccion_jugador_entered)
 	area_deteccion.body_exited.connect(_on_deteccion_jugador_exited)
 	area_ataque.body_entered.connect(_on_area_ataque_body_entered)
 	timer_ataque.timeout.connect(_on_timer_ataque_timeout)
+	
+	print("✅ BOSS: Listo para pelear!")
 
 func _physics_process(delta):
-	if estado_actual == Estado.MUERTO or estado_actual == Estado.APARECIENDO:
+	if estado_actual == Estado.MUERTO:
 		return
 	
 	# Gravedad
@@ -116,13 +119,19 @@ func comportamiento_atacar():
 func actualizar_flip():
 	if direction > 0:
 		anim.flip_h = false
+		# ⬅️ NUEVO: Mover área de ataque según dirección
+		area_ataque.get_node("CollisionShape2D").position.x = 125
 	else:
 		anim.flip_h = true
+		# ⬅️ NUEVO: Mover área de ataque según dirección
+		area_ataque.get_node("CollisionShape2D").position.x = -125
 
 # === SISTEMA DE COMBATE ===
 func iniciar_ataque():
 	estado_actual = Estado.ATACANDO
 	can_attack = false
+	
+	print("⚔️ BOSS: Iniciando ataque!")  # ⬅️ DEBUG
 	
 	if is_transformed:
 		anim.play("atack2") # Ataque monstruo más rápido
@@ -137,26 +146,29 @@ func _on_timer_ataque_timeout():
 		estado_actual = Estado.PERSIGUIENDO
 
 func _on_area_ataque_body_entered(body):
+	print("💥 BOSS: AreaAtaque detectó: ", body.name)  # ⬅️ DEBUG
+	
 	if body.is_in_group("player") and estado_actual == Estado.ATACANDO:
+		print("✅ BOSS: ¡Golpeando al jugador!")  # ⬅️ DEBUG
 		if body.has_method("take_damage"):
 			var daño = damage_fase2 if is_transformed else damage_fase1
 			body.take_damage(daño, global_position)
 
 # === SISTEMA DE DAÑO ===
 func take_damage(amount: int, _source_position: Vector2 = Vector2.ZERO):
-	print("🩸 BOSS: take_damage() llamado - Daño: ", amount)  # ⬅ AGREGAR PRIMERO
+	print("🩸 BOSS: take_damage() llamado - Daño: ", amount)
 	
 	if estado_actual == Estado.MUERTO or estado_actual == Estado.TRANSFORMANDO:
-		print("⚠️ BOSS: Daño bloqueado (muerto o transformando)")  # ⬅ AGREGAR
+		print("⚠️ BOSS: Daño bloqueado (muerto o transformando)")
 		return
 	
 	current_health -= amount
-	print("❤️ BOSS: Vida actual: ", current_health, "/", max_health)  # ⬅ AGREGAR
+	print("❤️ BOSS: Vida actual: ", current_health, "/", max_health)
 	
 	# Actualizar barra de vida
 	if barra_vida:
 		barra_vida.value = current_health
-		print("📊 BOSS: Barra actualizada a: ", current_health)  # ⬅ AGREGAR
+		print("📊 BOSS: Barra actualizada a: ", current_health)
 	
 	# Feedback visual
 	modulate = Color(10, 10, 10)
@@ -175,6 +187,7 @@ func iniciar_transformacion():
 	is_transformed = true
 	velocity.x = 0
 	
+	print("🔥 BOSS: ¡TRANSFORMACIÓN!")
 	anim.play("transformation")
 	
 	# Esperar a que termine la animación
@@ -182,7 +195,7 @@ func iniciar_transformacion():
 	
 	# Volver a perseguir con nuevos stats
 	estado_actual = Estado.PERSIGUIENDO
-	print("¡Solivan se ha transformado! Ahora es más peligroso")
+	print("⚡ BOSS: ¡Solivan se ha transformado! Ahora es más peligroso")
 
 func morir():
 	estado_actual = Estado.MUERTO
@@ -191,43 +204,47 @@ func morir():
 	area_ataque.set_deferred("monitoring", false)
 	area_deteccion.set_deferred("monitoring", false)
 	
+	print("💀 BOSS: Muriendo...")
 	anim.play("desappearing")
 	
 	# Esperar a que termine la animación
 	await anim.animation_finished
 	
-	# Puedes hacer que deje un ítem, abra una puerta, etc.
+	print("👻 BOSS: Eliminado")
 	queue_free()
 
 # === DETECCIÓN DEL JUGADOR ===
 func _on_deteccion_jugador_entered(body):
 	if body.is_in_group("player") and estado_actual != Estado.MUERTO:
 		target_player = body
-		print("👁️ BOSS: ¡Jugador detectado!")  # ⬅ AGREGAR
+		print("👁️ BOSS: ¡Jugador detectado!")
 		
 		if estado_actual == Estado.IDLE:
 			estado_actual = Estado.PERSIGUIENDO
-			print("🏃 BOSS: Empezando a perseguir")  # ⬅ AGREGAR
+			print("🏃 BOSS: Empezando a perseguir")
 		
 		# Mostrar UI del boss
 		if barra_vida:
 			barra_vida.visible = true
-			print("📊 BOSS: Barra de vida mostrada")  # ⬅ AGREGAR
+			print("📊 BOSS: Barra de vida mostrada")
+		if label_nombre:
+			label_nombre.visible = true
 
 func _on_deteccion_jugador_exited(body):
 	if body == target_player:
+		print("🚶 BOSS: Jugador salió del área de detección")
 		target_player = null
 		estado_actual = Estado.IDLE
 
 # === ANIMACIONES ===
 func _on_animated_sprite_2d_animation_finished():
+	print("🎬 BOSS: Animación terminada: ", anim.animation)
+	
 	match anim.animation:
-		"appearing":
-			estado_actual = Estado.IDLE
-			set_physics_process(true)
 		"atack1", "atack2":
 			if estado_actual == Estado.ATACANDO:
 				estado_actual = Estado.PERSIGUIENDO
+				print("🔄 BOSS: Volviendo a perseguir después de atacar")
 		"transformation":
 			# Ya manejado en iniciar_transformacion()
 			pass
