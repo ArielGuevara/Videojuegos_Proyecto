@@ -262,7 +262,7 @@ radius = 91.0
 height = 350.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_deteccion"]
-size = Vector2(1200, 400)
+size = Vector2(800, 300)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ataque"]
 size = Vector2(180, 300)
